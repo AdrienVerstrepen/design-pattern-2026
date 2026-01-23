@@ -1,5 +1,7 @@
 package fr.fges;
 
+import fr.fges.services.MenuService;
+
 public class Main {
     public static void main(String[] args) {
         String storageFile = ArgumentReceiver(args);
@@ -33,7 +35,7 @@ public class Main {
 
     public static void LaunchApplication() {
         while (true) {
-            Menu.handleMenu();
+            MenuService.handleMenu();
         }
     }
 }

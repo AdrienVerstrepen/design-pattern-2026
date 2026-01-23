@@ -2,7 +2,6 @@ package fr.fges.formatters;
 
 public class MenuFormatter {
     public static void displayMainMenu() {
-
         String menuText = """
                 === Board Game Collection ===
                 1. Add Board Game

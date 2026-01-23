@@ -6,29 +6,36 @@ import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMainMenu;
 
 public class MenuService {
-    public static String getUserInput(String prompt) {
+    private static String getUserInput(String numberPlayers) {
         Scanner scanner = new Scanner(System.in);
-        System.out.printf("%s: ", prompt);
+        System.out.printf("%s: ", numberPlayers);
         return scanner.nextLine();
     }
 
-    public static void addGame() {
-        String title = getUserInput("Title");
-        String minPlayersStr = getUserInput("Minimum Players");
-        String maxPlayersStr = getUserInput("Maximum Players");
-        String category = getUserInput("Category (e.g., fantasy, cooperative, family, strategy)");
+    private static int verificationValidNumber(String numberPlayers) {
+        // This function is there to check if the number the user entered is correct, it treats this kind of issue to avoid the program to crash
+        while (true) {
+            try {
+                return Integer.parseInt(getUserInput(numberPlayers));
+            } catch (NumberFormatException e) {
+                System.out.println("The number entered is invalid, please write a correct number.");
+            }
+        }
+    }
 
-        int minPlayers = Integer.parseInt(minPlayersStr);
-        int maxPlayers = Integer.parseInt(maxPlayersStr);
+    private static void addGame() {
+        String title = getUserInput("Title");
+        String category = getUserInput("Category (e.g., fantasy, cooperative, family, strategy)");
+        int minPlayers = verificationValidNumber("Minimum Players");
+        int maxPlayers = verificationValidNumber("Maximum Players");
 
         BoardGame game = new BoardGame(title, minPlayers, maxPlayers, category);
         GameCollectionRepository.addGame(game);
         System.out.println("Board game added successfully.");
     }
 
-    public static void removeGame() {
+    private static void removeGame() {
         String title = getUserInput("Title of game to remove");
-
         if (GameService.removeGame(title)) {
             System.out.println("Board game removed successfully.");
         } else {
@@ -36,11 +43,11 @@ public class MenuService {
         }
     }
 
-    public static void listAllGames() {
+    private static void listAllGames() {
         GameCollectionFormatter.viewAllGames();
     }
 
-    public static void exit() {
+    private static void exit() {
         System.out.println("Exiting the application. Goodbye!");
         System.exit(0);
     }
