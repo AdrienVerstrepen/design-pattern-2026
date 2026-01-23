@@ -5,8 +5,6 @@ import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionRepository;
 import fr.fges.services.GameCollectionLoader;
 import fr.fges.services.GameCollectionSaver;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameCollection {
