@@ -1,5 +1,7 @@
 package fr.fges;
 
+import fr.fges.models.BoardGame;
+
 import java.util.Scanner;
 
 public class Menu {
