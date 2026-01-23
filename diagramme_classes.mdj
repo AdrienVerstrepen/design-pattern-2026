@@ -1,0 +1,26 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "Design Pattern",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAGb7DKXnPL3r8I=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Projet",
+			"ownedElements": [
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAGb7DKXnPL4FuU=",
+					"_parent": {
+						"$ref": "AAAAAAGb7DKXnPL3r8I="
+					},
+					"name": "Diagramme de classes"
+				}
+			]
+		}
+	],
+	"documentVersion": 1
+}
