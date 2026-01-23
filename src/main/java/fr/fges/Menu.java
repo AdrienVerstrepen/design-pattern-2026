@@ -1,6 +1,8 @@
 package fr.fges;
 
+import fr.fges.formatters.GameCollectionFormatter;
 import fr.fges.models.BoardGame;
+import fr.fges.repositories.GameCollectionRepository;
 
 import java.util.Scanner;
 
@@ -39,7 +41,7 @@ public class Menu {
 
         BoardGame game = new BoardGame(title, minPlayers, maxPlayers, category);
 
-        GameCollection.addGame(game);
+        GameCollectionRepository.addGame(game);
         System.out.println("Board game added successfully.");
     }
 
@@ -47,11 +49,11 @@ public class Menu {
         String title = getUserInput("Title of game to remove");
 
         // get games from the collection, find the one that matches the title given by the user and remove
-        var games = GameCollection.getGames();
+        var games = GameCollectionRepository.getGames();
 
         for (BoardGame game : games) {
             if (game.title().equals(title)) {
-                GameCollection.removeGame(game);
+                GameCollectionRepository.removeGame(game);
                 System.out.println("Board game removed successfully.");
                 return;
             }
@@ -60,7 +62,7 @@ public class Menu {
     }
 
     public static void listAllGames() {
-        GameCollection.viewAllGames();
+        GameCollectionFormatter.viewAllGames();
     }
 
     public static void exit() {

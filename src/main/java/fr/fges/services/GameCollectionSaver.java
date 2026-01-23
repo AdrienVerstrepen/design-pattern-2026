@@ -11,15 +11,21 @@ import java.util.List;
 
 public class GameCollectionSaver {
 
-    public static void saveToFile(String storageFile, List<BoardGame> games) {
+    public static String storageFile = "";
+
+    public static void setStorageFile(String file) {
+        storageFile = file;
+    }
+
+    public static void saveToFile(List<BoardGame> games) {
         if (storageFile.endsWith(".json")) {
-            saveToJson(storageFile, games);
+            saveToJson(games);
         } else if (storageFile.endsWith(".csv")) {
-            saveToCsv(storageFile, games);
+            saveToCsv(games);
         }
     }
 
-    private static void saveToJson(String storageFile, List<BoardGame> games) {
+    private static void saveToJson(List<BoardGame> games) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(storageFile), games);
@@ -28,7 +34,7 @@ public class GameCollectionSaver {
         }
     }
 
-    private static void saveToCsv(String storageFile, List<BoardGame> games) {
+    private static void saveToCsv(List<BoardGame> games) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(storageFile))) {
             writer.write("title,minPlayers,maxPlayers,category");
             writer.newLine();

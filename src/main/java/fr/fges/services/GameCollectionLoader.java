@@ -3,6 +3,7 @@ package fr.fges.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.models.BoardGame;
+import fr.fges.repositories.GameCollectionRepository;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,34 +13,35 @@ import java.util.List;
 
 public class GameCollectionLoader {
 
-    public static void loadFromFile(String storageFile, List<BoardGame> games) {
+    public static void loadFromFile() {
+        String storageFile = GameCollectionSaver.storageFile;
         File file = new File(storageFile);
         if (!file.exists()) {
             return;
         }
 
         if (storageFile.endsWith(".json")) {
-            loadFromJson(storageFile, games);
+            loadFromJson(storageFile);
         } else if (storageFile.endsWith(".csv")) {
-            loadFromCsv(storageFile, games);
+            loadFromCsv(storageFile);
         }
     }
 
-    private static void loadFromJson(String storageFile, List<BoardGame> games) {
+    private static void loadFromJson(String storageFile) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             File file = new File(storageFile);
             List<BoardGame> loadedGames = mapper.readValue(file, new TypeReference<List<BoardGame>>() {});
-            games.clear();
-            games.addAll(loadedGames);
+            GameCollectionRepository.getGames().clear();
+            GameCollectionRepository.getGames().addAll(loadedGames);
         } catch (IOException e) {
             System.out.println("Error loading from JSON: " + e.getMessage());
         }
     }
 
-    private static void loadFromCsv(String storageFile, List<BoardGame> games) {
+    private static void loadFromCsv(String storageFile) {
         try (BufferedReader reader = new BufferedReader(new FileReader(storageFile))) {
-            games.clear();
+            GameCollectionRepository.getGames().clear();
             String line;
             boolean firstLine = true;
             while ((line = reader.readLine()) != null) {
@@ -55,7 +57,7 @@ public class GameCollectionLoader {
                             Integer.parseInt(parts[2]),
                             parts[3]
                     );
-                    games.add(game);
+                    GameCollectionRepository.getGames().add(game);
                 }
             }
         } catch (IOException e) {

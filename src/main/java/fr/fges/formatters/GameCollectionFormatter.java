@@ -1,13 +1,15 @@
 package fr.fges.formatters;
 
 import fr.fges.models.BoardGame;
+import fr.fges.repositories.GameCollectionRepository;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class GameCollectionFormatter {
 
-    public static void viewAllGames(List<BoardGame> games) {
+    public static void viewAllGames() {
+        List<BoardGame> games = GameCollectionRepository.getGames();
         if (games.isEmpty()) {
             System.out.println("No board games in collection.");
             return;

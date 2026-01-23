@@ -11,4 +11,12 @@ public class GameCollectionRepository {
     public static List<BoardGame> getGames() {
         return games;
     }
+
+    public static void addGame(BoardGame game) {
+        games.add(game);
+    }
+
+    public static void removeGame(BoardGame game) {
+        games.remove(game);
+    }
 }
