@@ -55,3 +55,5 @@ The storage file is passed as a command-line argument at startup.
 ## Documentation
 
 - [Output Examples](docs/output-example.md) - Example CLI sessions
+
+![Diagramme de classes.png](Diagramme%20de%20classes.png)
