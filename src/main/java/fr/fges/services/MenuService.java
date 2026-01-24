@@ -31,6 +31,7 @@ public class MenuService {
 
         BoardGame game = new BoardGame(title, minPlayers, maxPlayers, category);
         GameCollectionRepository.addGame(game);
+        GameCollectionSaver.saveToFile(GameCollectionRepository.getGames());
         System.out.println("Board game added successfully.");
     }
 
