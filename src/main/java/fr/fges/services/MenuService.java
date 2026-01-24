@@ -23,9 +23,19 @@ public class MenuService {
         }
     }
 
+    private static String verificationValidString(String prompt) {
+        while (true) {
+            String input = getUserInput(prompt);
+            if (input != null && !input.isBlank()) {
+                return input;
+            }
+            System.out.println("The text entered is empty, please write a correct text.");
+        }
+    }
+
     private static void addGame() {
-        String title = getUserInput("Title");
-        String category = getUserInput("Category (e.g., fantasy, cooperative, family, strategy)");
+        String title = verificationValidString("Title");
+        String category = verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
         int minPlayers = verificationValidNumber("Minimum Players");
         int maxPlayers = verificationValidNumber("Maximum Players");
 
