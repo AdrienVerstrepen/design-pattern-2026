@@ -12,10 +12,12 @@ public class GameCollectionRepository {
     public static List<BoardGame> getGames() {
         return games;
     }
-    public static void addGame(BoardGame game) {
+    public static Boolean addGame(BoardGame game) {
         games.add(game);
+        return true;
     }
-    public static void removeGame(BoardGame game) {
+    public static Boolean removeGame(BoardGame game) {
         games.remove(game);
+        return true;
     }
 }
