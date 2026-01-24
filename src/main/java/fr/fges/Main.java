@@ -1,5 +1,7 @@
 package fr.fges;
 
+import fr.fges.services.GameCollectionLoader;
+import fr.fges.services.GameCollectionSaver;
 import fr.fges.services.MenuService;
 
 public class Main {
@@ -27,8 +29,8 @@ public class Main {
     }
 
     public static void AllocateMemory(String storageFile) {
-        GameCollection.setStorageFile(storageFile);
-        GameCollection.loadFromFile();
+        GameCollectionSaver.setStorageFile(storageFile);
+        GameCollectionLoader.loadFromFile();
         System.out.println("Using storage file: " + storageFile);
     }
 
