@@ -13,12 +13,12 @@ import java.util.List;
 
 public class GameCollectionLoader {
 
-    public static void loadFromFile() {
+    public static Boolean loadFromFile() {
         // This method loads the games contained in the storageFile defined in the GameCollectionSaver
         String storageFile = GameCollectionSaver.getStorageFile();
         File file = new File(storageFile);
         if (!file.exists()) {
-            return;
+            return false;
         }
 
         if (storageFile.endsWith(".json")) {
@@ -26,21 +26,24 @@ public class GameCollectionLoader {
         } else if (storageFile.endsWith(".csv")) {
             loadFromCsv(storageFile);
         }
+        return true;
     }
 
-    private static void loadFromJson(String storageFile) {
+    private static Boolean loadFromJson(String storageFile) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             File file = new File(storageFile);
             List<BoardGame> loadedGames = mapper.readValue(file, new TypeReference<List<BoardGame>>() {});
             GameCollectionRepository.getGames().clear();
             GameCollectionRepository.getGames().addAll(loadedGames);
+            return true;
         } catch (IOException e) {
             System.out.println("Error loading from JSON: " + e.getMessage());
+            return false;
         }
     }
 
-    private static void loadFromCsv(String storageFile) {
+    private static Boolean loadFromCsv(String storageFile) {
         try (BufferedReader reader = new BufferedReader(new FileReader(storageFile))) {
             GameCollectionRepository.getGames().clear();
             String line;
@@ -61,8 +64,10 @@ public class GameCollectionLoader {
                     GameCollectionRepository.getGames().add(game);
                 }
             }
+            return true;
         } catch (IOException e) {
             System.out.println("Error loading from CSV: " + e.getMessage());
+            return false;
         }
     }
 
