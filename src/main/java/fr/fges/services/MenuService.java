@@ -12,8 +12,9 @@ public class MenuService {
         return scanner.nextLine();
     }
 
-    private static int verificationValidNumber(String numberPlayers) {
-        // This function is there to check if the number the user entered is correct, it treats this kind of issue to avoid the program to crash
+    public static int verificationValidNumber(String numberPlayers) {
+        // this function is there to check if the number the user entered is correct, it treats this kind of issue to avoid the program to crash
+        // it's set to public to be tested in a different class
         while (true) {
             try {
                 return Integer.parseInt(getUserInput(numberPlayers));
@@ -23,9 +24,11 @@ public class MenuService {
         }
     }
 
-    private static String verificationValidString(String prompt) {
+    public static String verificationValidString(String stringInput) {
+        // this function is there to check if the title or the category entered are not empty strings
+        // it's set to public to be tested in a different class
         while (true) {
-            String input = getUserInput(prompt);
+            String input = getUserInput(stringInput);
             if (input != null && !input.isBlank()) {
                 return input;
             }
