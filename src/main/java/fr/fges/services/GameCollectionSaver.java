@@ -11,13 +11,15 @@ import java.util.List;
 
 public class GameCollectionSaver {
 
-    public static String storageFile = "";
-
+    private static String storageFile = "";
+    // These methods helps to access / edit the storageFile value
     public static void setStorageFile(String file) {
         storageFile = file;
     }
+    public static String getStorageFile() { return storageFile; }
 
     public static void saveToFile(List<BoardGame> games) {
+        // This method calls the corresponding file extension saving method
         if (storageFile.endsWith(".json")) {
             saveToJson(games);
         } else if (storageFile.endsWith(".csv")) {

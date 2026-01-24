@@ -14,7 +14,8 @@ import java.util.List;
 public class GameCollectionLoader {
 
     public static void loadFromFile() {
-        String storageFile = GameCollectionSaver.storageFile;
+        // This method loads the games contained in the storageFile defined in the GameCollectionSaver
+        String storageFile = GameCollectionSaver.getStorageFile();
         File file = new File(storageFile);
         if (!file.exists()) {
             return;

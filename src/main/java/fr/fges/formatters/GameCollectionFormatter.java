@@ -9,6 +9,7 @@ import java.util.List;
 public class GameCollectionFormatter {
 
     public static void viewAllGames() {
+        // This method prints all games to the user interface
         List<BoardGame> games = GameCollectionRepository.getGames();
         if (games.isEmpty()) {
             System.out.println("No board games in collection.");
