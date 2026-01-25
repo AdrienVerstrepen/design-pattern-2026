@@ -1,0 +1,11 @@
+[ {
+  "title" : "lkhl",
+  "minPlayers" : 1,
+  "maxPlayers" : 1,
+  "category" : "kug"
+}, {
+  "title" : "",
+  "minPlayers" : 5,
+  "maxPlayers" : 1,
+  "category" : ""
+} ]
