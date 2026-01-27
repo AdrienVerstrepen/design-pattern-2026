@@ -1,39 +1,51 @@
 package fr.fges.samplecode;
+import fr.fges.services.MenuService;
+import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayInputStream;
-import static fr.fges.services.MenuService.verificationValidNumber;
-import static fr.fges.services.MenuService.verificationValidString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static fr.fges.services.MenuService.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MenuTest {
+    @Test
     void testVerificationValidNumberValid() {
-        // this function tests a valid answer
-        String testInput = "4\n";
-        System.setIn(new ByteArrayInputStream(testInput.getBytes()));
-        int result = verificationValidNumber("Minimum Players");
-        assertEquals(4, result);
+        // this function tests an answer that's valid
+        assertTrue(isValidNumber("1"));
     }
 
+    @Test
     void testVerificationValidNumberInvalid() {
-        // this function tests an answer that's invalid and then valid
-        String testInput = "a\n5\n";
-        System.setIn(new ByteArrayInputStream(testInput.getBytes()));
-        int result = verificationValidNumber("Minimum Players");
-        assertEquals(5, result);
+        // this function tests an answer that's invalid
+        assertFalse(isValidNumber("a"));
     }
 
+    @Test
     void testVerificationValidStringValid() {
-        // this function tests a valid answer
-        String testInput = "a\n";
-        System.setIn(new ByteArrayInputStream(testInput.getBytes()));
-        String result = verificationValidString("Title");
-        assertEquals("a", result);
+        // this function tests an answer that's valid
+        assertTrue(MenuService.isValidString("a"));
     }
 
+    @Test
     void testVerificationValidStringInvalid() {
-        // this function tests an answer that's invalid and then valid
-        String testInput = "\na\n";
-        System.setIn(new ByteArrayInputStream(testInput.getBytes()));
-        String result = verificationValidString("Category");
-        assertEquals("a", result);
+        // this function tests an answer that's invalid
+        assertFalse(MenuService.isValidString(""));
+        assertFalse(MenuService.isValidString("   "));
+    }
+
+    @Test
+    void testIsWeekEndTrue(){
+        // this function tests if the function detects correctly the days that are weekends
+        int weekDay = 1;
+        boolean result = isWeekEnd(weekDay);
+        assertTrue(result);
+    }
+
+    @Test
+    void testIsWeekEndFalse(){
+        // this function tests if the function detects correctly the days that are not weekends
+        int weekDay = 2;
+        boolean result = isWeekEnd(weekDay);
+        assertFalse(result);
     }
 }

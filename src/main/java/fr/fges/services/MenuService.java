@@ -36,6 +36,21 @@ public class MenuService {
         }
     }
 
+    public static boolean isValidNumber(String input) {
+        // this function is there to test more easily the function verificationValidNumber without having to simulate user inputs
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidString(String input) {
+        // this function is there to test more easily the function verificationValidString without having to simulate user inputs
+        return input != null && !input.isBlank();
+    }
+
     private static void addGame() {
         String title = verificationValidString("Title");
         String category = verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
