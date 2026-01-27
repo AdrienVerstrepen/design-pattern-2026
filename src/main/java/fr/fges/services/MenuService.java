@@ -1,4 +1,6 @@
 package fr.fges.services;
+import fr.fges.repositories.GameCollectionRepository;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -87,6 +89,14 @@ public class MenuService {
     private static void exit() {
         System.out.println("Exiting the application. Goodbye!");
         System.exit(0);
+    }
+
+    private static void summaryWeekend(){
+        if (GameCollectionRepository.numberGames() <= 3){
+            listAllGames();
+        } else {
+            // sélection aléatoire 3 jeux
+        }
     }
 
     public static void handleMenu() {
