@@ -1,4 +1,5 @@
 package fr.fges.services;
+import fr.fges.formatters.GameCollectionFormatter;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionRepository;
 
@@ -12,5 +13,9 @@ public class GameService {
             }
         }
         return false;
+    }
+
+    public static void listAllGames() {
+        GameCollectionFormatter.viewAllGames();
     }
 }

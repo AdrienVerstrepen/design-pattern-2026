@@ -4,6 +4,7 @@ import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionRepository;
 import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMainMenu;
+import static fr.fges.services.GameService.listAllGames;
 
 public class MenuService {
     private static String getUserInput(String numberPlayers) {
@@ -55,10 +56,6 @@ public class MenuService {
         } else {
             System.out.println("No board game found with that title.");
         }
-    }
-
-    private static void listAllGames() {
-        GameCollectionFormatter.viewAllGames();
     }
 
     private static void exit() {
