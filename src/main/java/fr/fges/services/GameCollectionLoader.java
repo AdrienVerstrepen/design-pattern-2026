@@ -1,5 +1,4 @@
 package fr.fges.services;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.models.BoardGame;
@@ -12,13 +11,12 @@ import java.io.IOException;
 import java.util.List;
 
 public class GameCollectionLoader {
-
-    public static Boolean loadFromFile() {
+    public static void loadFromFile() {
         // This method loads the games contained in the storageFile defined in the GameCollectionSaver
         String storageFile = GameCollectionSaver.getStorageFile();
         File file = new File(storageFile);
         if (!file.exists()) {
-            return false;
+            return;
         }
 
         if (storageFile.endsWith(".json")) {
@@ -26,24 +24,21 @@ public class GameCollectionLoader {
         } else if (storageFile.endsWith(".csv")) {
             loadFromCsv(storageFile);
         }
-        return true;
     }
 
-    private static Boolean loadFromJson(String storageFile) {
+    private static void loadFromJson(String storageFile) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             File file = new File(storageFile);
             List<BoardGame> loadedGames = mapper.readValue(file, new TypeReference<List<BoardGame>>() {});
             GameCollectionRepository.getGames().clear();
             GameCollectionRepository.getGames().addAll(loadedGames);
-            return true;
         } catch (IOException e) {
             System.out.println("Error loading from JSON: " + e.getMessage());
-            return false;
         }
     }
 
-    private static Boolean loadFromCsv(String storageFile) {
+    private static void loadFromCsv(String storageFile) {
         try (BufferedReader reader = new BufferedReader(new FileReader(storageFile))) {
             GameCollectionRepository.getGames().clear();
             String line;
@@ -64,11 +59,8 @@ public class GameCollectionLoader {
                     GameCollectionRepository.getGames().add(game);
                 }
             }
-            return true;
         } catch (IOException e) {
             System.out.println("Error loading from CSV: " + e.getMessage());
-            return false;
         }
     }
-
 }

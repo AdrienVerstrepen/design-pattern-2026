@@ -1,5 +1,4 @@
 package fr.fges;
-
 import fr.fges.services.GameCollectionLoader;
 import fr.fges.services.GameCollectionSaver;
 import fr.fges.services.MenuService;
@@ -33,7 +32,6 @@ public class Main {
         GameCollectionLoader.loadFromFile();
         System.out.println("Using storage file: " + storageFile);
     }
-
 
     public static void LaunchApplication() {
         while (true) {

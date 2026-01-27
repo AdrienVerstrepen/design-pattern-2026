@@ -2,7 +2,6 @@ package fr.fges.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.models.BoardGame;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,13 +9,16 @@ import java.io.IOException;
 import java.util.List;
 
 public class GameCollectionSaver {
-
     private static String storageFile = "";
+
     // These methods helps to access / edit the storageFile value
     public static void setStorageFile(String file) {
         storageFile = file;
     }
-    public static String getStorageFile() { return storageFile; }
+
+    public static String getStorageFile() {
+        return storageFile;
+    }
 
     public static void saveToFile(List<BoardGame> games) {
         // This method calls the corresponding file extension saving method
@@ -48,5 +50,4 @@ public class GameCollectionSaver {
             System.out.println("Error saving to CSV: " + e.getMessage());
         }
     }
-
 }
