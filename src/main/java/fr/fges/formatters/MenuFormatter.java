@@ -1,5 +1,4 @@
 package fr.fges.formatters;
-
 import fr.fges.services.MenuService;
 
 public class MenuFormatter {
