@@ -81,10 +81,7 @@ public class MenuService {
 
     public static int getWeekDay() {
         Calendar calendar = getDate();
-        //int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
-        // System.out.println(weekDay);
         return calendar.get(Calendar.DAY_OF_WEEK);
-        //return 1;
     }
 
     private static void exit() {
@@ -96,13 +93,23 @@ public class MenuService {
         displayMainMenu();
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
-        switch (choice) {
-            case "1" -> addGame();
-            case "2" -> removeGame();
-            case "3" -> listAllGames();
-            case "4" -> getWeekDay();
-            case "5" -> exit();
-            default -> System.out.println("Invalid choice. Please select a valid option.");
+        if (MenuService.isWeekEnd(MenuService.getWeekDay())) {
+            switch (choice) {
+                case "1" -> addGame();
+                case "2" -> removeGame();
+                case "3" -> listAllGames();
+                case "4" -> getWeekDay();
+                case "5" -> exit();
+                default -> System.out.println("Invalid choice. Please select a valid option.");
+            }
+        } else {
+            switch (choice) {
+                case "1" -> addGame();
+                case "2" -> removeGame();
+                case "3" -> listAllGames();
+                case "4" -> exit();
+                default -> System.out.println("Invalid choice. Please select a valid option.");
+            }
         }
     }
 }
