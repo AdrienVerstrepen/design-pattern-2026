@@ -9,7 +9,7 @@ public class MenuFormatter {
                 1. Add Board Game
                 2. Remove Board Game
                 3. List All Board Games
-                4. View summary
+                4. View Summary (Weekend Special !)
                 5. Exit
                 Please select an option (1-5):
                 """;
