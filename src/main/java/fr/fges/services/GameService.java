@@ -18,4 +18,10 @@ public class GameService {
     public static void listAllGames() {
         GameCollectionFormatter.viewAllGames();
     }
+
+    public static void addGame(String title, Integer minPlayers, Integer maxPlayers, String category){
+        BoardGame game = new BoardGame(title, minPlayers, maxPlayers, category);
+        GameCollectionRepository.addGame(game);
+        GameCollectionSaver.saveToFile(GameCollectionRepository.getGames());
+    }
 }

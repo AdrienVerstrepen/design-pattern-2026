@@ -42,10 +42,7 @@ public class MenuService {
         String category = verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
         int minPlayers = verificationValidNumber("Minimum Players");
         int maxPlayers = verificationValidNumber("Maximum Players");
-
-        BoardGame game = new BoardGame(title, minPlayers, maxPlayers, category);
-        GameCollectionRepository.addGame(game);
-        GameCollectionSaver.saveToFile(GameCollectionRepository.getGames());
+        GameService.addGame(title, minPlayers, maxPlayers, category);
         System.out.println("Board game added successfully.");
     }
 
