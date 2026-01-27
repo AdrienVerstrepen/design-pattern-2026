@@ -1,7 +1,4 @@
 package fr.fges.services;
-import fr.fges.formatters.GameCollectionFormatter;
-import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionRepository;
 import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMainMenu;
 import static fr.fges.services.GameService.listAllGames;
