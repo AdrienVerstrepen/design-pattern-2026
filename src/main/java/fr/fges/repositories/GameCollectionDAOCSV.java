@@ -1,0 +1,76 @@
+package fr.fges.repositories;
+
+import fr.fges.models.BoardGame;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameCollectionDAOCSV implements GameCollectionDAO {
+    private final String filename;
+
+    public GameCollectionDAOCSV(String filename) {
+        this.filename = filename;
+    }
+
+    @Override
+    public void save(BoardGame newGame) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            writer.write("title,minPlayers,maxPlayers,category");
+            writer.newLine();
+            List<BoardGame> savedGames = this.findAll();
+            savedGames.add(newGame);
+            for (BoardGame game : savedGames) {
+                writer.write(game.title() + "," + game.minPlayers() + "," + game.maxPlayers() + "," + game.category());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving to CSV: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<BoardGame> findAll() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            List<BoardGame> savedGames = new ArrayList<>();
+            String line;
+            boolean firstLine = true;
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // skip header
+                }
+                String[] parts = line.split(",");
+                if (parts.length >= 4) {
+                    BoardGame game = new BoardGame(
+                            parts[0],
+                            Integer.parseInt(parts[1]),
+                            Integer.parseInt(parts[2]),
+                            parts[3]
+                    );
+                    savedGames.add(game);
+                }
+            }
+            return savedGames;
+        } catch (IOException e) {
+            System.out.println("Error loading from CSV: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public void delete(BoardGame gameToRemove) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            List<BoardGame> savedGames = this.findAll();
+            savedGames.remove(gameToRemove);
+            writer.write("title,minPlayers,maxPlayers,category");
+            writer.newLine();
+            for (BoardGame game : savedGames) {
+                writer.write(game.title() + "," + game.minPlayers() + "," + game.maxPlayers() + "," + game.category());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading from CSV: " + e.getMessage());
+        }
+    }
+}
