@@ -1,29 +1,27 @@
 package fr.fges.formatters;
-import fr.fges.services.MenuService;
+import static fr.fges.services.DateGestion.getWeekDay;
+import static fr.fges.services.DateGestion.isWeekEnd;
 
 public class MenuFormatter {
     public static void displayMainMenu() {
-        if (MenuService.isWeekEnd(MenuService.getWeekDay())){
-            String menuText = """
-                === Board Game Collection ===
-                1. Add Board Game
-                2. Remove Board Game
-                3. List All Board Games
-                4. View Summary (Weekend Special !)
-                5. Exit
-                Please select an option (1-5):
-                """;
-            System.out.println(menuText);
+        String menuText = """
+            === Board Game Collection ===
+            1. Add Board Game
+            2. Remove Board Game
+            3. List All Board Games
+            """;
+        if (isWeekEnd(getWeekDay())) {
+            menuText += """
+            4. View Summary (Weekend Special !)
+            5. Exit
+            Please select an option (1-5):
+            """;
         } else {
-            String menuText = """
-                === Board Game Collection ===
-                1. Add Board Game
-                2. Remove Board Game
-                3. List All Board Games
-                4. Exit
-                Please select an option (1-4):
-                """;
-            System.out.println(menuText);
+            menuText += """
+            4. Exit
+            Please select an option (1-4):
+            """;
         }
+        System.out.println(menuText);
     }
 }

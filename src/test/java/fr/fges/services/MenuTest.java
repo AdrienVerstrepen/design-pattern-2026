@@ -1,6 +1,6 @@
-package fr.fges.samplecode;
-import fr.fges.services.MenuService;
+package fr.fges.services;
 import org.junit.jupiter.api.Test;
+import static fr.fges.services.DateGestion.isWeekEnd;
 import static fr.fges.services.MenuService.*;
 import static org.junit.jupiter.api.Assertions.*;
 

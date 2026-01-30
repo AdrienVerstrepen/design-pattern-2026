@@ -1,10 +1,9 @@
 package fr.fges.services;
 import fr.fges.repositories.GameCollectionRepository;
-
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMainMenu;
+import static fr.fges.services.DateGestion.getWeekDay;
+import static fr.fges.services.DateGestion.isWeekEnd;
 import static fr.fges.services.GameService.listAllGames;
 
 public class MenuService {
@@ -71,21 +70,6 @@ public class MenuService {
         }
     }
 
-    public static boolean isWeekEnd(int weekDay){
-        return weekDay == 1 || weekDay == 7;
-    }
-
-    public static Calendar getDate(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        return calendar;
-    }
-
-    public static int getWeekDay() {
-        Calendar calendar = getDate();
-        return calendar.get(Calendar.DAY_OF_WEEK);
-    }
-
     private static void exit() {
         System.out.println("Exiting the application. Goodbye!");
         System.exit(0);
@@ -103,23 +87,26 @@ public class MenuService {
         displayMainMenu();
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
-        if (MenuService.isWeekEnd(MenuService.getWeekDay())) {
-            switch (choice) {
-                case "1" -> addGame();
-                case "2" -> removeGame();
-                case "3" -> listAllGames();
-                case "4" -> getWeekDay();
-                case "5" -> exit();
-                default -> System.out.println("Invalid choice. Please select a valid option.");
+        boolean weekEnd = isWeekEnd(getWeekDay());
+        switch (choice) {
+            case "1" -> addGame();
+            case "2" -> removeGame();
+            case "3" -> listAllGames();
+            case "4" -> {
+                if (weekEnd) {
+                    getWeekDay();
+                } else {
+                    exit();
+                }
             }
-        } else {
-            switch (choice) {
-                case "1" -> addGame();
-                case "2" -> removeGame();
-                case "3" -> listAllGames();
-                case "4" -> exit();
-                default -> System.out.println("Invalid choice. Please select a valid option.");
+            case "5" -> {
+                if (weekEnd) {
+                    exit();
+                } else {
+                    System.out.println("Invalid choice. Please select a valid option.");
+                }
             }
+            default -> System.out.println("Invalid choice. Please select a valid option.");
         }
     }
 }
