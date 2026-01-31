@@ -1,5 +1,4 @@
 package fr.fges.repositories;
-
 import fr.fges.models.BoardGame;
 
 import java.util.List;

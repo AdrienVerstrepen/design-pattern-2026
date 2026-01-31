@@ -1,5 +1,4 @@
 package fr.fges.services.random;
-
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.services.Random.LastNElementsStrategy;

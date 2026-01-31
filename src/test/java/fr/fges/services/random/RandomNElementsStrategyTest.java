@@ -1,5 +1,4 @@
 package fr.fges.services.random;
-
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.services.Random.RandomStrategy;
@@ -13,7 +12,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class RandomNElementsStrategyTest extends RandomTest {
-
     @Override
     protected RandomStrategy getStrategy() {
         return new fr.fges.services.Random.RandomNElementsStrategy();

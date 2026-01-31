@@ -1,5 +1,4 @@
 package fr.fges.repositories;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.models.BoardGame;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameCollectionDAOJSON implements GameCollectionDAO {
-
     private final String filename;
 
     public GameCollectionDAOJSON(String filename) {
@@ -52,5 +50,4 @@ public class GameCollectionDAOJSON implements GameCollectionDAO {
             System.out.println("Error saving to JSON: " + e.getMessage());
         }
     }
-
 }

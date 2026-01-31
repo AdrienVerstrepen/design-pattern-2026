@@ -1,11 +1,11 @@
 package fr.fges.services;
-import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.repositories.GameCollectionRepository;
 import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMainMenu;
+import static fr.fges.repositories.GameCollectionRepository.printGames;
 import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
-import static fr.fges.services.GameService.listAllGames;
+import static fr.fges.repositories.GameCollectionRepository.listAllGames;
 
 public class MenuService {
     public static String getUserInput(String numberPlayers) {
@@ -19,13 +19,13 @@ public class MenuService {
         String category = MenuLogic.verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
         int minPlayers = MenuLogic.verificationValidNumber("Minimum Players");
         int maxPlayers = MenuLogic.verificationValidNumber("Maximum Players");
-        GameService.addGame(title, minPlayers, maxPlayers, category);
+        GameCollectionRepository.addGame(title, minPlayers, maxPlayers, category);
         System.out.println("Board game added successfully.");
     }
 
     private static void removeGame() {
         String title = getUserInput("Title of game to remove");
-        if (GameService.removeGame(title)) {
+        if (GameCollectionRepository.removeGame(title)) {
             System.out.println("Board game removed successfully.");
         } else {
             System.out.println("No board game found with that title.");
@@ -41,7 +41,8 @@ public class MenuService {
         if (GameCollectionRepository.numberGames() <= 3){
             listAllGames();
         } else {
-            // sélection aléatoire 3 jeux
+            //RandomStrategy randomGames = RandomNElementsStrategy.(3);
+            printGames(randomGames);
         }
     }
 

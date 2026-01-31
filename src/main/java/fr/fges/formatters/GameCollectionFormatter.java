@@ -12,12 +12,10 @@ public class GameCollectionFormatter {
             System.out.println("No board games in collection.");
             return;
         }
-
         // Sort the games by their title alphabetically
         List<BoardGame> sortedGames = games.stream()
                 .sorted(Comparator.comparing(BoardGame::title))
                 .toList();
-
         for (BoardGame game : sortedGames) {
             System.out.println("Game: " + game.title() + " (" + game.minPlayers() + "-" + game.maxPlayers() + " players) - " + game.category());
         }

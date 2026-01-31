@@ -1,5 +1,4 @@
 package fr.fges.services;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.models.BoardGame;
 import java.io.BufferedWriter;
