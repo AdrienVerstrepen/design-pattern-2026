@@ -1,7 +1,7 @@
 package fr.fges.services;
 import org.junit.jupiter.api.Test;
 import static fr.fges.services.DateGestion.isWeekEnd;
-import static fr.fges.services.MenuService.*;
+import static fr.fges.services.MenuLogic.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MenuTest {
@@ -20,14 +20,14 @@ public class MenuTest {
     @Test
     void testVerificationValidStringValid() {
         // this function tests an answer that's valid
-        assertTrue(MenuService.isValidString("a"));
+        assertTrue(isValidString("a"));
     }
 
     @Test
     void testVerificationValidStringInvalid() {
         // this function tests an answer that's invalid
-        assertFalse(MenuService.isValidString(""));
-        assertFalse(MenuService.isValidString("   "));
+        assertFalse(isValidString(""));
+        assertFalse(isValidString("   "));
     }
 
     @Test
