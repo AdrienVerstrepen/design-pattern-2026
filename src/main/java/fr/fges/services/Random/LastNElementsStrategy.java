@@ -1,6 +1,7 @@
 package fr.fges.services.Random;
 
 import fr.fges.models.BoardGame;
+import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.repositories.GameCollectionRepository;
 
 import java.util.ArrayList;
@@ -9,11 +10,17 @@ import java.util.List;
 public class LastNElementsStrategy implements RandomStrategy {
 
     @Override
-    public List<BoardGame> getNRandomGame(int numberOfGames) {
-        List<BoardGame> myGameCollection = GameCollectionRepository.getGames();
+    public List<BoardGame> getNRandomGame(int numberOfGames, GameCollectionDAO dao) {
+        List<BoardGame> myGameCollection = dao.findAll();
+        if (myGameCollection.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        int limit = Math.min(numberOfGames, myGameCollection.size());
+
         List<BoardGame> mySelectedGames = new ArrayList<>();
-        for (int i = 1; i < numberOfGames; i++) {
-            mySelectedGames.add(myGameCollection.get(myGameCollection.size()-i));
+        for (int i = 0; i < limit; i++) {
+            mySelectedGames.add(myGameCollection.get(myGameCollection.size() - 1 -i ));
         }
         return mySelectedGames;
     }
