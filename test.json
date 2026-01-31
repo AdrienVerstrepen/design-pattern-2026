@@ -8,4 +8,9 @@
   "minPlayers" : 5,
   "maxPlayers" : 1,
   "category" : ""
+}, {
+  "title" : "Test",
+  "minPlayers" : 2,
+  "maxPlayers" : 4,
+  "category" : "family"
 } ]
