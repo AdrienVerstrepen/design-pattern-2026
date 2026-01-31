@@ -9,4 +9,6 @@ Enfin, GameCollections a été séparée en trois également : GameCollectionFor
 
 # Rapport 2
 
+Pour la première mission, si le titre a ajouter est repéré dans les jeux déjà existants, la fonction addGame est avortée De plus,les fonctions relevant de la logique ont été déplacées dans une classe séparée. 
+
 Pour la troisième mission, une gestion de la récupération de la date, ainsi que la vérification du jour de la semaine a été implémentée, avec l'ajout d'un classe DateGestion.
