@@ -1,12 +1,9 @@
 package fr.fges.services;
-import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.repositories.GameCollectionRepository;
 import fr.fges.services.Random.RandomStrategy;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static fr.fges.services.DateGestion.isWeekEnd;
 import static fr.fges.services.MenuLogic.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -68,8 +65,8 @@ public class MenuTest {
         */
 
         GameCollectionRepository.getGames().clear();
-        GameCollectionRepository.addGame(new BoardGame("Tutel1",2,2,"fantasy"));
-        GameCollectionRepository.addGame(new BoardGame("Tutel2",2,2,"fantasy"));
+        GameCollectionRepository.addGame("Tutel1",2,2,"fantasy");
+        GameCollectionRepository.addGame("Tutel2",2,2,"fantasy");
 
         assertTrue(duplicateVerification("Tutel5"));
     }
@@ -87,10 +84,9 @@ public class MenuTest {
         */
 
         GameCollectionRepository.getGames().clear();
-        GameCollectionRepository.addGame(new BoardGame("Tutel1",2,2,"fantasy"));
-        GameCollectionRepository.addGame(new BoardGame("Tutel2",2,2,"fantasy"));
+        GameCollectionRepository.addGame("Tutel1",2,2,"fantasy");
+        GameCollectionRepository.addGame("Tutel2",2,2,"fantasy");
 
         assertFalse(duplicateVerification("Tutel1"));
     }
-
 }

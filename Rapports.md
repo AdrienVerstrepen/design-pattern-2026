@@ -9,3 +9,4 @@ Enfin, GameCollections a été séparée en trois également : GameCollectionFor
 
 # Rapport 2
 
+Pour la troisième mission, une gestion de la récupération de la date, ainsi que la vérification du jour de la semaine a été implémentée, avec l'ajout d'un classe DateGestion.
