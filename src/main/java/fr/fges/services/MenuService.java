@@ -1,4 +1,5 @@
 package fr.fges.services;
+import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.repositories.GameCollectionRepository;
 import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMainMenu;
@@ -44,15 +45,15 @@ public class MenuService {
         }
     }
 
-    public static void handleMenu() {
+    public static void handleMenu(GameCollectionDAO dao) {
         displayMainMenu();
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
         boolean weekEnd = isWeekEnd(getWeekDay());
         switch (choice) {
-            case "1" -> addGame();
-            case "2" -> removeGame();
-            case "3" -> listAllGames();
+            case "1" -> addGame(dao);
+            case "2" -> removeGame(dao);
+            case "3" -> listAllGames(dao);
             case "4" -> {
                 if (weekEnd) {
                     getWeekDay();
