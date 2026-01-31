@@ -16,6 +16,7 @@ public class MenuService {
 
     private static void addGame() {
         String title = MenuLogic.verificationValidString("Title");
+        if (MenuLogic.duplicateVerification(title)) return;
         String category = MenuLogic.verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
         int minPlayers = MenuLogic.verificationValidNumber("Minimum Players");
         int maxPlayers = MenuLogic.verificationValidNumber("Maximum Players");

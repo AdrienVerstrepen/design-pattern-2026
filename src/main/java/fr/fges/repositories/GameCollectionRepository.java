@@ -8,7 +8,6 @@ public class GameCollectionRepository {
 
     // These methods help to access / edit the data structure holding our games
     public static List<BoardGame> getGames() {
-        System.out.println(games);
         return games;
     }
 

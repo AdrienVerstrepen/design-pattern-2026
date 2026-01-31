@@ -1,4 +1,7 @@
 package fr.fges.services;
+import fr.fges.models.BoardGame;
+import fr.fges.repositories.GameCollectionRepository;
+
 import static fr.fges.services.MenuService.getUserInput;
 
 public class MenuLogic {
@@ -39,5 +42,16 @@ public class MenuLogic {
 	public static boolean isValidString(String input) {
 		// this function is there to test more easily the function verificationValidString without having to simulate user inputs
 		return input != null && !input.isBlank();
+	}
+
+	public static boolean duplicateVerification(String input){
+		var games = GameCollectionRepository.getGames();
+		for (BoardGame game : games) {
+			if (game.title().equals(input)) {
+				System.out.println("ce jeu existe déjà");
+				return false;
+			}
+		}
+		return true;
 	}
 }
