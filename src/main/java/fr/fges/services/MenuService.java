@@ -1,4 +1,5 @@
 package fr.fges.services;
+import fr.fges.formatters.GameCollectionFormatter;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.services.Random.RandomNElementsStrategy;
@@ -8,10 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMainMenu;
 import static fr.fges.formatters.MenuFormatter.displayMessage;
-import static fr.fges.repositories.GameCollectionRepository.printGames;
+import static fr.fges.formatters.MenuFormatter.displayGames;
 import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
-import static fr.fges.repositories.GameCollectionRepository.listAllGames;
 
 public class MenuService {
     public static String getUserInput(String numberPlayers) {
@@ -49,11 +49,11 @@ public class MenuService {
 
     private static void summaryWeekend(GameCollectionDAO dao){
         if (dao.findAll().size() <= 3){
-            listAllGames(dao);
+            GameCollectionFormatter.viewAllGames(dao);
         } else {
             RandomStrategy myStrategy = new RandomNElementsStrategy();
             List<BoardGame> randomGames = myStrategy.getNRandomGame(3, dao);
-            printGames(randomGames);
+            displayGames(randomGames);
         }
     }
 
@@ -65,7 +65,7 @@ public class MenuService {
         switch (choice) {
             case "1" -> addGame(dao);
             case "2" -> removeGame(dao);
-            case "3" -> listAllGames(dao);
+            case "3" -> GameCollectionFormatter.viewAllGames(dao);
             case "4" -> {
                 if (weekEnd) {
                     summaryWeekend(dao);

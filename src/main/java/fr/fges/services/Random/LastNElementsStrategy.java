@@ -2,7 +2,6 @@ package fr.fges.services.Random;
 
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
-import fr.fges.repositories.GameCollectionRepository;
 
 import java.util.ArrayList;
 import java.util.List;

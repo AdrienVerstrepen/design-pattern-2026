@@ -2,7 +2,6 @@ package fr.fges.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionRepository;
 
 import java.io.BufferedReader;
 import java.io.File;

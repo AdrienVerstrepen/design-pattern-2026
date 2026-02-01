@@ -1,4 +1,8 @@
 package fr.fges.formatters;
+import fr.fges.models.BoardGame;
+
+import java.util.List;
+
 import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
 
@@ -31,5 +35,11 @@ public class MenuFormatter {
 
     public static void displayMessage(String format, Object... args) {
         System.out.printf(format, args);
+    }
+
+    public static void displayGames(List<BoardGame> games) {
+        for (BoardGame game: games) {
+            System.out.println(game);
+        }
     }
 }
