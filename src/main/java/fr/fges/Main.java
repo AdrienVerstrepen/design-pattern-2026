@@ -1,7 +1,5 @@
 package fr.fges;
 import fr.fges.repositories.*;
-import fr.fges.services.GameCollectionLoader;
-import fr.fges.services.GameCollectionSaver;
 import fr.fges.services.MenuService;
 
 public class Main {
