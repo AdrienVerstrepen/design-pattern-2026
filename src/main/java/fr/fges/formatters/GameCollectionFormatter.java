@@ -1,13 +1,14 @@
 package fr.fges.formatters;
 import fr.fges.models.BoardGame;
+import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.repositories.GameCollectionRepository;
 import java.util.Comparator;
 import java.util.List;
 
 public class GameCollectionFormatter {
-    public static void viewAllGames() {
+    public static void viewAllGames(GameCollectionDAO dao) {
         // This method prints all games to the user interface
-        List<BoardGame> games = GameCollectionRepository.getGames();
+        List<BoardGame> games = dao.findAll();
         if (games.isEmpty()) {
             System.out.println("No board games in collection.");
             return;

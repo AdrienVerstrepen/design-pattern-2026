@@ -1,16 +1,86 @@
 [ {
-  "title" : "lkhl",
-  "minPlayers" : 1,
-  "maxPlayers" : 1,
-  "category" : "kug"
+  "title" : "Catan",
+  "minPlayers" : 3,
+  "maxPlayers" : 4,
+  "category" : "Strategy"
 }, {
-  "title" : "",
-  "minPlayers" : 5,
-  "maxPlayers" : 1,
-  "category" : ""
+  "title" : "7 Wonders Duel",
+  "minPlayers" : 2,
+  "maxPlayers" : 2,
+  "category" : "Strategy"
 }, {
-  "title" : "Test",
+  "title" : "Dixit",
+  "minPlayers" : 3,
+  "maxPlayers" : 6,
+  "category" : "Family"
+}, {
+  "title" : "Pandemic",
   "minPlayers" : 2,
   "maxPlayers" : 4,
-  "category" : "family"
+  "category" : "Cooperative"
+}, {
+  "title" : "Carcassonne",
+  "minPlayers" : 2,
+  "maxPlayers" : 5,
+  "category" : "Family"
+}, {
+  "title" : "Terraforming Mars",
+  "minPlayers" : 1,
+  "maxPlayers" : 5,
+  "category" : "Expert"
+}, {
+  "title" : "Azul",
+  "minPlayers" : 2,
+  "maxPlayers" : 4,
+  "category" : "Abstract"
+}, {
+  "title" : "The Mind",
+  "minPlayers" : 2,
+  "maxPlayers" : 4,
+  "category" : "Card Game"
+}, {
+  "title" : "Root",
+  "minPlayers" : 2,
+  "maxPlayers" : 4,
+  "category" : "Wargame"
+}, {
+  "title" : "Splendor",
+  "minPlayers" : 2,
+  "maxPlayers" : 4,
+  "category" : "Family"
+}, {
+  "title" : "MicroMacro: Crime City",
+  "minPlayers" : 1,
+  "maxPlayers" : 4,
+  "category" : "Investigation"
+}, {
+  "title" : "Wingspan",
+  "minPlayers" : 1,
+  "maxPlayers" : 5,
+  "category" : "Strategy"
+}, {
+  "title" : "Ticket to Ride",
+  "minPlayers" : 2,
+  "maxPlayers" : 5,
+  "category" : "Family"
+}, {
+  "title" : "Skyjo",
+  "minPlayers" : 2,
+  "maxPlayers" : 8,
+  "category" : "Card Game"
+}, {
+  "title" : "Exploding Kittens",
+  "minPlayers" : 2,
+  "maxPlayers" : 5,
+  "category" : "Party Game"
+}, {
+  "title" : "Gloomhaven",
+  "minPlayers" : 1,
+  "maxPlayers" : 4,
+  "category" : "Legacy"
+}, {
+  "title" : "Code Names",
+  "minPlayers" : 2,
+  "maxPlayers" : 8,
+  "category" : "Party Game"
 } ]

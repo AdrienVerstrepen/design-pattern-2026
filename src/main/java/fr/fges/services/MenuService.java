@@ -46,7 +46,7 @@ public class MenuService {
     }
 
     private static void summaryWeekend(GameCollectionDAO dao){
-        if (GameCollectionRepository.numberGames() <= 3){
+        if (dao.findAll().size() <= 3){
             listAllGames(dao);
         } else {
             RandomStrategy myStrategy = new RandomNElementsStrategy();
@@ -66,7 +66,7 @@ public class MenuService {
             case "3" -> listAllGames(dao);
             case "4" -> {
                 if (weekEnd) {
-                    getWeekDay();
+                    summaryWeekend(dao);
                 } else {
                     exit();
                 }

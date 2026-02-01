@@ -1,4 +1,5 @@
 package fr.fges;
+import fr.fges.repositories.*;
 import fr.fges.services.GameCollectionLoader;
 import fr.fges.services.GameCollectionSaver;
 import fr.fges.services.MenuService;
@@ -7,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
         String storageFile = ArgumentReceiver(args);
         ExtensionVerification(storageFile);
-        AllocateMemory(storageFile);
-        LaunchApplication();
+        GameCollectionDAO dao = InitializeDao(storageFile);
+        LaunchApplication(dao);
     }
 
     public static String ArgumentReceiver(String[] arguments) {
@@ -27,15 +28,20 @@ public class Main {
         }
     }
 
-    public static void AllocateMemory(String storageFile) {
-        GameCollectionSaver.setStorageFile(storageFile);
-        GameCollectionLoader.loadFromFile();
+    public static GameCollectionDAO InitializeDao(String storageFile) {
         System.out.println("Using storage file: " + storageFile);
+        if(storageFile.endsWith(".json")) {
+            return new GameCollectionDAOJSON(storageFile);
+        } else if (storageFile.endsWith(".csv")) {
+            return new GameCollectionDAOCSV(storageFile);
+        } else {
+            return new GameCollectionDAORAM();
+        }
     }
 
-    public static void LaunchApplication() {
+    public static void LaunchApplication(GameCollectionDAO dao) {
         while (true) {
-            MenuService.handleMenu();
+            MenuService.handleMenu(dao);
         }
     }
 }
