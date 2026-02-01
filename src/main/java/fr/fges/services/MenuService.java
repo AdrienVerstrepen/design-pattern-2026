@@ -1,13 +1,13 @@
 package fr.fges.services;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
-import fr.fges.repositories.GameCollectionRepository;
 import fr.fges.services.Random.RandomNElementsStrategy;
 import fr.fges.services.Random.RandomStrategy;
 
 import java.util.List;
 import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMainMenu;
+import static fr.fges.formatters.MenuFormatter.displayMessage;
 import static fr.fges.repositories.GameCollectionRepository.printGames;
 import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
@@ -16,32 +16,31 @@ import static fr.fges.repositories.GameCollectionRepository.listAllGames;
 public class MenuService {
     public static String getUserInput(String numberPlayers) {
         Scanner scanner = new Scanner(System.in);
-        System.out.printf("%s: ", numberPlayers);
+        displayMessage("%s: ", numberPlayers);
         return scanner.nextLine();
     }
 
     private static void addGame(GameCollectionDAO dao) {
         // Les vérifications doivent basculer dans l'UI car c'est de l'entrée / sortie
         String title = MenuLogic.verificationValidString("Title");
-        if (!MenuLogic.duplicateVerification(title)) return;
         String category = MenuLogic.verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
         int minPlayers = MenuLogic.verificationValidNumber("Minimum Players");
         int maxPlayers = MenuLogic.verificationValidNumber("Maximum Players");
         dao.save(new BoardGame(title, minPlayers, maxPlayers, category));
-        System.out.println("Board game added successfully.");
+        displayMessage("Board game added successfully.");
     }
 
     private static void removeGame(GameCollectionDAO dao) {
         String title = getUserInput("Title of game to remove");
         if (dao.delete(title)) {
-            System.out.println("Board game removed successfully.");
+            displayMessage("Board game removed successfully.");
         } else {
-            System.out.println("No board game found with that title.");
+            displayMessage("No board game found with that title.");
         }
     }
 
     private static void exit() {
-        System.out.println("Exiting the application. Goodbye!");
+        displayMessage("Exiting the application. Goodbye!");
         System.exit(0);
     }
 
@@ -75,10 +74,10 @@ public class MenuService {
                 if (weekEnd) {
                     exit();
                 } else {
-                    System.out.println("Invalid choice. Please select a valid option.");
+                    displayMessage("Invalid choice. Please select a valid option");
                 }
             }
-            default -> System.out.println("Invalid choice. Please select a valid option.");
+            default -> displayMessage("Invalid choice. Please select a valid option.");
         }
     }
 }

@@ -24,4 +24,12 @@ public class MenuFormatter {
         }
         System.out.println(menuText);
     }
+
+    public static void displayMessage(String message) {
+        System.out.println(message);
+    }
+
+    public static void displayMessage(String format, Object... args) {
+        System.out.printf(format, args);
+    }
 }

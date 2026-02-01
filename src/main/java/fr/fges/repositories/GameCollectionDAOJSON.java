@@ -3,11 +3,14 @@ package fr.fges.repositories;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.models.BoardGame;
+import fr.fges.services.MenuLogic;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static fr.fges.services.MenuLogic.isNotADuplicate;
 
 public class GameCollectionDAOJSON implements GameCollectionDAO {
 
@@ -18,14 +21,19 @@ public class GameCollectionDAOJSON implements GameCollectionDAO {
     }
 
     @Override
-    public void save(BoardGame game) {
+    public boolean save(BoardGame newGame) {
+        if (!isNotADuplicate(newGame.title(), this)) {
+            return false;
+        }
         try {
             ObjectMapper mapper = new ObjectMapper();
             List<BoardGame> savedGames = this.findAll();
-            savedGames.add(game);
+            savedGames.add(newGame);
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(this.filename), savedGames);
+            return true;
         } catch (IOException e) {
             System.out.println("Error saving to JSON: " + e.getMessage());
+            return false;
         }
     }
 

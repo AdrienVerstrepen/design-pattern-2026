@@ -3,7 +3,7 @@ import fr.fges.models.BoardGame;
 import java.util.List;
 
 public interface GameCollectionDAO {
-    void save(BoardGame game);
+    boolean save(BoardGame game);
 
     List<BoardGame> findAll();
 

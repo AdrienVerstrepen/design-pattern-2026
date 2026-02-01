@@ -1,10 +1,13 @@
 package fr.fges.repositories;
 
 import fr.fges.models.BoardGame;
+import fr.fges.services.MenuLogic;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static fr.fges.services.MenuLogic.isNotADuplicate;
 
 public class GameCollectionDAOCSV implements GameCollectionDAO {
     private final String filename;
@@ -14,7 +17,10 @@ public class GameCollectionDAOCSV implements GameCollectionDAO {
     }
 
     @Override
-    public void save(BoardGame newGame) {
+    public boolean save(BoardGame newGame) {
+        if (!isNotADuplicate(newGame.title(), this)) {
+            return false;
+        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             writer.write("title,minPlayers,maxPlayers,category");
             writer.newLine();
@@ -24,8 +30,10 @@ public class GameCollectionDAOCSV implements GameCollectionDAO {
                 writer.write(game.title() + "," + game.minPlayers() + "," + game.maxPlayers() + "," + game.category());
                 writer.newLine();
             }
+            return true;
         } catch (IOException e) {
             System.out.println("Error saving to CSV: " + e.getMessage());
+            return false;
         }
     }
 

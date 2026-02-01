@@ -1,7 +1,8 @@
 package fr.fges.services;
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionRepository;
+import fr.fges.repositories.GameCollectionDAO;
 
+import static fr.fges.formatters.MenuFormatter.displayMessage;
 import static fr.fges.services.MenuService.getUserInput;
 
 public class MenuLogic {
@@ -12,7 +13,7 @@ public class MenuLogic {
 			try {
 				return Integer.parseInt(getUserInput(numberPlayers));
 			} catch (NumberFormatException e) {
-				System.out.println("The number entered is invalid, please write a correct number.");
+				displayMessage("The number entered is invalid, please write a correct number.");
 			}
 		}
 	}
@@ -25,7 +26,7 @@ public class MenuLogic {
 			if (input != null && !input.isBlank()) {
 				return input;
 			}
-			System.out.println("The text entered is empty, please write a correct text.");
+			displayMessage("The text entered is empty, please write a correct text.");
 		}
 	}
 
@@ -44,11 +45,11 @@ public class MenuLogic {
 		return input != null && !input.isBlank();
 	}
 
-	public static boolean duplicateVerification(String input){
-		var games = GameCollectionRepository.getGames();
+	public static boolean isNotADuplicate(String input, GameCollectionDAO dao){
+		var games = dao.findAll();
 		for (BoardGame game : games) {
 			if (game.title().equals(input)) {
-				System.out.println("ce jeu existe déjà");
+				displayMessage("A game with the same title already exists.");
 				return false;
 			}
 		}

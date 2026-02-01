@@ -1,14 +1,11 @@
 package fr.fges.services;
-import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.repositories.GameCollectionRepository;
-import fr.fges.services.Random.RandomStrategy;
 import org.junit.jupiter.api.Test;
-import java.util.List;
+
 import static fr.fges.services.DateGestion.isWeekEnd;
 import static fr.fges.services.MenuLogic.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class MenuTest {
     @Test
