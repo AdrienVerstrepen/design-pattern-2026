@@ -26,8 +26,11 @@ public class MenuService {
         String category = MenuLogic.verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
         int minPlayers = MenuLogic.verificationValidNumber("Minimum Players");
         int maxPlayers = MenuLogic.verificationValidNumber("Maximum Players");
-        dao.save(new BoardGame(title, minPlayers, maxPlayers, category));
-        displayMessage("Board game added successfully.");
+        if (dao.save(new BoardGame(title, minPlayers, maxPlayers, category))) {
+            displayMessage("Board game added successfully.");
+        } else {
+            displayMessage("Game already exists.");
+        }
     }
 
     private static void removeGame(GameCollectionDAO dao) {
