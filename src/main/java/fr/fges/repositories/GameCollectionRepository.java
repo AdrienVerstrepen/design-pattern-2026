@@ -29,8 +29,8 @@ public class GameCollectionRepository {
         return false;
     }
 
-    public static void listAllGames() {
-        GameCollectionFormatter.viewAllGames();
+    public static void listAllGames(GameCollectionDAO dao) {
+        GameCollectionFormatter.viewAllGames(dao);
     }
 
     public static void addGame(String title, Integer minPlayers, Integer maxPlayers, String category){

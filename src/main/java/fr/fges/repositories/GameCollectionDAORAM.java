@@ -18,7 +18,7 @@ public class GameCollectionDAORAM implements GameCollectionDAO {
     }
 
     @Override
-    public void delete(BoardGame game) {
-        games.remove(game);
+    public boolean delete(String title) {
+        return games.removeIf(game -> game.title().equals(title));
     }
 }

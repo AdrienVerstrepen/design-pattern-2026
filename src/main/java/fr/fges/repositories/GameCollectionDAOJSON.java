@@ -42,14 +42,17 @@ public class GameCollectionDAOJSON implements GameCollectionDAO {
     }
 
     @Override
-    public void delete(BoardGame game) {
+    public boolean delete(String title) {
         try {
             List<BoardGame> savedGames = this.findAll();
-            savedGames.remove(game);
+            savedGames.removeIf(game -> game.title().equals(title));
             ObjectMapper mapper = new ObjectMapper();
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(this.filename), savedGames);
+            // appel au formatter
+            return true;
         } catch (IOException e) {
             System.out.println("Error saving to JSON: " + e.getMessage());
+            return false;
         }
     }
 

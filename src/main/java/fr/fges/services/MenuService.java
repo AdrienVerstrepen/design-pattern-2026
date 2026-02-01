@@ -1,8 +1,11 @@
 package fr.fges.services;
+import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.repositories.GameCollectionRepository;
 import fr.fges.services.Random.RandomNElementsStrategy;
 import fr.fges.services.Random.RandomStrategy;
+
+import java.util.List;
 import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMainMenu;
 import static fr.fges.repositories.GameCollectionRepository.printGames;
@@ -17,19 +20,20 @@ public class MenuService {
         return scanner.nextLine();
     }
 
-    private static void addGame() {
+    private static void addGame(GameCollectionDAO dao) {
+        // Les vérifications doivent basculer dans l'UI car c'est de l'entrée / sortie
         String title = MenuLogic.verificationValidString("Title");
-        if (MenuLogic.duplicateVerification(title)) return;
+        if (!MenuLogic.duplicateVerification(title)) return;
         String category = MenuLogic.verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
         int minPlayers = MenuLogic.verificationValidNumber("Minimum Players");
         int maxPlayers = MenuLogic.verificationValidNumber("Maximum Players");
-        GameCollectionRepository.addGame(title, minPlayers, maxPlayers, category);
+        dao.save(new BoardGame(title, minPlayers, maxPlayers, category));
         System.out.println("Board game added successfully.");
     }
 
-    private static void removeGame() {
+    private static void removeGame(GameCollectionDAO dao) {
         String title = getUserInput("Title of game to remove");
-        if (GameCollectionRepository.removeGame(title)) {
+        if (dao.delete(title)) {
             System.out.println("Board game removed successfully.");
         } else {
             System.out.println("No board game found with that title.");
@@ -41,25 +45,25 @@ public class MenuService {
         System.exit(0);
     }
 
-    private static void summaryWeekend(){
+    private static void summaryWeekend(GameCollectionDAO dao){
         if (GameCollectionRepository.numberGames() <= 3){
-            listAllGames();
+            listAllGames(dao);
         } else {
-            // récupération du DAO
-            RandomStrategy randomGames = new RandomNElementsStrategy(3, myDao);
+            RandomStrategy myStrategy = new RandomNElementsStrategy();
+            List<BoardGame> randomGames = myStrategy.getNRandomGame(3, dao);
             printGames(randomGames);
         }
     }
 
-    public static void handleMenu() {
+    public static void handleMenu(GameCollectionDAO dao) {
         displayMainMenu();
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
         boolean weekEnd = isWeekEnd(getWeekDay());
         switch (choice) {
-            case "1" -> addGame();
-            case "2" -> removeGame();
-            case "3" -> listAllGames();
+            case "1" -> addGame(dao);
+            case "2" -> removeGame(dao);
+            case "3" -> listAllGames(dao);
             case "4" -> {
                 if (weekEnd) {
                     getWeekDay();

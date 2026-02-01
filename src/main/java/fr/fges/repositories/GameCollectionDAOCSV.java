@@ -59,18 +59,20 @@ public class GameCollectionDAOCSV implements GameCollectionDAO {
     }
 
     @Override
-    public void delete(BoardGame gameToRemove) {
+    public boolean delete(String title) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             List<BoardGame> savedGames = this.findAll();
-            savedGames.remove(gameToRemove);
+            savedGames.removeIf(game -> game.title().equals(title));
             writer.write("title,minPlayers,maxPlayers,category");
             writer.newLine();
             for (BoardGame game : savedGames) {
                 writer.write(game.title() + "," + game.minPlayers() + "," + game.maxPlayers() + "," + game.category());
                 writer.newLine();
             }
+            return true;
         } catch (IOException e) {
             System.out.println("Error loading from CSV: " + e.getMessage());
+            return false;
         }
     }
 }

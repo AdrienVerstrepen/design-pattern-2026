@@ -7,5 +7,5 @@ public interface GameCollectionDAO {
 
     List<BoardGame> findAll();
 
-    void delete(BoardGame game);
+    boolean delete(String title);
 }
