@@ -3,7 +3,6 @@ import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
 
 import static fr.fges.formatters.MenuFormatter.displayMessage;
-import static fr.fges.services.MenuService.getUserInput;
 
 public class MenuLogic {
 	public static int verificationValidNumber(String numberPlayers) {
@@ -11,7 +10,7 @@ public class MenuLogic {
 		// it's set to public to be tested in a different class
 		while (true) {
 			try {
-				return Integer.parseInt(getUserInput(numberPlayers));
+				return Integer.parseInt(numberPlayers);
 			} catch (NumberFormatException e) {
 				displayMessage("The number entered is invalid, please write a correct number.");
 			}
@@ -22,7 +21,7 @@ public class MenuLogic {
 		// this function is there to check if the title or the category entered are not empty strings
 		// it's set to public to be tested in a different class
 		while (true) {
-			String input = getUserInput(stringInput);
+			String input = stringInput;
 			if (input != null && !input.isBlank()) {
 				return input;
 			}

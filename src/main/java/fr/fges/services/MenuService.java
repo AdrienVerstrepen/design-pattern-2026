@@ -22,8 +22,8 @@ public class MenuService {
 
     private void addGame(GameCollectionDAO dao) {
         // Les vérifications doivent basculer dans l'UI car c'est de l'entrée / sortie
-        String title = MenuLogic.verificationValidString("Title");
-        String category = MenuLogic.verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
+        String title = MenuLogic.verificationValidString(getUserInput("Title"));
+        String category = MenuLogic.verificationValidString(getUserInput("Category (e.g., fantasy, cooperative, family, strategy)"));
         int minPlayers = MenuLogic.verificationValidNumber("Minimum Players");
         int maxPlayers = MenuLogic.verificationValidNumber("Maximum Players");
         if (dao.save(new BoardGame(title, minPlayers, maxPlayers, category))) {
