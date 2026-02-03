@@ -7,7 +7,8 @@ public class Main {
         String storageFile = ArgumentReceiver(args);
         ExtensionVerification(storageFile);
         GameCollectionDAO dao = InitializeDao(storageFile);
-        LaunchApplication(dao);
+        MenuService leMenu = new MenuService();
+        LaunchApplication(dao, leMenu);
     }
 
     public static String ArgumentReceiver(String[] arguments) {
@@ -37,9 +38,9 @@ public class Main {
         }
     }
 
-    public static void LaunchApplication(GameCollectionDAO dao) {
+    public static void LaunchApplication(GameCollectionDAO dao, MenuService leMenu) {
         while (true) {
-            MenuService.handleMenu(dao);
+            leMenu.handleMenu(dao);
         }
     }
 }

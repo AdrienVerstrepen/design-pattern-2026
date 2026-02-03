@@ -14,13 +14,13 @@ import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
 
 public class MenuService {
-    public static String getUserInput(String numberPlayers) {
+    public String getUserInput(String numberPlayers) {
         Scanner scanner = new Scanner(System.in);
         displayMessage("%s: ", numberPlayers);
         return scanner.nextLine();
     }
 
-    private static void addGame(GameCollectionDAO dao) {
+    private void addGame(GameCollectionDAO dao) {
         // Les vérifications doivent basculer dans l'UI car c'est de l'entrée / sortie
         String title = MenuLogic.verificationValidString("Title");
         String category = MenuLogic.verificationValidString("Category (e.g., fantasy, cooperative, family, strategy)");
@@ -33,7 +33,7 @@ public class MenuService {
         }
     }
 
-    private static void removeGame(GameCollectionDAO dao) {
+    private void removeGame(GameCollectionDAO dao) {
         String title = getUserInput("Title of game to remove");
         if (dao.delete(title)) {
             displayMessage("Board game removed successfully.");
@@ -42,12 +42,12 @@ public class MenuService {
         }
     }
 
-    private static void exit() {
+    private void exit() {
         displayMessage("Exiting the application. Goodbye!");
         System.exit(0);
     }
 
-    private static void summaryWeekend(GameCollectionDAO dao){
+    private void summaryWeekend(GameCollectionDAO dao){
         if (dao.findAll().size() <= 3){
             GameCollectionFormatter.viewAllGames(dao);
         } else {
@@ -57,7 +57,7 @@ public class MenuService {
         }
     }
 
-    public static void handleMenu(GameCollectionDAO dao) {
+    public void handleMenu(GameCollectionDAO dao) {
         displayMainMenu();
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
