@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RandomNElementsStrategy implements RandomStrategy {
+public class RandomNElementsStrategy implements RecommendationStrategy {
 
     @Override
     public List<BoardGame> getNRandomGame(int numberOfGames, GameCollectionDAO dao) {

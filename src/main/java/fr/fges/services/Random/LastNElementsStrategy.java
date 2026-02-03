@@ -6,7 +6,7 @@ import fr.fges.repositories.GameCollectionDAO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LastNElementsStrategy implements RandomStrategy {
+public class LastNElementsStrategy implements RecommendationStrategy {
 
     @Override
     public List<BoardGame> getNRandomGame(int numberOfGames, GameCollectionDAO dao) {

@@ -4,6 +4,6 @@ import fr.fges.repositories.GameCollectionDAO;
 
 import java.util.List;
 
-public interface RandomStrategy {
+public interface RecommendationStrategy {
     List<BoardGame> getNRandomGame(int numberOfGames, GameCollectionDAO dao);
 }
