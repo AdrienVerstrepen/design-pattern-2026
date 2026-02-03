@@ -3,7 +3,7 @@ import fr.fges.formatters.GameCollectionFormatter;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.services.Random.RandomNElementsStrategy;
-import fr.fges.services.Random.RandomStrategy;
+import fr.fges.services.Random.RecommendationStrategy;
 
 import java.util.List;
 import java.util.Scanner;
@@ -51,7 +51,7 @@ public class MenuService {
         if (dao.findAll().size() <= 3){
             GameCollectionFormatter.viewAllGames(dao);
         } else {
-            RandomStrategy myStrategy = new RandomNElementsStrategy();
+            RecommendationStrategy myStrategy = new RandomNElementsStrategy();
             List<BoardGame> randomGames = myStrategy.getNRandomGame(3, dao);
             displayGames(randomGames);
         }
