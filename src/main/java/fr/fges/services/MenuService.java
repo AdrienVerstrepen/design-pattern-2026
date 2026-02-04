@@ -31,10 +31,10 @@ public class MenuService {
 
     private void addGame(GameCollectionDao dao) {
         // Les vérifications doivent basculer dans l'UI car c'est de l'entrée / sortie
-        String title = MenuLogic.verificationValidString(getUserInput("Title"));
-        String category = MenuLogic.verificationValidString(getUserInput("Category (e.g., fantasy, cooperative, family, strategy)"));
-        int minPlayers = MenuLogic.verificationValidNumber("Minimum Players");
-        int maxPlayers = MenuLogic.verificationValidNumber("Maximum Players");
+        String title = MenuLogic.verificationValidString(getUserInput("Title: "));
+        String category = MenuLogic.verificationValidString(getUserInput("Category (e.g., fantasy, cooperative, family, strategy): "));
+        int minPlayers = MenuLogic.verificationValidNumber(getUserInput("Minimum Players: "));
+        int maxPlayers = MenuLogic.verificationValidNumber(getUserInput("Maximum Players: "));
         if (MenuLogic.isADuplicate(title, dao)) {
             displayMessage("A game with the same title already exists !");
             return;
