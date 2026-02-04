@@ -7,15 +7,8 @@ import static fr.fges.formatters.MenuFormatter.displayMessage;
 
 public class BoardGameVerificator {
 
-	public static boolean isNotADuplicate(String input, GameCollectionDao dao){
-		var games = dao.findAll();
-		for (BoardGame game : games) {
-			if (game.title().equals(input)) {
-				displayMessage("A game with the same title already exists.");
-				return false;
-			}
-		}
-		return true;
+	public static boolean isADuplicate(String title, GameCollectionDao dao){
+		return dao.findAll().stream().anyMatch(game -> game.title().equalsIgnoreCase(title));
 	}
 
 }
