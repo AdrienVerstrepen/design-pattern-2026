@@ -1,13 +1,21 @@
 package fr.fges.formatters;
 import fr.fges.models.BoardGame;
 
+import java.io.PrintStream;
 import java.util.List;
+import java.util.Scanner;
 
 import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
 
 public class MenuFormatter {
-    public static void displayMainMenu() {
+    private final PrintStream out;
+
+    public MenuFormatter() {
+        this.out = System.out;
+    }
+
+    public void displayMainMenu() {
         String menuText = """
             === Board Game Collection ===
             1. Add Board Game
@@ -41,5 +49,11 @@ public class MenuFormatter {
         for (BoardGame game: games) {
             System.out.println(game);
         }
+    }
+
+    public String getUserInput(String message) {
+        Scanner scanner = new Scanner(System.in);
+        displayMessage("%s: ", message);
+        return scanner.nextLine();
     }
 }

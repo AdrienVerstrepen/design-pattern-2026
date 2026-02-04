@@ -1,5 +1,6 @@
 package fr.fges.services;
 import fr.fges.formatters.GameCollectionFormatter;
+import fr.fges.formatters.MenuFormatter;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDAO;
 import fr.fges.services.Random.RandomNElementsStrategy;
@@ -7,16 +8,23 @@ import fr.fges.services.Random.RecommendationStrategy;
 
 import java.util.List;
 import java.util.Scanner;
-import static fr.fges.formatters.MenuFormatter.displayMainMenu;
 import static fr.fges.formatters.MenuFormatter.displayMessage;
 import static fr.fges.formatters.MenuFormatter.displayGames;
 import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
 
 public class MenuService {
+    private final GameCollectionDAO dao;
+    private final MenuFormatter formatter;
+
+    public MenuService(GameCollectionDAO dao, MenuFormatter formatter) {
+        this.dao = dao;
+        this.formatter = formatter;
+    }
+
     public String getUserInput(String numberPlayers) {
         Scanner scanner = new Scanner(System.in);
-        displayMessage("%s: ", numberPlayers);
+        displayMessage("%s", numberPlayers);
         return scanner.nextLine();
     }
 
@@ -57,8 +65,8 @@ public class MenuService {
         }
     }
 
-    public void handleMenu(GameCollectionDAO dao) {
-        displayMainMenu();
+    public void handleMenu() {
+        formatter.displayMainMenu();
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
         boolean weekEnd = isWeekEnd(getWeekDay());
