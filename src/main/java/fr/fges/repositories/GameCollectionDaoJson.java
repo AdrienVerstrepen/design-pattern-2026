@@ -3,28 +3,22 @@ package fr.fges.repositories;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.models.BoardGame;
-import fr.fges.services.MenuLogic;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.fges.services.MenuLogic.isNotADuplicate;
-
-public class GameCollectionDAOJSON implements GameCollectionDAO {
+public class GameCollectionDaoJson implements GameCollectionDao {
 
     private final String filename;
 
-    public GameCollectionDAOJSON(String filename) {
+    public GameCollectionDaoJson(String filename) {
         this.filename = filename;
     }
 
     @Override
     public boolean save(BoardGame newGame) {
-        if (!isNotADuplicate(newGame.title(), this)) {
-            return false;
-        }
         try {
             ObjectMapper mapper = new ObjectMapper();
             List<BoardGame> savedGames = this.findAll();

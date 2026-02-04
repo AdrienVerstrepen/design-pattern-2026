@@ -1,8 +1,8 @@
 package fr.fges.services.random;
 
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDAO;
-import fr.fges.services.Random.RandomStrategy;
+import fr.fges.repositories.GameCollectionDao;
+import fr.fges.services.Random.RecommendationStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,14 +15,14 @@ import static org.mockito.Mockito.when;
 public class RandomNElementsStrategyTest extends RandomTest {
 
     @Override
-    protected RandomStrategy getStrategy() {
+    protected RecommendationStrategy getStrategy() {
         return new fr.fges.services.Random.RandomNElementsStrategy();
     }
 
     @Test
     void shouldReturnNElementsWhenListIsLargeEnough() {
         int N = 2;
-        GameCollectionDAO myDao = mock(GameCollectionDAO.class);
+        GameCollectionDao myDao = mock(GameCollectionDao.class);
         BoardGame firstGame = new BoardGame("Tutel1", 2, 2, "fantasy");
         BoardGame secondGame = new BoardGame("Tutel2", 2, 2, "fantasy");
         BoardGame thirdGame = new BoardGame("Tutel3", 2, 2, "fantasy");
@@ -31,7 +31,7 @@ public class RandomNElementsStrategyTest extends RandomTest {
 
         when(myDao.findAll()).thenReturn(myGames);
 
-        RandomStrategy myStrategy = getStrategy();
+        RecommendationStrategy myStrategy = getStrategy();
         List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
 
         assertEquals(N, myResult.size());
@@ -41,14 +41,14 @@ public class RandomNElementsStrategyTest extends RandomTest {
     @Test
     void shouldReturnNAvailableElementsWhenNIsGreaterThanListSize() {
         int N = 10;
-        GameCollectionDAO myDao = mock(GameCollectionDAO.class);
+        GameCollectionDao myDao = mock(GameCollectionDao.class);
         BoardGame firstGame = new BoardGame("Tutel1", 2, 2, "fantasy");
         BoardGame secondGame = new BoardGame("Tutel2", 2, 2, "fantasy");
         BoardGame thirdGame = new BoardGame("Tutel3", 2, 2, "fantasy");
         List<BoardGame> myGames = List.of(firstGame, secondGame, thirdGame);
         when(myDao.findAll()).thenReturn(myGames);
 
-        RandomStrategy myStrategy = getStrategy();
+        RecommendationStrategy myStrategy = getStrategy();
         List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
 
         assertEquals(3, myResult.size());

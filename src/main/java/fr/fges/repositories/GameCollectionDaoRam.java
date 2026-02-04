@@ -1,20 +1,15 @@
 package fr.fges.repositories;
 
 import fr.fges.models.BoardGame;
-import fr.fges.services.MenuLogic;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static fr.fges.services.MenuLogic.isNotADuplicate;
-
-public class GameCollectionDAORAM implements GameCollectionDAO {
-    private List<BoardGame> games;
+public class GameCollectionDaoRam implements GameCollectionDao {
+    private final List<BoardGame> games = new ArrayList<>();
 
     @Override
     public boolean save(BoardGame newGame) {
-        if (!isNotADuplicate(newGame.title(), this)) {
-            return false;
-        }
         return games.add(newGame);
     }
 

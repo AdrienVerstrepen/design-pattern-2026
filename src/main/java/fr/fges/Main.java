@@ -2,14 +2,13 @@ package fr.fges;
 import fr.fges.factories.DaoFactory;
 import fr.fges.formatters.MenuFormatter;
 import fr.fges.repositories.*;
-import fr.fges.services.DateGestion;
 import fr.fges.services.MenuService;
 
 import static fr.fges.formatters.MenuFormatter.displayMessage;
 
 public class Main {
     MenuService menu;
-    GameCollectionDAO dao;
+    GameCollectionDao dao;
     MenuFormatter UI;
 
     public Main(String[] args) {

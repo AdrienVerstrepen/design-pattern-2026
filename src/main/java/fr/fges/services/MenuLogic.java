@@ -1,6 +1,6 @@
 package fr.fges.services;
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDAO;
+import fr.fges.repositories.GameCollectionDao;
 
 import static fr.fges.formatters.MenuFormatter.displayMessage;
 
@@ -44,14 +44,7 @@ public class MenuLogic {
 		return input != null && !input.isBlank();
 	}
 
-	public static boolean isNotADuplicate(String input, GameCollectionDAO dao){
-		var games = dao.findAll();
-		for (BoardGame game : games) {
-			if (game.title().equals(input)) {
-				displayMessage("A game with the same title already exists.");
-				return false;
-			}
-		}
-		return true;
+	public static boolean isADuplicate(String title, GameCollectionDao dao){
+		return dao.findAll().stream().anyMatch(game -> game.title().equalsIgnoreCase(title));
 	}
 }

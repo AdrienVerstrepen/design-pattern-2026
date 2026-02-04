@@ -1,31 +1,25 @@
 package fr.fges.repositories;
 
 import fr.fges.models.BoardGame;
-import fr.fges.services.MenuLogic;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.fges.services.MenuLogic.isNotADuplicate;
-
-public class GameCollectionDAOCSV implements GameCollectionDAO {
+public class GameCollectionDaoCsv implements GameCollectionDao {
     private final String filename;
 
-    public GameCollectionDAOCSV(String filename) {
+    public GameCollectionDaoCsv(String filename) {
         this.filename = filename;
     }
 
     @Override
     public boolean save(BoardGame newGame) {
-        if (!isNotADuplicate(newGame.title(), this)) {
-            return false;
-        }
+        List<BoardGame> savedGames = this.findAll();
+        savedGames.add(newGame);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             writer.write("title,minPlayers,maxPlayers,category");
             writer.newLine();
-            List<BoardGame> savedGames = this.findAll();
-            savedGames.add(newGame);
             for (BoardGame game : savedGames) {
                 writer.write(game.title() + "," + game.minPlayers() + "," + game.maxPlayers() + "," + game.category());
                 writer.newLine();

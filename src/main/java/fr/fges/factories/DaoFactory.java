@@ -1,11 +1,11 @@
 package fr.fges.factories;
 
-import fr.fges.repositories.GameCollectionDAO;
-import fr.fges.repositories.GameCollectionDAOCSV;
-import fr.fges.repositories.GameCollectionDAOJSON;
+import fr.fges.repositories.GameCollectionDao;
+import fr.fges.repositories.GameCollectionDaoCsv;
+import fr.fges.repositories.GameCollectionDaoJson;
 
 public class DaoFactory {
-    public static GameCollectionDAO create(String filename) {
+    public static GameCollectionDao create(String filename) {
         if (filename == null || !filename.contains(".")) {
             throw new IllegalArgumentException("Invalid filename: " + filename);
         }
@@ -13,8 +13,8 @@ public class DaoFactory {
         String extension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
 
         return switch (extension) {
-            case "json" -> new GameCollectionDAOJSON(filename);
-            case "csv" -> new GameCollectionDAOCSV(filename);
+            case "json" -> new GameCollectionDaoJson(filename);
+            case "csv" -> new GameCollectionDaoCsv(filename);
             default -> throw new IllegalArgumentException("Unknown extension: " + extension);
         };
     }

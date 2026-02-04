@@ -2,10 +2,11 @@ package fr.fges.services;
 import fr.fges.formatters.GameCollectionFormatter;
 import fr.fges.formatters.MenuFormatter;
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDAO;
+import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Random.RandomNElementsStrategy;
 import fr.fges.services.Random.RecommendationStrategy;
 
+import javax.management.InstanceAlreadyExistsException;
 import java.util.List;
 import java.util.Scanner;
 import static fr.fges.formatters.MenuFormatter.displayMessage;
@@ -14,10 +15,10 @@ import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
 
 public class MenuService {
-    private final GameCollectionDAO dao;
+    private final GameCollectionDao dao;
     private final MenuFormatter formatter;
 
-    public MenuService(GameCollectionDAO dao, MenuFormatter formatter) {
+    public MenuService(GameCollectionDao dao, MenuFormatter formatter) {
         this.dao = dao;
         this.formatter = formatter;
     }
@@ -28,12 +29,16 @@ public class MenuService {
         return scanner.nextLine();
     }
 
-    private void addGame(GameCollectionDAO dao) {
+    private void addGame(GameCollectionDao dao) {
         // Les vérifications doivent basculer dans l'UI car c'est de l'entrée / sortie
         String title = MenuLogic.verificationValidString(getUserInput("Title"));
         String category = MenuLogic.verificationValidString(getUserInput("Category (e.g., fantasy, cooperative, family, strategy)"));
         int minPlayers = MenuLogic.verificationValidNumber("Minimum Players");
         int maxPlayers = MenuLogic.verificationValidNumber("Maximum Players");
+        if (MenuLogic.isADuplicate(title, dao)) {
+            displayMessage("A game with the same title already exists !");
+            return;
+        }
         if (dao.save(new BoardGame(title, minPlayers, maxPlayers, category))) {
             displayMessage("Board game added successfully.");
         } else {
@@ -41,7 +46,7 @@ public class MenuService {
         }
     }
 
-    private void removeGame(GameCollectionDAO dao) {
+    private void removeGame(GameCollectionDao dao) {
         String title = getUserInput("Title of game to remove");
         if (dao.delete(title)) {
             displayMessage("Board game removed successfully.");
@@ -55,7 +60,7 @@ public class MenuService {
         System.exit(0);
     }
 
-    private void summaryWeekend(GameCollectionDAO dao){
+    private void summaryWeekend(GameCollectionDao dao){
         if (dao.findAll().size() <= 3){
             GameCollectionFormatter.viewAllGames(dao);
         } else {

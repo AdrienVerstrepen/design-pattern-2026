@@ -1,6 +1,6 @@
 package fr.fges.services.Random;
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDAO;
+import fr.fges.repositories.GameCollectionDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Random;
 public class RandomNElementsStrategy implements RecommendationStrategy {
 
     @Override
-    public List<BoardGame> getNRandomGame(int numberOfGames, GameCollectionDAO dao) {
+    public List<BoardGame> getNRandomGame(int numberOfGames, GameCollectionDao dao) {
         Random random = new Random();
         List<BoardGame> myGameCollection = dao.findAll();
         if (myGameCollection.isEmpty()) {

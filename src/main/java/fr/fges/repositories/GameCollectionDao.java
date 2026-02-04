@@ -2,7 +2,7 @@ package fr.fges.repositories;
 import fr.fges.models.BoardGame;
 import java.util.List;
 
-public interface GameCollectionDAO {
+public interface GameCollectionDao {
     boolean save(BoardGame game);
 
     List<BoardGame> findAll();

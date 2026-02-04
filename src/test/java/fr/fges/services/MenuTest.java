@@ -1,6 +1,6 @@
 package fr.fges.services;
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDAO;
+import fr.fges.repositories.GameCollectionDao;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -55,7 +55,7 @@ public class MenuTest {
 
     @Test
     void shouldAllowIfNoDupes() {
-        GameCollectionDAO myDao = mock(GameCollectionDAO.class);
+        GameCollectionDao myDao = mock(GameCollectionDao.class);
         when(myDao.findAll()).thenReturn(List.of(
                 new BoardGame("Tutel1", 2, 2, "fantasy"),
                 new BoardGame("Tutel2", 2, 2, "fantasy"),
@@ -63,12 +63,12 @@ public class MenuTest {
                 new BoardGame("Tutel4", 2, 2, "fantasy")
         ));
 
-        assertTrue(isNotADuplicate("Tutel5", myDao));
+        assertFalse(isADuplicate("Tutel5", myDao));
     }
 
     @Test
     void shouldNotAllowIfDupes() {
-        GameCollectionDAO myDao = mock(GameCollectionDAO.class);
+        GameCollectionDao myDao = mock(GameCollectionDao.class);
         when(myDao.findAll()).thenReturn(List.of(
                 new BoardGame("Tutel1", 2, 2, "fantasy"),
                 new BoardGame("Tutel2", 2, 2, "fantasy"),
@@ -76,6 +76,6 @@ public class MenuTest {
                 new BoardGame("Tutel4", 2, 2, "fantasy")
         ));
 
-        assertFalse(isNotADuplicate("Tutel1", myDao));
+        assertTrue(isADuplicate("Tutel1", myDao));
     }
 }

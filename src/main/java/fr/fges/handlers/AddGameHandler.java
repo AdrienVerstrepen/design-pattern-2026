@@ -2,12 +2,12 @@ package fr.fges.handlers;
 
 import fr.fges.models.AddGameCommand;
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDAO;
+import fr.fges.repositories.GameCollectionDao;
 
 public class AddGameHandler implements CommandHandler<AddGameCommand> {
-    private final GameCollectionDAO dao;
+    private final GameCollectionDao dao;
 
-    public AddGameHandler(GameCollectionDAO dao) {
+    public AddGameHandler(GameCollectionDao dao) {
         this.dao = dao;
     }
 

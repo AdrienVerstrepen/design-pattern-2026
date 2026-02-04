@@ -1,9 +1,9 @@
 package fr.fges.services.random;
 
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDAO;
+import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Random.FirstNElementsStrategy;
-import fr.fges.services.Random.RandomStrategy;
+import fr.fges.services.Random.RecommendationStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,14 +15,14 @@ import static org.mockito.Mockito.when;
 public class FirstNElementsStrategyTest extends RandomTest {
 
     @Override
-    protected RandomStrategy getStrategy() {
+    protected RecommendationStrategy getStrategy() {
         return new FirstNElementsStrategy();
     }
 
     @Test
     void shouldReturnNFirstElementsWhenListIsLargeEnough() {
         int N = 3;
-        GameCollectionDAO myDao = mock(GameCollectionDAO.class);
+        GameCollectionDao myDao = mock(GameCollectionDao.class);
         when(myDao.findAll()).thenReturn(List.of(
                 new BoardGame("Tutel1", 2, 2, "fantasy"),
                 new BoardGame("Tutel2", 2, 2, "fantasy"),
@@ -30,7 +30,7 @@ public class FirstNElementsStrategyTest extends RandomTest {
                 new BoardGame("Tutel4", 2, 2, "fantasy")
         ));
 
-        RandomStrategy myStrategy = getStrategy();
+        RecommendationStrategy myStrategy = getStrategy();
         List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
 
         assertEquals(N, myResult.size());
@@ -42,14 +42,14 @@ public class FirstNElementsStrategyTest extends RandomTest {
     @Test
     void shouldReturnNFirstAvailableElementsWhenNIsGreaterThanListSize() {
         int N = 10;
-        GameCollectionDAO myDao = mock(GameCollectionDAO.class);
+        GameCollectionDao myDao = mock(GameCollectionDao.class);
         when(myDao.findAll()).thenReturn(List.of(
                 new BoardGame("Tutel1", 2, 2, "fantasy"),
                 new BoardGame("Tutel2", 2, 2, "fantasy"),
                 new BoardGame("Tutel3", 2, 2, "fantasy")
         ));
 
-        RandomStrategy myStrategy = getStrategy();
+        RecommendationStrategy myStrategy = getStrategy();
         List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
 
         assertEquals(3, myResult.size());

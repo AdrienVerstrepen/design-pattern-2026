@@ -1,13 +1,13 @@
 package fr.fges.services.Verifications;
 
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDAO;
+import fr.fges.repositories.GameCollectionDao;
 
 import static fr.fges.formatters.MenuFormatter.displayMessage;
 
 public class BoardGameVerificator {
 
-	public static boolean isNotADuplicate(String input, GameCollectionDAO dao){
+	public static boolean isNotADuplicate(String input, GameCollectionDao dao){
 		var games = dao.findAll();
 		for (BoardGame game : games) {
 			if (game.title().equals(input)) {

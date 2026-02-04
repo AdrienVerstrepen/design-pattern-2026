@@ -1,23 +1,28 @@
 package fr.fges.repositories;
 
 import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDAO;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
+import java.io.File;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public abstract class GameCollectionDaoTest {
 
-    protected abstract GameCollectionDAO getDao();
+    @BeforeEach
+    void cleanup() {
+        new File("unit-test.json").delete();
+        new File("unit-test.csv").delete();
+    }
+
+    protected abstract GameCollectionDao getDao();
 
     @Test
     void shouldAddGame() {
-        GameCollectionDAO myDao = getDao();
+        GameCollectionDao myDao = getDao();
         BoardGame myGame = new BoardGame("Tutel", 1, 4, "humor");
 
         myDao.save(myGame);
@@ -27,7 +32,7 @@ public abstract class GameCollectionDaoTest {
 
     @Test
     void shouldDeleteGame() {
-        GameCollectionDAO myDao = getDao();
+        GameCollectionDao myDao = getDao();
         BoardGame myGame = new BoardGame("Tutel", 1, 4, "humor");
         myDao.save(myGame);
 
@@ -38,7 +43,7 @@ public abstract class GameCollectionDaoTest {
 
     @Test
     void shouldRetrieveGames() {
-        GameCollectionDAO myDao = getDao();
+        GameCollectionDao myDao = getDao();
         myDao.save(new BoardGame("Tutel1", 2, 2, "fantasy"));
         myDao.save(new BoardGame("Tutel2", 2, 2, "fantasy"));
         myDao.save(new BoardGame("Tutel3", 2, 2, "fantasy"));

@@ -1,12 +1,12 @@
 package fr.fges.handlers;
 
 import fr.fges.models.RemoveGameCommand;
-import fr.fges.repositories.GameCollectionDAO;
+import fr.fges.repositories.GameCollectionDao;
 
 public class RemoveGameHandler implements CommandHandler<RemoveGameCommand>{
-    private final GameCollectionDAO dao;
+    private final GameCollectionDao dao;
 
-    public RemoveGameHandler(GameCollectionDAO dao) {
+    public RemoveGameHandler(GameCollectionDao dao) {
         this.dao = dao;
     }
 
