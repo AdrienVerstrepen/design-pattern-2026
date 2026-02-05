@@ -1,6 +1,6 @@
 package fr.fges.handlers;
 
-import fr.fges.models.AddGameCommand;
+import fr.fges.models.commands.AddGameCommand;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
 
