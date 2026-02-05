@@ -1,5 +1,4 @@
 package fr.fges.repositories;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.models.BoardGame;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameCollectionDaoJson implements GameCollectionDao {
-
     private final String filename;
 
     public GameCollectionDaoJson(String filename) {
@@ -62,5 +60,4 @@ public class GameCollectionDaoJson implements GameCollectionDao {
     public BoardGame findByNumberOfPlayers(int NumberOfPlayers) {
         return findAll().stream().filter(game -> game.minPlayers() <= NumberOfPlayers && game.maxPlayers() >= NumberOfPlayers).findFirst().orElse(null);
     }
-
 }

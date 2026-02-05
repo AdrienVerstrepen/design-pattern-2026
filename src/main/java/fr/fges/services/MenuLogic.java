@@ -5,7 +5,7 @@ import fr.fges.repositories.GameCollectionDao;
 import static fr.fges.formatters.MenuFormatter.displayMessage;
 
 public class MenuLogic {
-	public static int verificationValidNumber(String numberPlayers, MenuService menu) {
+	public int verificationValidNumber(String numberPlayers, MenuService menu) {
 		// this function is there to check if the number the user entered is correct, it treats this kind of issue to avoid the program to crash
 		// it's set to public to be tested in a different class
 		while (true) {
@@ -18,7 +18,7 @@ public class MenuLogic {
 		}
 	}
 
-	public static String verificationValidString(String stringInput) {
+	public String verificationValidString(String stringInput) {
 		// this function is there to check if the title or the category entered are not empty strings
 		// it's set to public to be tested in a different class
 		while (true) {
@@ -45,7 +45,7 @@ public class MenuLogic {
 		return input != null && !input.isBlank();
 	}
 
-	public static boolean isADuplicate(String title, GameCollectionDao dao){
+	public boolean isADuplicate(String title, GameCollectionDao dao){
 		return dao.findAll().stream().anyMatch(game -> game.title().equalsIgnoreCase(title));
 	}
 }

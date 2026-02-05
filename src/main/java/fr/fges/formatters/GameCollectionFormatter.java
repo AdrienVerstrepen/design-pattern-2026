@@ -1,7 +1,6 @@
 package fr.fges.formatters;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
-
 import java.util.Comparator;
 import java.util.List;
 

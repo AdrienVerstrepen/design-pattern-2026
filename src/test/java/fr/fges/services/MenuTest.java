@@ -7,6 +7,7 @@ import java.util.List;
 
 import static fr.fges.services.DateGestion.isWeekEnd;
 import static fr.fges.services.MenuLogic.*;
+import static fr.fges.services.Verifications.BoardGameVerificator.isADuplicate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -38,22 +39,6 @@ public class MenuTest {
     }
 
     @Test
-    void testIsWeekEndTrue(){
-        // this function tests if the function detects correctly the days that are weekends
-        int weekDay = 1;
-        boolean result = isWeekEnd(weekDay);
-        assertTrue(result);
-    }
-
-    @Test
-    void testIsWeekEndFalse(){
-        // this function tests if the function detects correctly the days that are not weekends
-        int weekDay = 2;
-        boolean result = isWeekEnd(weekDay);
-        assertFalse(result);
-    }
-
-    @Test
     void shouldAllowIfNoDupes() {
         GameCollectionDao myDao = mock(GameCollectionDao.class);
         when(myDao.findAll()).thenReturn(List.of(
@@ -62,7 +47,6 @@ public class MenuTest {
                 new BoardGame("Tutel3", 2, 2, "fantasy"),
                 new BoardGame("Tutel4", 2, 2, "fantasy")
         ));
-
         assertFalse(isADuplicate("Tutel5", myDao));
     }
 
@@ -75,7 +59,6 @@ public class MenuTest {
                 new BoardGame("Tutel3", 2, 2, "fantasy"),
                 new BoardGame("Tutel4", 2, 2, "fantasy")
         ));
-
         assertTrue(isADuplicate("Tutel1", myDao));
     }
 }

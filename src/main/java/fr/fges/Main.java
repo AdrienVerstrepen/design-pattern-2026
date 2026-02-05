@@ -4,9 +4,7 @@ import fr.fges.formatters.MenuFormatter;
 import fr.fges.handlers.CommandHandler;
 import fr.fges.repositories.*;
 import fr.fges.services.MenuService;
-
 import java.util.List;
-
 import static fr.fges.formatters.MenuFormatter.displayMessage;
 
 public class Main {

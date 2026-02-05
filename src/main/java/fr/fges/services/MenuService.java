@@ -5,7 +5,6 @@ import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Random.RandomNElementsStrategy;
 import fr.fges.services.Random.RecommendationStrategy;
-
 import javax.management.InstanceAlreadyExistsException;
 import java.util.List;
 import java.util.Scanner;

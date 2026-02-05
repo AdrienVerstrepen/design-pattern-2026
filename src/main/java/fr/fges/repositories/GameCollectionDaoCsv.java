@@ -1,5 +1,4 @@
 package fr.fges.repositories;
-
 import fr.fges.models.BoardGame;
 
 import java.io.*;
@@ -77,7 +76,6 @@ public class GameCollectionDaoCsv implements GameCollectionDao {
             return false;
         }
     }
-
 
     @Override
     public BoardGame findByNumberOfPlayers(int NumberOfPlayers) {
