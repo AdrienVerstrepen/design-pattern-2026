@@ -1,6 +1,6 @@
 package fr.fges.handlers;
 
-import fr.fges.models.RemoveGameCommand;
+import fr.fges.models.commands.RemoveGameCommand;
 import fr.fges.repositories.GameCollectionDao;
 
 public class RemoveGameHandler implements CommandHandler<RemoveGameCommand>{

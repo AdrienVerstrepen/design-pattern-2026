@@ -1,4 +1,4 @@
-package fr.fges.models;
+package fr.fges.models.commands;
 
 public record AddGameCommand (
         String title,
