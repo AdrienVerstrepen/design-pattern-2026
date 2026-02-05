@@ -22,4 +22,9 @@ public class GameCollectionDaoRam implements GameCollectionDao {
     public boolean delete(String title) {
         return games.removeIf(game -> game.title().equals(title));
     }
+
+    @Override
+    public BoardGame findByNumberOfPlayers(int NumberOfPlayers) {
+        return findAll().stream().filter(game -> game.minPlayers() <= NumberOfPlayers && game.maxPlayers() >= NumberOfPlayers).findFirst().orElse(null);
+    }
 }

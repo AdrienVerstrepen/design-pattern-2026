@@ -58,4 +58,9 @@ public class GameCollectionDaoJson implements GameCollectionDao {
         }
     }
 
+    @Override
+    public BoardGame findByNumberOfPlayers(int NumberOfPlayers) {
+        return findAll().stream().filter(game -> game.minPlayers() <= NumberOfPlayers && game.maxPlayers() >= NumberOfPlayers).findFirst().orElse(null);
+    }
+
 }
