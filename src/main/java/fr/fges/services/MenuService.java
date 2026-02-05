@@ -13,6 +13,7 @@ import static fr.fges.formatters.MenuFormatter.displayMessage;
 import static fr.fges.formatters.MenuFormatter.displayGames;
 import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
+import static fr.fges.services.MenuLogic.isValidString;
 
 public class MenuService {
     private final GameCollectionDao dao;
@@ -23,18 +24,21 @@ public class MenuService {
         this.formatter = formatter;
     }
 
-    public String getUserInput(String numberPlayers) {
+    public String getUserInput(String message) {
         Scanner scanner = new Scanner(System.in);
-        displayMessage("%s", numberPlayers);
+        displayMessage("%s", message);
         return scanner.nextLine();
     }
 
     private void addGame(GameCollectionDao dao) {
         // Les vérifications doivent basculer dans l'UI car c'est de l'entrée / sortie
         String title = MenuLogic.verificationValidString(getUserInput("Title: "));
+        while (!isValidString(title)) {
+            title = MenuLogic.verificationValidString(getUserInput("Title: "));
+        }
         String category = MenuLogic.verificationValidString(getUserInput("Category (e.g., fantasy, cooperative, family, strategy): "));
-        int minPlayers = MenuLogic.verificationValidNumber(getUserInput("Minimum Players: "));
-        int maxPlayers = MenuLogic.verificationValidNumber(getUserInput("Maximum Players: "));
+        int minPlayers = MenuLogic.verificationValidNumber(getUserInput("Minimum Players: "), this);
+        int maxPlayers = MenuLogic.verificationValidNumber(getUserInput("Maximum Players: "), this);
         if (MenuLogic.isADuplicate(title, dao)) {
             displayMessage("A game with the same title already exists !");
             return;

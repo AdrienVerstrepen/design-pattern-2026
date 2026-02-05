@@ -5,14 +5,15 @@ import fr.fges.repositories.GameCollectionDao;
 import static fr.fges.formatters.MenuFormatter.displayMessage;
 
 public class MenuLogic {
-	public static int verificationValidNumber(String numberPlayers) {
+	public static int verificationValidNumber(String numberPlayers, MenuService menu) {
 		// this function is there to check if the number the user entered is correct, it treats this kind of issue to avoid the program to crash
 		// it's set to public to be tested in a different class
 		while (true) {
 			try {
-				return Integer.parseInt(numberPlayers);
+				return Integer.parseInt(menu.getUserInput(numberPlayers));
 			} catch (NumberFormatException e) {
 				displayMessage("The number entered is invalid, please write a correct number.");
+				displayMessage("Try again: ");
 			}
 		}
 	}
