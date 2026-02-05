@@ -2,10 +2,7 @@ package fr.fges.services;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
-import static fr.fges.services.DateGestion.isWeekEnd;
 import static fr.fges.services.MenuLogic.*;
 import static fr.fges.services.Verifications.BoardGameVerificator.isADuplicate;
 import static org.junit.jupiter.api.Assertions.*;
