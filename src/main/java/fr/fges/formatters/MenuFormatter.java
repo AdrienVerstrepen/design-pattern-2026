@@ -2,43 +2,12 @@ package fr.fges.formatters;
 import fr.fges.menu.actions.MenuEntry;
 import fr.fges.models.BoardGame;
 
-import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 
-import static fr.fges.services.DateGestion.getWeekDay;
-import static fr.fges.services.DateGestion.isWeekEnd;
-import static fr.fges.services.Verifications.BoardGameVerificator.isValidNumber;
-import static fr.fges.services.Verifications.BoardGameVerificator.isValidString;
+import static fr.fges.services.Verifications.BoardGameVerificator.*;
 
 public class MenuFormatter {
-    private final PrintStream out;
-
-    public MenuFormatter() {
-        this.out = System.out;
-    }
-
-    public void displayMainMenu() {
-        String menuText = """
-            === Board Game Collection ===
-            1. Add Board Game
-            2. Remove Board Game
-            3. List All Board Games
-            """;
-        if (isWeekEnd(getWeekDay())) {
-            menuText += """
-            4. View Summary (Weekend Special !)
-            5. Exit
-            Please select an option (1-5):
-            """;
-        } else {
-            menuText += """
-            4. Exit
-            Please select an option (1-4):
-            """;
-        }
-        System.out.println(menuText);
-    }
 
     public void displayMessage(String message) {
         System.out.println(message);
@@ -49,6 +18,9 @@ public class MenuFormatter {
     }
 
     public void displayGames(List<BoardGame> games) {
+        if (isEmptyList(games)) {
+            displayMessage("Error: no games found :'(");
+        }
         for (BoardGame game: games) {
             displayGame(game);
         }
