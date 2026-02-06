@@ -1,6 +1,7 @@
 package fr.fges.menu.actions;
 
 import fr.fges.formatters.MenuFormatter;
+import fr.fges.repositories.GameCollectionDao;
 
 public class ListAllGamesEntry implements MenuEntry {
 
@@ -11,7 +12,7 @@ public class ListAllGamesEntry implements MenuEntry {
     }
 
     @Override
-    public void handle(MenuFormatter UI) {
+    public void handle(MenuFormatter UI, GameCollectionDao dao) {
 
     }
 

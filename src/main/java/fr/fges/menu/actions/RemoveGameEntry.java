@@ -1,6 +1,7 @@
 package fr.fges.menu.actions;
 
 import fr.fges.formatters.MenuFormatter;
+import fr.fges.repositories.GameCollectionDao;
 
 import java.awt.*;
 
@@ -12,8 +13,13 @@ public class RemoveGameEntry implements MenuEntry {
     }
 
     @Override
-    public void handle(MenuFormatter UI) {
-
+    public void handle(MenuFormatter UI, GameCollectionDao dao) {
+        /*String title = getUserInput("Title of game to remove");
+        if (dao.delete(title)) {
+            displayMessage("Board game removed successfully.");
+        } else {
+            displayMessage("No board game found with that title.");
+        }*/
     }
 
     @Override
