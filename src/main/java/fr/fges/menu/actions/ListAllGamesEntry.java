@@ -13,7 +13,7 @@ public class ListAllGamesEntry implements MenuEntry {
 
     @Override
     public void handle(MenuFormatter UI, GameCollectionDao dao) {
-
+        UI.displayGames(dao.findAll());
     }
 
     @Override
