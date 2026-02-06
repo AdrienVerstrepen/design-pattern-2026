@@ -14,12 +14,12 @@ public class RemoveGameEntry implements MenuEntry {
 
     @Override
     public void handle(MenuFormatter UI, GameCollectionDao dao) {
-        /*String title = getUserInput("Title of game to remove");
+        String title = UI.getGameTitle();
         if (dao.delete(title)) {
-            displayMessage("Board game removed successfully.");
+            UI.displayMessage("Board game removed successfully.");
         } else {
-            displayMessage("No board game found with that title.");
-        }*/
+            UI.displayMessage("No board game found with that title.");
+        }
     }
 
     @Override
