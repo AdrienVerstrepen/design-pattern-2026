@@ -1,9 +1,8 @@
 package fr.fges.models.commands;
 
-import fr.fges.handlers.CommandHandler;
+import fr.fges.models.BoardGame;
 
 public interface Command {
-
-    String getLabel();
-    CommandHandler getHandler();
+    BoardGame getModifiedGame();
+    void restore();
 }

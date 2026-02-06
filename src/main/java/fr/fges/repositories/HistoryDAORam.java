@@ -18,7 +18,6 @@ public class HistoryDAORam implements HistoryDAO{
 	}
 
 	@Override
-	public boolean restoreModification() {
-		return false;
+	public void undo() {
 	}
 }

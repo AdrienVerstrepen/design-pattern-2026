@@ -8,6 +8,6 @@ public interface HistoryDAO {
 
 	List<Command> findAll();
 
-	boolean restoreModification();
+	void undo();
 
 }
