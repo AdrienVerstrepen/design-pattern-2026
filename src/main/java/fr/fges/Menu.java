@@ -13,15 +13,14 @@ import static fr.fges.services.DateGestion.isWeekEnd;
 public class Menu {
     private final MenuFormatter formatter;
     private final GameCollectionDao dao;
-    List<MenuEntry> menuEntries = new ArrayList<>();
 
     public Menu(MenuFormatter formatter, GameCollectionDao dao) {
         this.formatter = formatter;
         this.dao = dao;
-        this.create();
     }
 
-    void create() {
+    List<MenuEntry> create() {
+        List<MenuEntry> menuEntries = new ArrayList<>();
         menuEntries.add(new AddGameEntry("Add Board Game"));
         menuEntries.add(new RemoveGameEntry("Remove Board Game"));
         menuEntries.add(new ListAllGamesEntry("List All Board Games"));
@@ -30,15 +29,16 @@ public class Menu {
         }
         menuEntries.add(new UndoLastActionEntry("Undo Last Action"));
         menuEntries.add(new ExitEntry("Exit"));
+        return menuEntries;
     }
 
-    public void handleMenu() {
+    public void handleMenu(List<MenuEntry> menuEntries) {
         formatter.displayMenu(menuEntries);
 
         String input = formatter.getUserInput("");
         // Add verification function
 
-        menuEntries.get(Integer.parseInt(input)).handle(formatter);
+        menuEntries.get(Integer.parseInt(input) - 1).handle(formatter, dao);
     }
 
 }

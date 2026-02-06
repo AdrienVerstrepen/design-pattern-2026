@@ -2,23 +2,22 @@ package fr.fges;
 import fr.fges.factories.DaoFactory;
 import fr.fges.formatters.MenuFormatter;
 import fr.fges.handlers.CommandHandler;
+import fr.fges.menu.actions.MenuEntry;
 import fr.fges.repositories.*;
 import fr.fges.services.MenuService;
 import java.util.List;
-import static fr.fges.formatters.MenuFormatter.displayMessage;
+
 
 public class Main {
-    MenuService menu;
+    Menu menu;
     GameCollectionDao dao;
     MenuFormatter UI;
-    List<CommandHandler> menuCommands;
 
     public Main(String[] args) {
         String storageFile = receiveArguments(args);
         this.dao = DaoFactory.create(storageFile);
         this.UI = new MenuFormatter();
-        this.menu = new MenuService(dao, UI);
-        // Dynamically build the menuCommands ArrayList
+        this.menu = new Menu(UI, dao);
     }
 
     public static void main(String[] args) {
@@ -43,8 +42,9 @@ public class Main {
 //    }
 
     public void launch() {
+        List<MenuEntry> entries = menu.create();
         while (true) {
-            menu.handleMenu();
+            menu.handleMenu(entries);
         }
     }
 }

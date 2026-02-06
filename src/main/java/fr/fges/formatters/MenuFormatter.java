@@ -1,4 +1,5 @@
 package fr.fges.formatters;
+import fr.fges.menu.actions.MenuEntry;
 import fr.fges.models.BoardGame;
 
 import java.io.PrintStream;
@@ -7,6 +8,8 @@ import java.util.Scanner;
 
 import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
+import static fr.fges.services.Verifications.BoardGameVerificator.isValidNumber;
+import static fr.fges.services.Verifications.BoardGameVerificator.isValidString;
 
 public class MenuFormatter {
     private final PrintStream out;
@@ -37,15 +40,15 @@ public class MenuFormatter {
         System.out.println(menuText);
     }
 
-    public static void displayMessage(String message) {
+    public void displayMessage(String message) {
         System.out.println(message);
     }
 
-    public static void displayMessage(String format, Object... args) {
+    public void displayMessage(String format, Object... args) {
         System.out.printf(format, args);
     }
 
-    public static void displayGames(List<BoardGame> games) {
+    public void displayGames(List<BoardGame> games) {
         for (BoardGame game: games) {
             System.out.println(game);
         }
@@ -53,7 +56,52 @@ public class MenuFormatter {
 
     public String getUserInput(String message) {
         Scanner scanner = new Scanner(System.in);
-        displayMessage("%s: ", message);
+        displayMessage("%s", message);
         return scanner.nextLine();
+    }
+
+    public void displayMenu(List<MenuEntry> entries) {
+        displayMessage("=== Board Game Collection ===");
+        int i = 1;
+        for (MenuEntry entry : entries) {
+            displayMessage(i + ". " + entry.getLabel());
+            i++;
+        }
+    }
+
+    public String getGameTitle() {
+        String title = getUserInput("Title: ");
+        while (!isValidString(title)) {
+            displayMessage("The text entered is invalid, please write a non empty text.");
+            title = getUserInput("Title: ");
+        }
+        return title;
+    }
+
+    public int getMinimumPlayers() {
+        String min = getUserInput("Minimum Players: ");
+        while (!isValidNumber(min)) {
+            displayMessage("The number entered is invalid, please write a correct number.");
+            min = getUserInput("Minimum Players: ");
+        }
+        return Integer.parseInt(min);
+    }
+
+    public int getMaximumPlayers() {
+        String max = getUserInput("Maximum Players: ");
+        while (!isValidNumber(max)) {
+            displayMessage("The number entered is invalid, please write a correct number.");
+            max = getUserInput("Maximum Players: ");
+        }
+        return Integer.parseInt(max);
+    }
+
+    public String getGameCategory() {
+        String category = getUserInput("Category: ");
+        while (!isValidString(category)) {
+            displayMessage("The text entered is invalid, please write a non empty text.");
+            category = getUserInput("Title: ");
+        }
+        return category;
     }
 }
