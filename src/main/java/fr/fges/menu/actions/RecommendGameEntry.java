@@ -4,8 +4,6 @@ import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Random.RecommendationStrategy;
 
-import java.util.List;
-
 public class RecommendGameEntry implements MenuEntry {
     private final String label;
     private final RecommendationStrategy strategy;
@@ -23,7 +21,7 @@ public class RecommendGameEntry implements MenuEntry {
     }
 
     @Override
-    public String getLabel() {
+    public String label() {
         return label;
     }
 }

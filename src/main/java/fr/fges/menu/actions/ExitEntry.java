@@ -16,7 +16,7 @@ public class ExitEntry implements MenuEntry {
     }
 
     @Override
-    public String getLabel() {
+    public String label() {
         return label;
     }
 }

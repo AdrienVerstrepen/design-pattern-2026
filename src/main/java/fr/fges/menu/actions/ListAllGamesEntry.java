@@ -15,7 +15,7 @@ public class ListAllGamesEntry implements MenuEntry {
     }
 
     @Override
-    public String getLabel() {
+    public String label() {
         return label;
     }
 }

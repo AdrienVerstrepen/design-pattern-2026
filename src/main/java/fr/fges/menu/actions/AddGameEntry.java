@@ -13,7 +13,7 @@ public class AddGameEntry implements MenuEntry {
 
     @Override
     public void handle(MenuFormatter UI, GameCollectionDao dao) {
-        UI.displayMessage("> " + getLabel());
+        UI.displayMessage("> " + label());
         String title = UI.getGameTitle();
         int minPlayers = UI.getNumberFromUser("Minimum Players: ");
         int maxPlayers = UI.getNumberFromUser("Maximum Players: ");
@@ -31,7 +31,7 @@ public class AddGameEntry implements MenuEntry {
     }
 
     @Override
-    public String getLabel() {
+    public String label() {
         return label;
     }
 }

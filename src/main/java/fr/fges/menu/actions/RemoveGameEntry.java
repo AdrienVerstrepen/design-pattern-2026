@@ -2,8 +2,6 @@ package fr.fges.menu.actions;
 import fr.fges.formatters.MenuFormatter;
 import fr.fges.repositories.GameCollectionDao;
 
-import java.awt.*;
-
 public class RemoveGameEntry implements MenuEntry {
     private final String label;
 
@@ -22,7 +20,7 @@ public class RemoveGameEntry implements MenuEntry {
     }
 
     @Override
-    public String getLabel() {
+    public String label() {
         return label;
     }
 }

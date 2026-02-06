@@ -9,5 +9,5 @@ public interface GameCollectionDao {
 
     boolean delete(String title);
 
-    BoardGame findByNumberOfPlayers(int NumberOfPlayers);
+    List<BoardGame> findByNumberOfPlayers(int NumberOfPlayers);
 }

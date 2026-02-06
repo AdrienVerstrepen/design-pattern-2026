@@ -4,5 +4,5 @@ import fr.fges.repositories.GameCollectionDao;
 
 public interface MenuEntry {
     void handle(MenuFormatter UI, GameCollectionDao dao);
-    String getLabel();
+    String label();
 }

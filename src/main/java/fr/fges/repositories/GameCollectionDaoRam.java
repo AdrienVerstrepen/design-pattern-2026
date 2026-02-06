@@ -22,7 +22,7 @@ public class GameCollectionDaoRam implements GameCollectionDao {
     }
 
     @Override
-    public BoardGame findByNumberOfPlayers(int NumberOfPlayers) {
-        return findAll().stream().filter(game -> game.minPlayers() <= NumberOfPlayers && game.maxPlayers() >= NumberOfPlayers).findFirst().orElse(null);
+    public List<BoardGame> findByNumberOfPlayers(int numberOfPlayers) {
+        return findAll().stream().filter(game -> game.minPlayers() <= numberOfPlayers && game.maxPlayers() >= numberOfPlayers).toList();
     }
 }

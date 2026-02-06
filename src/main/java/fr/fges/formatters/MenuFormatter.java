@@ -37,7 +37,7 @@ public class MenuFormatter {
         displayMessage("=== Board Game Collection ===");
         int i = 1;
         for (MenuEntry entry : entries) {
-            displayMessage(i + ". " + entry.getLabel());
+            displayMessage(i + ". " + entry.label());
             i++;
         }
     }
