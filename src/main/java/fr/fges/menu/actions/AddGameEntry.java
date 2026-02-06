@@ -1,10 +1,7 @@
 package fr.fges.menu.actions;
 
 import fr.fges.formatters.MenuFormatter;
-import fr.fges.handlers.AddGameHandler;
-import fr.fges.handlers.CommandHandler;
 import fr.fges.models.BoardGame;
-import fr.fges.models.commands.AddGameCommand;
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Verifications.BoardGameVerificator;
 
