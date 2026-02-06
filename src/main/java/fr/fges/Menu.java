@@ -3,6 +3,7 @@ package fr.fges;
 import fr.fges.formatters.MenuFormatter;
 import fr.fges.menu.actions.*;
 import fr.fges.repositories.GameCollectionDao;
+import fr.fges.services.Random.RandomNElementsStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class Menu {
         menuEntries.add(new AddGameEntry("Add Board Game"));
         menuEntries.add(new RemoveGameEntry("Remove Board Game"));
         menuEntries.add(new ListAllGamesEntry("List All Board Games"));
-        menuEntries.add(new RecommendGameEntry("Recommend Game"));
+        menuEntries.add(new RecommendGameEntry("Recommend Game", new RandomNElementsStrategy()));
         if (isWeekEnd(getWeekDay())) {
             menuEntries.add(new SummaryEntry("View Summary (Weekend Specia!"));
         }
