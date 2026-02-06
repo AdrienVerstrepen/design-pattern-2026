@@ -1,5 +1,4 @@
 package fr.fges.factories;
-
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.repositories.GameCollectionDaoCsv;
 import fr.fges.repositories.GameCollectionDaoJson;

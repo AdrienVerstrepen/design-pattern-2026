@@ -1,14 +1,11 @@
 package fr.fges.formatters;
 import fr.fges.menu.actions.MenuEntry;
 import fr.fges.models.BoardGame;
-
 import java.util.List;
 import java.util.Scanner;
-
 import static fr.fges.services.Verifications.BoardGameVerificator.*;
 
 public class MenuFormatter {
-
     public void displayMessage(String message) {
         System.out.println(message);
     }

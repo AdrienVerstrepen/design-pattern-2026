@@ -1,10 +1,6 @@
 package fr.fges.services.Verifications;
-import fr.fges.models.BoardGame;
-import fr.fges.models.commands.Command;
 import fr.fges.repositories.GameCollectionDao;
-
 import java.util.List;
-
 
 public class BoardGameVerificator {
 	public static boolean isADuplicate(String title, GameCollectionDao dao){

@@ -1,6 +1,5 @@
 package fr.fges.repositories;
 import fr.fges.models.commands.Command;
-
 import java.util.List;
 
 public interface HistoryDao {
@@ -9,5 +8,4 @@ public interface HistoryDao {
 	List<Command> findAll();
 
 	void undo();
-
 }

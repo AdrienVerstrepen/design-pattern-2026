@@ -1,6 +1,5 @@
 package fr.fges.repositories;
 import fr.fges.models.BoardGame;
-import fr.fges.services.Random.RecommendationStrategy;
 import java.util.List;
 
 public interface GameCollectionDao {

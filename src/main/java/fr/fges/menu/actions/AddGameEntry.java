@@ -1,16 +1,13 @@
 package fr.fges.menu.actions;
-
 import fr.fges.formatters.MenuFormatter;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Verifications.BoardGameVerificator;
 
 public class AddGameEntry implements MenuEntry {
-
     private final String label;
 
     public AddGameEntry(String label) {
-
         this.label = label;
     }
 

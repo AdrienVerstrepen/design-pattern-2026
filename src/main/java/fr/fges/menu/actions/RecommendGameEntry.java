@@ -1,5 +1,4 @@
 package fr.fges.menu.actions;
-
 import fr.fges.formatters.MenuFormatter;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
