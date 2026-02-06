@@ -1,10 +1,10 @@
 package fr.fges;
 import fr.fges.factories.DaoFactory;
 import fr.fges.formatters.MenuFormatter;
+import fr.fges.menu.Menu;
 import fr.fges.menu.actions.MenuEntry;
 import fr.fges.repositories.*;
 import java.util.List;
-
 
 public class Main {
     Menu menu;

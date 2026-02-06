@@ -1,4 +1,4 @@
-package fr.fges;
+package fr.fges.menu;
 
 import fr.fges.formatters.MenuFormatter;
 import fr.fges.menu.actions.*;
@@ -20,7 +20,7 @@ public class Menu {
         this.dao = dao;
     }
 
-    List<MenuEntry> create() {
+    public List<MenuEntry> create() {
         List<MenuEntry> menuEntries = new ArrayList<>();
         menuEntries.add(new AddGameEntry("Add Board Game"));
         menuEntries.add(new RemoveGameEntry("Remove Board Game"));
