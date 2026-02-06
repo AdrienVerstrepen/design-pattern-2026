@@ -33,7 +33,7 @@ public class GameCollectionDaoJson implements GameCollectionDao {
         try {
             ObjectMapper mapper = new ObjectMapper();
             File file = new File(this.filename);
-            return  mapper.readValue(file, new TypeReference<List<BoardGame>>() {});
+            return  mapper.readValue(file, new TypeReference<>() {});
         } catch (IOException e) {
             System.out.println("Error loading from JSON: " + e.getMessage());
             return new ArrayList<>();
