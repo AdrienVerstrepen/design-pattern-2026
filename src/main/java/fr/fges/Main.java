@@ -1,10 +1,8 @@
 package fr.fges;
 import fr.fges.factories.DaoFactory;
 import fr.fges.formatters.MenuFormatter;
-import fr.fges.handlers.CommandHandler;
 import fr.fges.menu.actions.MenuEntry;
 import fr.fges.repositories.*;
-import fr.fges.services.MenuService;
 import java.util.List;
 
 
