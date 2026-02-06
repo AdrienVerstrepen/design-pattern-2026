@@ -25,7 +25,7 @@ public class BoardGameVerificator {
 		}
 	}
 
-	public static boolean isEmptyList(List<BoardGame> games){
-		return games.isEmpty();
+	public static boolean isEmptyList(List<?> list){
+		return list.isEmpty();
 	}
 }
