@@ -19,6 +19,7 @@ public class RecommendGameEntry implements MenuEntry {
     @Override
     public void handle(MenuFormatter UI, GameCollectionDao dao) {
          BoardGame game = strategy.getNRandomGame(1, dao).getFirst();
+         UI.displayMessage("Recommended game: ");
          UI.displayGame(game);
     }
 
