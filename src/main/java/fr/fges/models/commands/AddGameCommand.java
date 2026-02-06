@@ -13,7 +13,6 @@ public class AddGameCommand implements Command {
     private final AddGameHandler handler;
     private final String label;
 
-
     public AddGameCommand(String title, int minPlayers, int maxPlayers, String category, AddGameHandler handler, String label) {
         this.title = title;
         this.minPlayers = minPlayers;

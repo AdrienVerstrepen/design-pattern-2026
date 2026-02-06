@@ -50,8 +50,12 @@ public class MenuFormatter {
 
     public void displayGames(List<BoardGame> games) {
         for (BoardGame game: games) {
-            System.out.println(game);
+            displayGame(game);
         }
+    }
+
+    public void displayGame(BoardGame game) {
+        displayMessage('"' + game.title() + '"' + ": (" + game.minPlayers() + "-" + game.maxPlayers() + " players, " + game.category() + ")");
     }
 
     public String getUserInput(String message) {
@@ -78,22 +82,13 @@ public class MenuFormatter {
         return title;
     }
 
-    public int getMinimumPlayers() {
-        String min = getUserInput("Minimum Players: ");
+    public int getNumberFromUser(String message) {
+        String min = getUserInput(message);
         while (!isValidNumber(min)) {
             displayMessage("The number entered is invalid, please write a correct number.");
-            min = getUserInput("Minimum Players: ");
+            min = getUserInput(message);
         }
         return Integer.parseInt(min);
-    }
-
-    public int getMaximumPlayers() {
-        String max = getUserInput("Maximum Players: ");
-        while (!isValidNumber(max)) {
-            displayMessage("The number entered is invalid, please write a correct number.");
-            max = getUserInput("Maximum Players: ");
-        }
-        return Integer.parseInt(max);
     }
 
     public String getGameCategory() {

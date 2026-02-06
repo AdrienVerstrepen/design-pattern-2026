@@ -21,8 +21,8 @@ public class AddGameEntry implements MenuEntry {
     public void handle(MenuFormatter UI, GameCollectionDao dao) {
         UI.displayMessage("> " + getLabel());
         String title = UI.getGameTitle();
-        int minPlayers = UI.getMinimumPlayers();
-        int maxPlayers = UI.getMaximumPlayers();
+        int minPlayers = UI.getNumberFromUser("Minimum Players: ");
+        int maxPlayers = UI.getNumberFromUser("Maximum Players: ");
         String category = UI.getGameCategory();
         if (BoardGameVerificator.isADuplicate(title, dao)) {
             UI.displayMessage("A game with the same title already exists !");

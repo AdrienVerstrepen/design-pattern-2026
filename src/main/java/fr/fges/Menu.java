@@ -24,6 +24,7 @@ public class Menu {
         menuEntries.add(new AddGameEntry("Add Board Game"));
         menuEntries.add(new RemoveGameEntry("Remove Board Game"));
         menuEntries.add(new ListAllGamesEntry("List All Board Games"));
+        menuEntries.add(new RecommendGameEntry("Recommend Game"));
         if (isWeekEnd(getWeekDay())) {
             menuEntries.add(new SummaryEntry("View Summary (Weekend Specia!"));
         }
@@ -35,10 +36,10 @@ public class Menu {
     public void handleMenu(List<MenuEntry> menuEntries) {
         formatter.displayMenu(menuEntries);
 
-        String input = formatter.getUserInput("");
-        // Add verification function
-
-        menuEntries.get(Integer.parseInt(input) - 1).handle(formatter, dao);
+        int choice = formatter.getNumberFromUser("Please select an option (1-" + menuEntries.size() + "): ");
+        formatter.displayMessage("");
+        menuEntries.get(choice - 1).handle(formatter, dao);
+        formatter.displayMessage("");
     }
 
 }
