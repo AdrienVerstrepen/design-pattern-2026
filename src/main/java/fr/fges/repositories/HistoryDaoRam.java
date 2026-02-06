@@ -4,7 +4,7 @@ import fr.fges.models.commands.Command;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryDAORam implements HistoryDAO{
+public class HistoryDaoRam implements HistoryDao {
 	private final List<Command> modification = new ArrayList<>();
 
 	@Override

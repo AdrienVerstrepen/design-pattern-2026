@@ -3,7 +3,7 @@ import fr.fges.models.commands.Command;
 
 import java.util.List;
 
-public interface HistoryDAO {
+public interface HistoryDao {
 	void saveModification(Command command);
 
 	List<Command> findAll();
