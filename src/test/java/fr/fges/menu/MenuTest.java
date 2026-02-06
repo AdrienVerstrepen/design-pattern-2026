@@ -1,4 +1,4 @@
-package fr.fges.services;
+package fr.fges.menu;
 
 public class MenuTest {
 }

@@ -1,12 +1,10 @@
 package fr.fges.menu.actions;
-
 import fr.fges.formatters.GameCollectionFormatter;
 import fr.fges.formatters.MenuFormatter;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Random.RandomNElementsStrategy;
 import fr.fges.services.Random.RecommendationStrategy;
-
 import java.util.List;
 
 public class SummaryEntry implements MenuEntry {
