@@ -1,19 +1,15 @@
 package fr.fges.services.random;
-
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Random.RecommendationStrategy;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class RandomNElementsStrategyTest extends RandomTest {
-
     @Override
     protected RecommendationStrategy getStrategy() {
         return new fr.fges.services.Random.RandomNElementsStrategy();

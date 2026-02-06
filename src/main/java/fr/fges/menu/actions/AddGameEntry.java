@@ -1,18 +1,12 @@
 package fr.fges.menu.actions;
-import fr.fges.formatters.MenuFormatter;
+import fr.fges.formatters.MenuInterface;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Verifications.BoardGameVerificator;
 
-public class AddGameEntry implements MenuEntry {
-    private final String label;
-
-    public AddGameEntry(String label) {
-        this.label = label;
-    }
-
+public record AddGameEntry(String label) implements MenuEntry {
     @Override
-    public void handle(MenuFormatter UI, GameCollectionDao dao) {
+    public void handle(MenuInterface UI, GameCollectionDao dao) {
         UI.displayMessage("> " + label());
         String title = UI.getGameTitle();
         int minPlayers = UI.getNumberFromUser("Minimum Players: ");
@@ -28,10 +22,5 @@ public class AddGameEntry implements MenuEntry {
         } else {
             UI.displayMessage("An error occurred, please try again.");
         }
-    }
-
-    @Override
-    public String label() {
-        return label;
     }
 }

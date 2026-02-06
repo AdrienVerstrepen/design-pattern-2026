@@ -1,5 +1,5 @@
 package fr.fges.menu.actions;
-import fr.fges.formatters.MenuFormatter;
+import fr.fges.formatters.MenuInterface;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.services.Random.RandomNElementsStrategy;
@@ -14,7 +14,7 @@ public class SummaryEntry implements MenuEntry {
     }
 
     @Override
-    public void handle(MenuFormatter UI, GameCollectionDao dao) {
+    public void handle(MenuInterface UI, GameCollectionDao dao) {
         if (dao.findAll().size() <= 3){
             UI.displayGames(dao.findAll());
         } else {

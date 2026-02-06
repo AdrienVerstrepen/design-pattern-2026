@@ -1,17 +1,12 @@
 package fr.fges.repositories;
-
 import fr.fges.models.BoardGame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 public abstract class GameCollectionDaoTest {
-
     @BeforeEach
     void cleanup() {
         new File("unit-test.json").delete();
@@ -53,7 +48,5 @@ public abstract class GameCollectionDaoTest {
 
         assertNotNull(myGames);
         assertEquals(4, myGames.size());
-
     }
-
 }

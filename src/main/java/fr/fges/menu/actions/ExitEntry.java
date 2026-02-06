@@ -1,5 +1,5 @@
 package fr.fges.menu.actions;
-import fr.fges.formatters.MenuFormatter;
+import fr.fges.formatters.MenuInterface;
 import fr.fges.repositories.GameCollectionDao;
 
 public class ExitEntry implements MenuEntry {
@@ -10,7 +10,7 @@ public class ExitEntry implements MenuEntry {
     }
 
     @Override
-    public void handle(MenuFormatter formatter, GameCollectionDao dao) {
+    public void handle(MenuInterface formatter, GameCollectionDao dao) {
         formatter.displayMessage("Exiting the application. Goodbye!");
         System.exit(0);
     }

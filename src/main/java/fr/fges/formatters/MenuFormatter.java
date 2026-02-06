@@ -5,15 +5,18 @@ import java.util.List;
 import java.util.Scanner;
 import static fr.fges.services.Verifications.BoardGameVerificator.*;
 
-public class MenuFormatter {
+public class MenuFormatter implements MenuInterface {
+    @Override
     public void displayMessage(String message) {
         System.out.println(message);
     }
 
+    @Override
     public void displayMessage(String format, Object... args) {
         System.out.printf(format, args);
     }
 
+    @Override
     public void displayGames(List<BoardGame> games) {
         if (isEmptyList(games)) {
             displayMessage("Error: no games found :'(");
@@ -23,16 +26,19 @@ public class MenuFormatter {
         }
     }
 
+    @Override
     public void displayGame(BoardGame game) {
         displayMessage('"' + game.title() + '"' + ": (" + game.minPlayers() + "-" + game.maxPlayers() + " players, " + game.category() + ")");
     }
 
+    @Override
     public String getUserInput(String message) {
         Scanner scanner = new Scanner(System.in);
         displayMessage("%s", message);
         return scanner.nextLine();
     }
 
+    @Override
     public void displayMenu(List<MenuEntry> entries) {
         displayMessage("=== Board Game Collection ===");
         int i = 1;
@@ -42,6 +48,7 @@ public class MenuFormatter {
         }
     }
 
+    @Override
     public String getGameTitle() {
         String title = getUserInput("Title: ");
         while (!isValidString(title)) {
@@ -51,6 +58,7 @@ public class MenuFormatter {
         return title;
     }
 
+    @Override
     public int getNumberFromUser(String message) {
         String min = getUserInput(message);
         while (!isValidNumber(min)) {
@@ -60,6 +68,7 @@ public class MenuFormatter {
         return Integer.parseInt(min);
     }
 
+    @Override
     public String getGameCategory() {
         String category = getUserInput("Category: ");
         while (!isValidString(category)) {

@@ -1,10 +1,8 @@
 package fr.fges.factories;
-
 import fr.fges.repositories.GameCollectionDao;
 import fr.fges.repositories.GameCollectionDaoCsv;
 import fr.fges.repositories.GameCollectionDaoJson;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DaoFactoryTest {
@@ -36,5 +34,4 @@ public class DaoFactoryTest {
 
         assertEquals("Unknown extension: mmm", exception.getMessage());
     }
-
 }
