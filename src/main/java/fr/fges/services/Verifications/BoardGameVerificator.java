@@ -1,5 +1,9 @@
 package fr.fges.services.Verifications;
+import fr.fges.models.BoardGame;
+import fr.fges.models.commands.Command;
 import fr.fges.repositories.GameCollectionDao;
+
+import java.util.List;
 
 
 public class BoardGameVerificator {
@@ -19,5 +23,9 @@ public class BoardGameVerificator {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+	}
+
+	public static boolean isEmptyList(List<BoardGame> games){
+		return games.isEmpty();
 	}
 }
