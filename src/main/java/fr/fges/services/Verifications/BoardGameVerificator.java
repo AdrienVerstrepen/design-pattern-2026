@@ -18,8 +18,8 @@ public class BoardGameVerificator {
 
 	public static boolean isValidNumber(String input) {
 		try {
-			Integer.parseInt(input);
-			return true;
+			int parsedInt = Integer.parseInt(input);
+			return (parsedInt >= 0);
 		} catch (NumberFormatException e) {
 			return false;
 		}
