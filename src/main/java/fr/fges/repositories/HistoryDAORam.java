@@ -1,18 +1,20 @@
 package fr.fges.repositories;
+import fr.fges.models.commands.Command;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryDAORam implements HistoryDAO{
-	private final List</*type*/> games = new ArrayList<>();
+	private final List<Command> modification = new ArrayList<>();
 
 	@Override
-	public boolean saveModification() {
-		return false;
+	public void saveModification(Command command) {
+
 	}
 
 	@Override
-	public List findAll() {
-		return List.of();
+	public List<Command> findAll() {
+		return modification;
 	}
 
 	@Override

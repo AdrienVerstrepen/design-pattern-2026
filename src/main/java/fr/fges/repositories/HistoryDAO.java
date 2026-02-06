@@ -1,10 +1,12 @@
 package fr.fges.repositories;
+import fr.fges.models.commands.Command;
+
 import java.util.List;
 
 public interface HistoryDAO {
-	boolean saveModification(/*type*/ command);
+	void saveModification(Command command);
 
-	List</*type*/> findAll();
+	List<Command> findAll();
 
 	boolean restoreModification();
 
