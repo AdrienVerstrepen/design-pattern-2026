@@ -16,7 +16,7 @@ public class RemoveGameEntry implements MenuEntry {
     @Override
     public void handle(MenuInterface UI, GameCollectionDao dao) {
         String title = UI.getGameTitle();
-        history.saveModification(new RemoveGameCommand(dao.findAll().stream().filter(game -> game.title().equals(title)).toList().getFirst()));
+        history.saveModification(new RemoveGameCommand(dao.findByTitle(title).get()));
         if (dao.delete(title)) {
             UI.displayMessage("Board game removed successfully.");
         } else {
