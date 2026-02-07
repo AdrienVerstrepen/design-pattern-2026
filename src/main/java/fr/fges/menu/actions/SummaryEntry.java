@@ -19,7 +19,7 @@ public class SummaryEntry implements MenuEntry {
             UI.displayGames(dao.findAll());
         } else {
             RecommendationStrategy myStrategy = new RandomNElementsStrategy();
-            List<BoardGame> randomGames = myStrategy.getNRandomGame(3, dao);
+            List<BoardGame> randomGames = myStrategy.getNRandomGame(3, dao.findAll());
             UI.displayGames(randomGames);
         }
     }

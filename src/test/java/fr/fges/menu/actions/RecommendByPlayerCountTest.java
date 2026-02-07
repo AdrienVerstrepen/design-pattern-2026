@@ -17,7 +17,7 @@ class RecommendByPlayerCountTest {
                 new BoardGame("J2", 2, 10, "C2")
         );
 
-        when(formatter.getNumberFromUser("Number of players")).thenReturn(4);
+        when(formatter.getNumberFromUser("Number of players: ")).thenReturn(4);
         when(dao.findByNumberOfPlayers(4)).thenReturn(games);
         entry.handle(formatter, dao);
         verify(formatter).displayGames(games);
@@ -30,7 +30,7 @@ class RecommendByPlayerCountTest {
         GameCollectionDao dao = mock(GameCollectionDao.class);
         RecommendByPlayerCountEntry entry = new RecommendByPlayerCountEntry("Recommend by players");
 
-        when(formatter.getNumberFromUser("Number of players")).thenReturn(5);
+        when(formatter.getNumberFromUser("Number of players: ")).thenReturn(5);
         when(dao.findByNumberOfPlayers(5)).thenReturn(List.of());
         entry.handle(formatter, dao);
         verify(formatter).displayMessage("There is no game for this number of players.");

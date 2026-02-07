@@ -22,9 +22,9 @@ public class Menu {
         menuEntries.add(new AddGameEntry("Add Board Game"));
         menuEntries.add(new RemoveGameEntry("Remove Board Game"));
         menuEntries.add(new ListAllGamesEntry("List All Board Games"));
-        menuEntries.add(new RecommendGameEntry("Recommend Game", new RandomNElementsStrategy()));
+        menuEntries.add(new RecommendOneGameEntry("Recommend Game", new RandomNElementsStrategy()));
         if (isWeekEnd(getWeekDay())) {
-            menuEntries.add(new SummaryEntry("View Summary (Weekend Specia!"));
+            menuEntries.add(new SummaryEntry("View Summary (Weekend Special!)"));
         }
         menuEntries.add(new RecommendByPlayerCountEntry("Recommend games for a number of players"));
         menuEntries.add(new UndoLastActionEntry("Undo Last Action"));

@@ -23,7 +23,7 @@ public abstract class RandomTest {
         ));
 
         RecommendationStrategy myStrategy = getStrategy();
-        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
+        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao.findAll());
 
         assertEquals(N, myResult.size());
     }
@@ -39,7 +39,7 @@ public abstract class RandomTest {
         ));
 
         RecommendationStrategy myStrategy = getStrategy();
-        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
+        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao.findAll());
 
         assertEquals(3, myResult.size());
     }
@@ -51,7 +51,7 @@ public abstract class RandomTest {
         when(myDao.findAll()).thenReturn(List.of());
 
         RecommendationStrategy myStrategy = getStrategy();
-        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
+        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao.findAll());
 
         assertTrue(myResult.isEmpty());
     }

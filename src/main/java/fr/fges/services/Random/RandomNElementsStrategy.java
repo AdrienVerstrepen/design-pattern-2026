@@ -7,18 +7,17 @@ import java.util.Random;
 
 public class RandomNElementsStrategy implements RecommendationStrategy {
     @Override
-    public List<BoardGame> getNRandomGame(int numberOfGames, GameCollectionDao dao) {
+    public List<BoardGame> getNRandomGame(int numberOfGames, List<BoardGame> games) {
         Random random = new Random();
-        List<BoardGame> myGameCollection = dao.findAll();
-        if (myGameCollection.isEmpty()) {
+        if (games.isEmpty()) {
             return new ArrayList<>();
         }
         List<BoardGame> mySelectedGames = new ArrayList<>();
         for (int i = 0; i < numberOfGames; i++) {
-            if (i > myGameCollection.size() - 1) {
+            if (i > games.size() - 1) {
                 break;
             }
-            mySelectedGames.add(myGameCollection.get(random.nextInt(myGameCollection.size())));
+            mySelectedGames.add(games.get(random.nextInt(games.size())));
         }
         return mySelectedGames;
     }
