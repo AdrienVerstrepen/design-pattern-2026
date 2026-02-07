@@ -47,7 +47,6 @@ public class GameCollectionDaoJson implements GameCollectionDao {
             savedGames.removeIf(game -> game.title().equals(title));
             ObjectMapper mapper = new ObjectMapper();
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(this.filename), savedGames);
-            // appel au formatter
             return true;
         } catch (IOException e) {
             System.out.println("Error saving to JSON: " + e.getMessage());
