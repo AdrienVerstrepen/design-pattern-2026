@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GameCollectionDaoJson implements GameCollectionDao {
     private final String filename;
@@ -57,5 +58,10 @@ public class GameCollectionDaoJson implements GameCollectionDao {
     @Override
     public List<BoardGame> findByNumberOfPlayers(int numberOfPlayers) {
         return findAll().stream().filter(game -> game.minPlayers() <= numberOfPlayers && game.maxPlayers() >= numberOfPlayers).toList();
+    }
+
+    @Override
+    public Optional<BoardGame> findByTitle(String title) {
+        return this.findAll().stream().filter(game -> game.title().equalsIgnoreCase(title)).findFirst();
     }
 }
