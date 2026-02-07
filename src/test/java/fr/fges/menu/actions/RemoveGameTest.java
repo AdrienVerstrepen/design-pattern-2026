@@ -1,11 +1,12 @@
 package fr.fges.menu.actions;
-
-import fr.fges.formatters.MenuFormatter;
 import fr.fges.formatters.MenuInterface;
+import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
+import fr.fges.repositories.HistoryDao;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.ArgumentMatchers.anyString;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 public class RemoveGameTest {
@@ -13,10 +14,15 @@ public class RemoveGameTest {
     void shouldTellUserGameHasBeenRemoved () {
         MenuInterface formatter = mock(MenuInterface.class);
         GameCollectionDao dao = mock(GameCollectionDao.class);
+        HistoryDao history = mock(HistoryDao.class);
         when(formatter.getGameTitle()).thenReturn("Catan");
         when(dao.delete("Catan")).thenReturn(true);
-        RemoveGameEntry entry = new RemoveGameEntry("Remove Board Game");
+        when(dao.findAll()).thenReturn(List.of(
+                new BoardGame("Catan", 1, 2, "fam"),
+                new BoardGame("Catan2", 1, 2, "fam")
+        ));
 
+        RemoveGameEntry entry = new RemoveGameEntry("Remove Board Game", history);
 
         entry.handle(formatter, dao);
 
@@ -27,14 +33,13 @@ public class RemoveGameTest {
     void shouldTellUserNoGameToRemove () {
         MenuInterface formatter = mock(MenuInterface.class);
         GameCollectionDao dao = mock(GameCollectionDao.class);
+        HistoryDao history = mock(HistoryDao.class);
         when(formatter.getGameTitle()).thenReturn("Catan");
         when(dao.delete("Catan")).thenReturn(false);
-        RemoveGameEntry entry = new RemoveGameEntry("Remove Board Game");
+        RemoveGameEntry entry = new RemoveGameEntry("Remove Board Game", history);
 
         entry.handle(formatter, dao);
 
         verify(formatter).displayMessage("No board game found with that title.");
     }
-
-
 }

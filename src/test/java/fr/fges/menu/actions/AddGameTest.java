@@ -3,6 +3,7 @@ package fr.fges.menu.actions;
 import fr.fges.formatters.MenuInterface;
 import fr.fges.models.BoardGame;
 import fr.fges.repositories.GameCollectionDao;
+import fr.fges.repositories.HistoryDao;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,7 +18,8 @@ public class AddGameTest {
     void shouldTellUserGameIsADuplicate() {
         MenuInterface formatter = mock(MenuInterface.class);
         GameCollectionDao dao = mock(GameCollectionDao.class);
-        AddGameEntry entry = new AddGameEntry("Recommend by players");
+        HistoryDao history = mock(HistoryDao.class);
+        AddGameEntry entry = new AddGameEntry("Recommend by players", history);
         when(dao.findByTitle(anyString())).thenReturn(Optional.of(new BoardGame("J1", 3, 4, "C1")));
         when(formatter.getGameTitle()).thenReturn("J1");
         when(formatter.getNumberFromUser(anyString())).thenReturn(2);
@@ -32,7 +34,8 @@ public class AddGameTest {
     void shouldTellUserGameHasNotBeenSaved() {
         MenuInterface formatter = mock(MenuInterface.class);
         GameCollectionDao dao = mock(GameCollectionDao.class);
-        AddGameEntry entry = new AddGameEntry("Recommend by players");
+        HistoryDao history = mock(HistoryDao.class);
+        AddGameEntry entry = new AddGameEntry("Recommend by players", history);
         BoardGame notDuplicate = new BoardGame("J2", 3, 4, "C1");
         when(dao.findByTitle(anyString())).thenReturn(Optional.empty());
         when(formatter.getGameTitle()).thenReturn("J1");
@@ -49,7 +52,8 @@ public class AddGameTest {
     void shouldConfirmGameIsAdded() {
         MenuInterface formatter = mock(MenuInterface.class);
         GameCollectionDao dao = mock(GameCollectionDao.class);
-        AddGameEntry entry = new AddGameEntry("Recommend by players");
+        HistoryDao history = mock(HistoryDao.class);
+        AddGameEntry entry = new AddGameEntry("Recommend by players", history);
         BoardGame notDuplicate = new BoardGame("J2", 3, 4, "C1");
         when(dao.findByTitle(anyString())).thenReturn(Optional.empty());
         when(formatter.getGameTitle()).thenReturn("J1");
