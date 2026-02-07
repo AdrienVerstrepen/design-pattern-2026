@@ -1,10 +1,12 @@
 package fr.fges.menu.actions;
 import fr.fges.formatters.MenuInterface;
 import fr.fges.models.BoardGame;
+import fr.fges.models.commands.AddGameCommand;
 import fr.fges.repositories.GameCollectionDao;
+import fr.fges.repositories.HistoryDao;
 import fr.fges.services.Verifications.BoardGameVerificator;
 
-public record AddGameEntry(String label) implements MenuEntry {
+public record AddGameEntry(String label, HistoryDao history) implements MenuEntry {
     @Override
     public void handle(MenuInterface UI, GameCollectionDao dao) {
         UI.displayMessage("> " + label());
@@ -16,8 +18,10 @@ public record AddGameEntry(String label) implements MenuEntry {
             UI.displayMessage("A game with the same title already exists !");
             return;
         }
+        BoardGame game = new BoardGame(title, minPlayers, maxPlayers, category);
 
-        if (dao.save(new BoardGame(title, minPlayers, maxPlayers, category))) {
+        if (dao.save(game)) {
+            history.saveModification(new AddGameCommand(game));
             UI.displayMessage("Board game added successfully.");
         } else {
             UI.displayMessage("An error occurred, please try again.");
