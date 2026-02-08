@@ -11,7 +11,7 @@ public class AddGameCommand implements Command {
 
     @Override
     public BoardGame getModifiedGame() {
-        return null;
+        return game;
     }
 
     @Override
