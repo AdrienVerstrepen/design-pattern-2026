@@ -6,6 +6,7 @@ import fr.fges.repositories.HistoryDao;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -17,10 +18,7 @@ public class RemoveGameTest {
         HistoryDao history = mock(HistoryDao.class);
         when(formatter.getGameTitle()).thenReturn("Catan");
         when(dao.delete("Catan")).thenReturn(true);
-        when(dao.findAll()).thenReturn(List.of(
-                new BoardGame("Catan", 1, 2, "fam"),
-                new BoardGame("Catan2", 1, 2, "fam")
-        ));
+        when(dao.findByTitle(anyString())).thenReturn(Optional.of(new BoardGame("Catan", 1, 5, "fam")));
 
         RemoveGameEntry entry = new RemoveGameEntry("Remove Board Game", history);
 
@@ -35,6 +33,7 @@ public class RemoveGameTest {
         GameCollectionDao dao = mock(GameCollectionDao.class);
         HistoryDao history = mock(HistoryDao.class);
         when(formatter.getGameTitle()).thenReturn("Catan");
+        when(dao.findByTitle(anyString())).thenReturn(Optional.empty());
         when(dao.delete("Catan")).thenReturn(false);
         RemoveGameEntry entry = new RemoveGameEntry("Remove Board Game", history);
 
