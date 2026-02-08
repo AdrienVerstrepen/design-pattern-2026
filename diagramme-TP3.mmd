@@ -1,0 +1,242 @@
+---
+title : Diagramme de classes TP 3
+---
+
+classDiagram
+	namespace menu {
+		class Menu {
+			+create() List~MenuEntry~
+			+handleMenu(List~MenuEntry~ entries) Void
+		}
+		class MenuEntry {
+			<<interface>>
+			+handle(MenuInterface UI, GameCollectionDao dao) Void
+			+label() String
+		}
+		class ExitEntry {
+			+handle(MenuInterface UI, GameCollectionDao dao) Void
+			+label() String
+		}
+		class AddGameEntry {
+			+handle(MenuInterface UI, GameCollectionDao dao) Void
+			+label() String
+		}
+		class RemoveGameEntry {
+			+handle(MenuInterface UI, GameCollectionDao dao) Void
+			+label() String
+		}
+		class RecommendOneGameEntry {
+			+handle(MenuInterface UI, GameCollectionDao dao) Void
+			+label() String
+		}
+		class RecommendByPlayerCountEntry {
+			+handle(MenuInterface UI, GameCollectionDao dao) Void
+			+label() String
+		}
+		class ListAllGamesEntry {
+			+handle(MenuInterface UI, GameCollectionDao dao) Void
+			+label() String
+		}
+		class SummaryEntry {
+			+handle(MenuInterface UI, GameCollectionDao dao) Void
+			+label() String
+		}
+	}
+
+	namespace factories {
+		class DaoFactory {
+			+create(String filename) GameCollectionDao
+		}
+	}
+
+	namespace main {
+		class Main {
+			+receiveArguments(String[] arguments) String
+			+launch() Void
+			+verifyGivenFile(String filename) Void
+		}
+
+	}
+
+	namespace formatters {
+		class MenuFormatter {
+			+displayMessage(String message) Void
+			+displayMessage(String format, Object... args) Void
+			+displayGames(List~BoardGame~ games) Void
+			+getUserInput(String message) String
+			+displayMenu(List~MenuEntry~ entries) Void
+			+getGameTitle() String
+			+getNumberFromUser(String message) Int
+			+getGameCategory() String
+		}
+
+		class MenuInterface {
+			<<interface>>
+			+displayMessage(String message) Void
+			+displayMessage(String format, Object... args) Void
+			+displayGames(List~BoardGame~ games) Void
+			+getUserInput(String message) String
+			+displayMenu(List~MenuEntry~ entries) Void
+			+getGameTitle() String
+			+getNumberFromUser(String message) Int
+			+getGameCategory() String
+		}
+	}
+
+	namespace services {
+		class DateGestion {
+			+isWeekEnd(int weekDay) Boolean
+			+getDate() Calendar
+			+getWeekDay() Int
+		}
+
+		class BoardGameVerificator {
+			+isADuplicate(String title, GameCollectionDao dao) Boolean
+			+isValidString(String input) Boolean
+			+isValidNumber(String input) Boolean
+			+isEmptyList(List~?~ list) Boolean
+		}
+
+		class RecommendStrategy {
+			<<interface>>
+			+getNRandomGames(Int numberOfGames, GameCollectionDao) List~BoardGame~
+		}
+
+		class RandomNElementsStrategy {
+			+getNRandomGames(Int numberOfGames, GameCollectionDao) List~BoardGame~
+		}
+
+		class LastNElementsStrategy {
+			+getNRandomGames(Int numberOfGames, GameCollectionDao) List~BoardGame~
+		}
+
+		class FirstNElementsStrategy {
+			+getNRandomGames(Int numberOfGames, GameCollectionDao) List~BoardGame~
+		}
+
+	}
+
+	namespace models {
+		class BoardGame {
+			+title String
+			+minPlayers int
+			+maxPlayers int
+			+category String
+		}
+
+		class Command {
+			<<interface>>
+			+restore(GameCollectionDao dao) Void
+			+getModifiedGame() BoardGame
+		}
+
+		class RemoveGameCommand {
+			+restore(GameCollectionDao dao) Void
+			+getModifiedGame() BoardGame
+		}
+
+		class AddGameCommand {
+			+restore(GameCollectionDao dao) Void
+			+getModifiedGame() BoardGame
+		}
+	}
+
+	namespace repositories {
+		class GameCollectionDao {
+			<<interface>>
+			+save(BoardGame game) boolean
+			+findAll() List~BoardGame~
+			+delete(String title)
+			+findByNumberOfPlayers(Int numberOfPlayers)
+			+findByTitle(String title)
+			+findAllInAlphabeticalOrder(List~BoardGame~ games) List~BoardGame~
+		}
+
+		class GameCollectionDaoJson {
+			-filename String
+			+save(BoardGame game) boolean
+			+findAll() List~BoardGame~
+			+delete(String title)
+			+findByNumberOfPlayers(Int numberOfPlayers)
+			+findByTitle(String title)
+			+findAllInAlphabeticalOrder(List~BoardGame~ games) List~BoardGame~
+		}
+
+		class GameCollectionDaoCsv {
+			-filename String
+			+save(BoardGame game) boolean
+			+findAll() List~BoardGame~
+			+delete(String title)
+			+findByNumberOfPlayers(Int numberOfPlayers)
+			+findByTitle(String title)
+			+findAllInAlphabeticalOrder(List~BoardGame~ games) List~BoardGame~
+		}
+
+		class GameCollectionDaoRam {
+			-games List~BoardGame~
+			+save(BoardGame game) boolean
+			+findAll() List~BoardGame~
+			+delete(String title)
+			+findByNumberOfPlayers(Int numberOfPlayers)
+			+findByTitle(String title)
+			+findAllInAlphabeticalOrder(List~BoardGame~ games) List~BoardGame~
+		}
+
+		class HistoryDao {
+			<<interface>>
+			+saveModification(Command command) Void
+			+findAll() List~Command~
+			+removeLast() Command
+		}
+
+		class HistoryDaoRam {
+			+saveModification(Command command) Void
+			+findAll() List~Command~
+			+removeLast() Command
+		}
+	}
+
+	%% Implémentations des interfaces %%
+
+	GameCollectionDao <|.. GameCollectionDaoCsv
+	GameCollectionDao <|.. GameCollectionDaoRam
+	GameCollectionDao <|.. GameCollectionDaoJson
+
+	HistoryDao <|.. HistoryDaoRam
+
+	Command <|.. RemoveGameCommand
+	Command <|.. AddGameCommand
+
+	MenuEntry <|.. ExitEntry
+	MenuEntry <|.. AddGameEntry
+	MenuEntry <|.. RemoveGameEntry
+	MenuEntry <|.. RecommendOneGameEntry
+	MenuEntry <|.. RecommendByPlayerCountEntry
+	MenuEntry <|.. ListAllGamesEntry
+	MenuEntry <|.. SummaryEntry
+
+	RecommendStrategy <|.. FirstNElementsStrategy
+	RecommendStrategy <|.. LastNElementsStrategy
+	RecommendStrategy <|.. RandomNElementsStrategy
+
+	MenuInterface <|.. MenuFormatter
+
+	Menu --> MenuFormatter : Utilises l'UI
+	Main --> DaoFactory : Création de la DAO
+	Main --> Menu : création et appel du menu
+
+	Menu --> DateGestion : vérification pour le weekend spécial
+	Menu --> MenyEntry : utilises
+
+	DaoFactory --> GameCollectionDao : instancie
+
+	AddGameEntry --> HistoryDao : enregistre
+	RemoveGameEntry --> HistoryDao : enregistre
+
+	MenuEntry --> GameCollectionDao : utilises
+
+	Command --> GameCollectionDao : utilises
+
+	RandomStrategy --> GameCollectionDao : utilises
+
+	RecommendOneGameEntry --> RecommendStrategy : utilises
