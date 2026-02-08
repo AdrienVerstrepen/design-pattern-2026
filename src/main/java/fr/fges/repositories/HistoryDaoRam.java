@@ -8,6 +8,7 @@ public class HistoryDaoRam implements HistoryDao {
 
 	@Override
 	public void saveModification(Command command) {
+		modification.add(command);
 
 	}
 
@@ -17,6 +18,7 @@ public class HistoryDaoRam implements HistoryDao {
 	}
 
 	@Override
-	public void undo() {
+	public Command removeLast() {
+		return modification.removeLast();
 	}
 }

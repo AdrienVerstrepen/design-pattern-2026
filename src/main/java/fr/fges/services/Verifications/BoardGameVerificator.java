@@ -4,7 +4,7 @@ import java.util.List;
 
 public class BoardGameVerificator {
 	public static boolean isADuplicate(String title, GameCollectionDao dao){
-		return dao.findAll().stream().anyMatch(game -> game.title().equalsIgnoreCase(title));
+		return dao.findByTitle(title).isPresent();
 	}
 
 	public static boolean isValidString(String input) {

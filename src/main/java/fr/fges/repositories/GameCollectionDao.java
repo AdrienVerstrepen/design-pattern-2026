@@ -10,6 +10,4 @@ public interface GameCollectionDao {
     boolean delete(String title);
 
     List<BoardGame> findByNumberOfPlayers(int NumberOfPlayers);
-
-    List<BoardGame> alphabeticalOrder(List<BoardGame> games);
 }

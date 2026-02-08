@@ -27,7 +27,7 @@ public class LastNElementsStrategyTest extends RandomTest {
         ));
 
         RecommendationStrategy myStrategy = getStrategy();
-        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
+        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao.findAll());
 
         assertEquals(N, myResult.size());
         assertEquals("Tutel4", myResult.get(0).title());
@@ -46,7 +46,7 @@ public class LastNElementsStrategyTest extends RandomTest {
         ));
 
         RecommendationStrategy myStrategy = getStrategy();
-        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
+        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao.findAll());
 
         assertEquals(3, myResult.size());
         assertEquals("Tutel3", myResult.get(0).title());

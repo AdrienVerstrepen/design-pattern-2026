@@ -6,17 +6,16 @@ import java.util.List;
 
 public class LastNElementsStrategy implements RecommendationStrategy {
     @Override
-    public List<BoardGame> getNRandomGame(int numberOfGames, GameCollectionDao dao) {
-        List<BoardGame> myGameCollection = dao.findAll();
-        if (myGameCollection.isEmpty()) {
+    public List<BoardGame> getNRandomGame(int numberOfGames, List<BoardGame> games) {
+        if (games.isEmpty()) {
             return new ArrayList<>();
         }
 
-        int limit = Math.min(numberOfGames, myGameCollection.size());
+        int limit = Math.min(numberOfGames, games.size());
 
         List<BoardGame> mySelectedGames = new ArrayList<>();
         for (int i = 0; i < limit; i++) {
-            mySelectedGames.add(myGameCollection.get(myGameCollection.size() - 1 -i ));
+            mySelectedGames.add(games.get(games.size() - 1 -i ));
         }
         return mySelectedGames;
     }

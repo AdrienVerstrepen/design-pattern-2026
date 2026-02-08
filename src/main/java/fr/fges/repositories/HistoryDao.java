@@ -7,5 +7,6 @@ public interface HistoryDao {
 
 	List<Command> findAll();
 
-	void undo();
+	Command removeLast();
+
 }

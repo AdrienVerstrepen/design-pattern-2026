@@ -6,17 +6,16 @@ import java.util.List;
 
 public class FirstNElementsStrategy implements RecommendationStrategy {
     @Override
-    public List<BoardGame> getNRandomGame(int numberOfGames, GameCollectionDao dao) {
-        List<BoardGame> myGameCollection = dao.findAll();
-        if (myGameCollection.isEmpty()) {
+    public List<BoardGame> getNRandomGame(int numberOfGames, List<BoardGame> games) {
+        if (games.isEmpty()) {
             return new ArrayList<>();
         }
         List<BoardGame> mySelectedGames = new ArrayList<>();
-        for (int i = 0; i < myGameCollection.size(); i++) {
+        for (int i = 0; i < games.size(); i++) {
             if (numberOfGames == i) {
                 break;
             }
-            mySelectedGames.add(myGameCollection.get(i));
+            mySelectedGames.add(games.get(i));
         }
         return mySelectedGames;
     }

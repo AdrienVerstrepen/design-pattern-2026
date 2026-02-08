@@ -1,13 +1,27 @@
 package fr.fges.repositories;
 import fr.fges.models.BoardGame;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class GameCollectionDaoTest {
     @BeforeEach
+    void setUp() throws IOException {
+        File csvfile = new File("unit-test.csv");
+        File jsonfile = new File("unit-test.json");
+        if (!csvfile.exists()) {
+            csvfile.createNewFile();
+        }
+        if (!jsonfile.exists()) {
+            java.nio.file.Files.writeString(jsonfile.toPath(), "[]");
+        }
+    }
+
+    @AfterEach
     void cleanup() {
         new File("unit-test.json").delete();
         new File("unit-test.csv").delete();

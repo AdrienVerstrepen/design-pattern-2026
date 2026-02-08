@@ -28,7 +28,7 @@ public class RandomNElementsStrategyTest extends RandomTest {
         when(myDao.findAll()).thenReturn(myGames);
 
         RecommendationStrategy myStrategy = getStrategy();
-        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
+        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao.findAll());
 
         assertEquals(N, myResult.size());
         assertTrue(myGames.containsAll(myResult));
@@ -45,7 +45,7 @@ public class RandomNElementsStrategyTest extends RandomTest {
         when(myDao.findAll()).thenReturn(myGames);
 
         RecommendationStrategy myStrategy = getStrategy();
-        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao);
+        List<BoardGame> myResult = myStrategy.getNRandomGame(N, myDao.findAll());
 
         assertEquals(3, myResult.size());
         assertTrue(myGames.containsAll(myResult));
