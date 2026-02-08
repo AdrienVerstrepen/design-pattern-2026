@@ -13,6 +13,7 @@ public class Main {
 
     public Main(String[] args) {
         String storageFile = receiveArguments(args);
+        verifyGivenFile(storageFile);
         this.dao = DaoFactory.create(storageFile);
         this.UI = new MenuFormatter();
         this.menu = new Menu(UI, dao);
@@ -32,12 +33,12 @@ public class Main {
         return arguments[0];
     }
 
-//    public static void ExtensionVerification(String storageFile) {
-//        if (!storageFile.endsWith(".json") && !storageFile.endsWith(".csv")) {
-//            System.out.println("Error: Storage file must have .json or .csv extension");
-//            System.exit(1);
-//        }
-//    }
+    public static void verifyGivenFile(String storageFile) {
+        if (!storageFile.endsWith(".json") && !storageFile.endsWith(".csv")) {
+            System.out.println("Error: Storage file must have .json or .csv extension");
+            System.exit(1);
+        }
+    }
 
     public void launch() {
         List<MenuEntry> entries = menu.create();
