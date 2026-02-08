@@ -20,7 +20,11 @@ Au global : mise en place d'une DAO pour abstraire la gestion de la donnée, nou
 [Diagramme mermaid](diagramme-TP2.mmd)
 
 # Rapport 3
+Premièrement, nous avons modifié entièrement le système du menu afin de permettre les ajouts de features plus simples
 
-Pour la deuxième feature, nous avo,s ajouté une classe RecommendByPlayerCountEntry, qui fait la gestion de la feature et est appelée par le Menu. Elle contient une méthode handle qui va faire cette gestion. Pour appliquer des tests avec des mocks, il a fallut ajouter une classe MenuInterface pour faire la gestion du MenuFormatter, ce qui a amené quelques changelents structurels pour les actions du menu. On fait également une gestion de l'affichage dans l'ordre alphabetique en ajoutant une méthode dans GameCollectionDao.
+Pour la première Feature, nous avons implémenté une Dao qui traite l'historique ainsi qu'une interface Command afin de controler la commande à annuler
+
+
+Pour la deuxième feature, nous avons ajouté une classe RecommendByPlayerCountEntry, qui fait la gestion de la feature et est appelée par le Menu. Elle contient une méthode handle qui va faire cette gestion. Pour appliquer des tests avec des mocks, il a fallut ajouter une classe MenuInterface pour faire la gestion du MenuFormatter, ce qui a amené quelques changelents structurels pour les actions du menu. On fait également une gestion de l'affichage dans l'ordre alphabetique en ajoutant une méthode dans GameCollectionDao.
 
 [Diagramme mermaid](diagramme-TP3.mmd)
