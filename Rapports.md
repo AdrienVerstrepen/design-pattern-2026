@@ -140,3 +140,7 @@ classDiagram
     GameCollectionDaoRAM --> BoardGame : <<utilise>>
     RandomStrategy --> BoardGame : <<utilise>>
     ```
+
+# Rapport 3
+
+Pour la deuxième feature, nous avo,s ajouté une classe RecommendByPlayerCountEntry, qui fait la gestion de la feature et est appelée par le Menu. Elle contient une méthode handle qui va faire cette gestion. Pour appliquer des tests avec des mocks, il a fallut ajouter une classe MenuInterface pour faire la gestion du MenuFormatter, ce qui a amené quelques changelents structurels pour les actions du menu. On fait également une gestion de l'affichage dans l'ordre alphabetique en ajoutant une méthode dans GameCollectionDao.
