@@ -1,0 +1,63 @@
+---
+Title : ajouts pour le TP4
+---
+classDiagram
+    namespace data {
+        class Player {
+            +name String
+            +numberOfWins int
+            +points int
+        }
+    }
+
+    namespace UI {
+        class Menu {
+            +handleMenu(List~MenuEntry~ entries) Void
+        }
+        class MenuEntry {
+            <<interface>>
+            +handle(MenuInterface UI, GameCollectionDao dao) Void
+            +label() String
+        }
+        class TournamentEntry {
+            -formats List~TournamentFormat~
+            +handle(MenuInterface UI, GameCollectionDao dao) Void
+            +label() String
+        }
+
+        class TournamentFormatter {
+            %% Récupère les inputs utilisateurs d'un match %%
+            +getWinnerFromUser() void
+            %% Affichage du gagnant %%
+            +displayWinner() void
+            %% Affichage des gagnants %%
+            +displayAllScores() void
+        }
+    }
+
+    namespace control {
+        class MenuFactory {
+            +create() List~MenuEntry~
+        }
+
+        class TournamentFormat {
+            <<interface>>
+            +label() String
+            +playMatch() void %% appel à tournamentFormatter %%
+            +attributePoints() void
+            +playTournament() List~Player~ %% itère sur les playMatch et donne les scores finaux à tournamentEntry %%
+        }
+
+        class KingOfTheHillFormat {
+            +label() String
+            +playMatch() void
+            +attributePoints() void
+            +playTournament() List~Player~
+        }
+        class ChampionshipFormat {
+            +label() String
+            +playMatch() void
+            +attributePoints() void
+            +playTournament() List~Player~
+        }
+    }
