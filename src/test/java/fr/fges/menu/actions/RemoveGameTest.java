@@ -1,11 +1,11 @@
 package fr.fges.menu.actions;
-import fr.fges.formatters.MenuInterface;
-import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDao;
-import fr.fges.repositories.HistoryDao;
+import fr.fges.UI.formatters.MenuInterface;
+import fr.fges.UI.menu.actions.RemoveGameEntry;
+import fr.fges.data.models.BoardGame;
+import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.HistoryDao;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;

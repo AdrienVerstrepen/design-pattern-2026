@@ -1,9 +1,9 @@
 package fr.fges;
-import fr.fges.factories.DaoFactory;
-import fr.fges.formatters.MenuFormatter;
-import fr.fges.menu.Menu;
-import fr.fges.menu.actions.MenuEntry;
-import fr.fges.repositories.*;
+import fr.fges.services.factories.DaoFactory;
+import fr.fges.UI.formatters.MenuFormatter;
+import fr.fges.UI.menu.Menu;
+import fr.fges.UI.menu.actions.MenuEntry;
+import fr.fges.data.repositories.GameCollectionDao;
 import java.util.List;
 
 public class Main {

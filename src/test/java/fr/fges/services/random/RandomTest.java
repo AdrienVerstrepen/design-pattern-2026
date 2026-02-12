@@ -1,6 +1,6 @@
 package fr.fges.services.random;
-import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDao;
+import fr.fges.data.models.BoardGame;
+import fr.fges.data.repositories.GameCollectionDao;
 import fr.fges.services.Random.RecommendationStrategy;
 import org.junit.jupiter.api.Test;
 import java.util.List;

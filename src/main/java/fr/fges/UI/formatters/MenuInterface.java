@@ -1,6 +1,6 @@
-package fr.fges.formatters;
-import fr.fges.menu.actions.MenuEntry;
-import fr.fges.models.BoardGame;
+package fr.fges.UI.formatters;
+import fr.fges.UI.menu.actions.MenuEntry;
+import fr.fges.data.models.BoardGame;
 import java.util.List;
 
 public interface MenuInterface {

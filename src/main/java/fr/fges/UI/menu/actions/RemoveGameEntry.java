@@ -1,9 +1,9 @@
-package fr.fges.menu.actions;
-import fr.fges.formatters.MenuInterface;
-import fr.fges.models.BoardGame;
-import fr.fges.models.commands.RemoveGameCommand;
-import fr.fges.repositories.GameCollectionDao;
-import fr.fges.repositories.HistoryDao;
+package fr.fges.UI.menu.actions;
+import fr.fges.UI.formatters.MenuInterface;
+import fr.fges.data.models.BoardGame;
+import fr.fges.data.commands.RemoveGameCommand;
+import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.HistoryDao;
 
 import java.util.Optional;
 

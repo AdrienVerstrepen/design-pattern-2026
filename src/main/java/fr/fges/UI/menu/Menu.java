@@ -1,8 +1,8 @@
-package fr.fges.menu;
-import fr.fges.formatters.MenuFormatter;
-import fr.fges.menu.actions.*;
-import fr.fges.repositories.GameCollectionDao;
-import fr.fges.repositories.HistoryDaoRam;
+package fr.fges.UI.menu;
+import fr.fges.UI.formatters.MenuFormatter;
+import fr.fges.UI.menu.actions.*;
+import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.HistoryDaoRam;
 import fr.fges.services.Random.RandomNElementsStrategy;
 import java.util.ArrayList;
 import java.util.List;

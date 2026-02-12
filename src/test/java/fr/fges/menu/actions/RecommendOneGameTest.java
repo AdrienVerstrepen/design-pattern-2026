@@ -1,7 +1,7 @@
 package fr.fges.menu.actions;
 
-import fr.fges.formatters.MenuInterface;
-import fr.fges.repositories.GameCollectionDao;
+import fr.fges.UI.formatters.MenuInterface;
+import fr.fges.data.repositories.GameCollectionDao;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.ArgumentMatchers.anyString;

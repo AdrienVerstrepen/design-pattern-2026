@@ -1,6 +1,6 @@
 package fr.fges.services.Random;
-import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDao;
+import fr.fges.data.models.BoardGame;
+
 import java.util.List;
 
 public interface RecommendationStrategy {

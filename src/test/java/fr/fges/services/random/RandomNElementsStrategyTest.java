@@ -1,6 +1,7 @@
 package fr.fges.services.random;
-import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDao;
+import fr.fges.services.Random.RandomNElementsStrategy;
+import fr.fges.data.models.BoardGame;
+import fr.fges.data.repositories.GameCollectionDao;
 import fr.fges.services.Random.RecommendationStrategy;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -12,7 +13,7 @@ import static org.mockito.Mockito.when;
 public class RandomNElementsStrategyTest extends RandomTest {
     @Override
     protected RecommendationStrategy getStrategy() {
-        return new fr.fges.services.Random.RandomNElementsStrategy();
+        return new RandomNElementsStrategy();
     }
 
     @Test

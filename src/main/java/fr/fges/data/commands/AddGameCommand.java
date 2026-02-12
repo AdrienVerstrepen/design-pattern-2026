@@ -1,6 +1,6 @@
-package fr.fges.models.commands;
-import fr.fges.models.BoardGame;
-import fr.fges.repositories.GameCollectionDao;
+package fr.fges.data.commands;
+import fr.fges.data.models.BoardGame;
+import fr.fges.data.repositories.GameCollectionDao;
 
 public class AddGameCommand implements Command {
     private final BoardGame game;

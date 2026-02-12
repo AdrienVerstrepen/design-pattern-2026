@@ -1,5 +1,5 @@
-package fr.fges.repositories;
-import fr.fges.models.BoardGame;
+package fr.fges.data.repositories;
+import fr.fges.data.models.BoardGame;
 import java.util.List;
 import java.util.Optional;
 

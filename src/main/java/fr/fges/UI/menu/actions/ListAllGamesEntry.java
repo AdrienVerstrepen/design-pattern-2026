@@ -1,6 +1,6 @@
-package fr.fges.menu.actions;
-import fr.fges.formatters.MenuInterface;
-import fr.fges.repositories.GameCollectionDao;
+package fr.fges.UI.menu.actions;
+import fr.fges.UI.formatters.MenuInterface;
+import fr.fges.data.repositories.GameCollectionDao;
 
 public class ListAllGamesEntry implements MenuEntry {
     private final String label;
