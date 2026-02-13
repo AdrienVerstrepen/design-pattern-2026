@@ -18,22 +18,6 @@ public class Menu {
         this.dao = dao;
     }
 
-    public List<MenuEntry> create() {
-        List<MenuEntry> menuEntries = new ArrayList<>();
-        HistoryDaoRam history = new HistoryDaoRam();
-        menuEntries.add(new AddGameEntry("Add Board Game", history));
-        menuEntries.add(new RemoveGameEntry("Remove Board Game", history));
-        menuEntries.add(new ListAllGamesEntry("List All Board Games"));
-        menuEntries.add(new RecommendOneGameEntry("Recommend Game", new RandomNElementsStrategy()));
-        if (isWeekEnd(getWeekDay())) {
-            menuEntries.add(new SummaryEntry("View Summary (Weekend Special!)"));
-        }
-        menuEntries.add(new RecommendByPlayerCountEntry("Recommend games for a number of players"));
-        menuEntries.add(new UndoLastActionEntry("Undo Last Action", history));
-        menuEntries.add(new ExitEntry("Exit"));
-        return menuEntries;
-    }
-
     public void handleMenu(List<MenuEntry> menuEntries) {
         formatter.displayMenu(menuEntries);
         int choice = formatter.getNumberFromUser("Please select an option (1-" + menuEntries.size() + "): ");

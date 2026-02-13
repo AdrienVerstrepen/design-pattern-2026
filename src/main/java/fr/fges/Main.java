@@ -4,6 +4,8 @@ import fr.fges.UI.formatters.MenuFormatter;
 import fr.fges.UI.menu.Menu;
 import fr.fges.UI.menu.actions.MenuEntry;
 import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.services.factories.MenuFactory;
+
 import java.util.List;
 
 public class Main {
@@ -41,7 +43,7 @@ public class Main {
     }
 
     public void launch() {
-        List<MenuEntry> entries = menu.create();
+        List<MenuEntry> entries = MenuFactory.create();
         while (true) {
             menu.handleMenu(entries);
         }
