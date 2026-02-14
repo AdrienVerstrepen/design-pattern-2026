@@ -1,5 +1,5 @@
 package fr.fges.UI.formatters;
-import fr.fges.UI.menu.actions.MenuEntry;
+import fr.fges.UI.menu.entries.MenuEntry;
 import fr.fges.data.models.BoardGame;
 import java.util.List;
 

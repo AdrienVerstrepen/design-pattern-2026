@@ -1,6 +1,6 @@
 package fr.fges.menu.actions;
 import fr.fges.UI.formatters.MenuInterface;
-import fr.fges.UI.menu.actions.RecommendByPlayerCountEntry;
+import fr.fges.UI.menu.entries.RecommendByPlayerCountEntry;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.GameCollectionDao;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package fr.fges.menu.actions;
 import fr.fges.UI.formatters.MenuInterface;
-import fr.fges.UI.menu.actions.RemoveGameEntry;
+import fr.fges.UI.menu.entries.RemoveGameEntry;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.GameCollectionDao;
 import fr.fges.data.repositories.HistoryDao;

@@ -1,7 +1,7 @@
 package fr.fges.menu.actions;
 
 import fr.fges.UI.formatters.MenuInterface;
-import fr.fges.UI.menu.actions.AddGameEntry;
+import fr.fges.UI.menu.entries.AddGameEntry;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.GameCollectionDao;
 import fr.fges.data.repositories.HistoryDao;
