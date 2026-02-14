@@ -1,4 +1,4 @@
-package fr.fges.menu.actions;
+package fr.fges.UI.menu.entries;
 
 import org.junit.jupiter.api.Test;
 

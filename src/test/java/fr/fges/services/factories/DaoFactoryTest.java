@@ -1,4 +1,4 @@
-package fr.fges.factories;
+package fr.fges.services.factories;
 import fr.fges.services.factories.DaoFactory;
 import fr.fges.data.repositories.GameCollectionDao;
 import fr.fges.data.repositories.GameCollectionDaoCsv;

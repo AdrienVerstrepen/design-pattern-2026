@@ -2,7 +2,7 @@ package fr.fges.UI.menu.entries;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.GameCollectionDao;
-import fr.fges.services.Random.RecommendationStrategy;
+import fr.fges.services.recommend.RecommendationStrategy;
 
 public class RecommendOneGameEntry implements MenuEntry {
     private final String label;

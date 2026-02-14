@@ -1,4 +1,4 @@
-package fr.fges.repositories;
+package fr.fges.data.repositories;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.GameCollectionDao;
 import org.junit.jupiter.api.AfterEach;

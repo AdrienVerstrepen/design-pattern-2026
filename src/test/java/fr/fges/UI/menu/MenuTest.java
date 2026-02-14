@@ -1,4 +1,4 @@
-package fr.fges.menu;
+package fr.fges.UI.menu;
 
 public class MenuTest {
 }

@@ -1,4 +1,4 @@
-package fr.fges.services.Random;
+package fr.fges.services.recommend;
 import fr.fges.data.models.BoardGame;
 
 import java.util.List;

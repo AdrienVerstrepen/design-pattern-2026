@@ -1,4 +1,4 @@
-package fr.fges.formatters;
+package fr.fges.UI.formatters;
 
 public class MenuFormatterTest {
 

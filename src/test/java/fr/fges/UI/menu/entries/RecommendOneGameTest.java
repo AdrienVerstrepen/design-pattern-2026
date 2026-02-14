@@ -1,4 +1,4 @@
-package fr.fges.menu.actions;
+package fr.fges.UI.menu.entries;
 
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.repositories.GameCollectionDao;

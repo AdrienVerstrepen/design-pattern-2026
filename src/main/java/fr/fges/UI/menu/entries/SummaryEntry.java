@@ -2,8 +2,8 @@ package fr.fges.UI.menu.entries;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.GameCollectionDao;
-import fr.fges.services.Random.RandomNElementsStrategy;
-import fr.fges.services.Random.RecommendationStrategy;
+import fr.fges.services.recommend.RandomNElementsStrategy;
+import fr.fges.services.recommend.RecommendationStrategy;
 import java.util.List;
 
 public class SummaryEntry implements MenuEntry {
