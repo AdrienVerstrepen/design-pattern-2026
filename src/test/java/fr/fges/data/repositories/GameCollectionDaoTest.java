@@ -1,6 +1,6 @@
 package fr.fges.data.repositories;
 import fr.fges.data.models.BoardGame;
-import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.Games.GameCollectionDao;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

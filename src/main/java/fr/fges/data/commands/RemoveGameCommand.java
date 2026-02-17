@@ -1,6 +1,6 @@
 package fr.fges.data.commands;
 import fr.fges.data.models.BoardGame;
-import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.Games.GameCollectionDao;
 
 public class RemoveGameCommand implements Command {
     private final BoardGame game;

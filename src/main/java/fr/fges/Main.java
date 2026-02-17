@@ -3,7 +3,7 @@ import fr.fges.services.factories.DaoFactory;
 import fr.fges.UI.formatters.MenuFormatter;
 import fr.fges.UI.menu.Menu;
 import fr.fges.UI.menu.entries.MenuEntry;
-import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.Games.GameCollectionDao;
 import fr.fges.services.factories.MenuFactory;
 
 import java.util.List;

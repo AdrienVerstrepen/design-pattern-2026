@@ -2,8 +2,8 @@ package fr.fges.UI.menu.entries;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.commands.AddGameCommand;
 import fr.fges.data.commands.Command;
-import fr.fges.data.repositories.GameCollectionDao;
-import fr.fges.data.repositories.HistoryDao;
+import fr.fges.data.repositories.Games.GameCollectionDao;
+import fr.fges.data.repositories.History.HistoryDao;
 
 import static fr.fges.services.Verifications.BoardGameVerificator.isEmptyList;
 

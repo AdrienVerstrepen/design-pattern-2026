@@ -1,7 +1,7 @@
 package fr.fges.services.factories;
 
 import fr.fges.UI.menu.entries.*;
-import fr.fges.data.repositories.HistoryDaoRam;
+import fr.fges.data.repositories.History.HistoryDaoRam;
 import fr.fges.services.recommend.RandomNElementsStrategy;
 
 import java.util.ArrayList;

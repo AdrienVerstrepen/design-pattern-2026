@@ -2,7 +2,7 @@ package fr.fges.UI.menu.entries;
 
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
-import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.Games.GameCollectionDao;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 

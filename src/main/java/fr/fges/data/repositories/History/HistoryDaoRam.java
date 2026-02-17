@@ -1,4 +1,4 @@
-package fr.fges.data.repositories;
+package fr.fges.data.repositories.History;
 import fr.fges.data.commands.Command;
 import java.util.ArrayList;
 import java.util.List;

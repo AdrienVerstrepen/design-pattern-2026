@@ -1,7 +1,8 @@
-package fr.fges.data.repositories;
+package fr.fges.data.repositories.Games;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.fges.data.models.BoardGame;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package fr.fges.UI.menu.entries;
 import fr.fges.UI.formatters.MenuInterface;
-import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.Games.GameCollectionDao;
 
 public class ExitEntry implements MenuEntry {
     private final String label;

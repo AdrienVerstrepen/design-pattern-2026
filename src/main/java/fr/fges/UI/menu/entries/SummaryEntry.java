@@ -1,7 +1,7 @@
 package fr.fges.UI.menu.entries;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
-import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.Games.GameCollectionDao;
 import fr.fges.services.recommend.RandomNElementsStrategy;
 import fr.fges.services.recommend.RecommendationStrategy;
 import java.util.List;

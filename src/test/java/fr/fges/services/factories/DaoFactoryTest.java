@@ -1,8 +1,7 @@
 package fr.fges.services.factories;
-import fr.fges.services.factories.DaoFactory;
-import fr.fges.data.repositories.GameCollectionDao;
-import fr.fges.data.repositories.GameCollectionDaoCsv;
-import fr.fges.data.repositories.GameCollectionDaoJson;
+import fr.fges.data.repositories.Games.GameCollectionDao;
+import fr.fges.data.repositories.Games.GameCollectionDaoCsv;
+import fr.fges.data.repositories.Games.GameCollectionDaoJson;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

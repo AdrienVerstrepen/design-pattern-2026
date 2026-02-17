@@ -1,7 +1,7 @@
 package fr.fges.UI.menu;
 import fr.fges.UI.formatters.MenuFormatter;
 import fr.fges.UI.menu.entries.*;
-import fr.fges.data.repositories.GameCollectionDao;
+import fr.fges.data.repositories.Games.GameCollectionDao;
 
 import java.util.List;
 
