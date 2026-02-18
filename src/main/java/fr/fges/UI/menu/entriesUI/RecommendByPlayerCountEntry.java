@@ -1,7 +1,8 @@
-package fr.fges.UI.menu.entries;
+package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
-import fr.fges.data.repositories.Games.GameCollectionDao;
+import fr.fges.services.entriesServices.RecommendByPlayerCountService;
+
 import java.util.List;
 
 public record RecommendByPlayerCountEntry(String label, RecommendByPlayerCountService service) implements MenuEntry {

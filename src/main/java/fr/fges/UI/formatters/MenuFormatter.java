@@ -1,10 +1,10 @@
 package fr.fges.UI.formatters;
-import fr.fges.UI.menu.entries.MenuEntry;
+import fr.fges.UI.menu.entriesUI.MenuEntry;
 import fr.fges.data.models.BoardGame;
 import java.util.List;
 import java.util.Scanner;
 
-import static fr.fges.services.Verifications.BoardGameVerificator.*;
+import static fr.fges.services.verifications.BoardGameVerificator.*;
 
 public class MenuFormatter implements MenuInterface {
     @Override

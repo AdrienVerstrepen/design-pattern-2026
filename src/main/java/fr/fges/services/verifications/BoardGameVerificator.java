@@ -1,5 +1,5 @@
-package fr.fges.services.Verifications;
-import fr.fges.data.repositories.Games.GameCollectionDao;
+package fr.fges.services.verifications;
+import fr.fges.data.repositories.games.GameCollectionDao;
 import java.util.List;
 
 public class BoardGameVerificator {

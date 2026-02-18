@@ -1,4 +1,8 @@
 package fr.fges.services.entriesServices;
+import fr.fges.data.models.BoardGame;
+import fr.fges.data.repositories.games.GameCollectionDao;
+
+import java.util.List;
 
 public class RecommendByPlayerCountService {
     private final GameCollectionDao dao;

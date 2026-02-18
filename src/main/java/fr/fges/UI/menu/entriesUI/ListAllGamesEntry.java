@@ -1,17 +1,11 @@
-package fr.fges.UI.menu.entries;
+package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
-import fr.fges.data.repositories.Games.GameCollectionDao;
+import fr.fges.services.entriesServices.ListAllGamesService;
 
-public class ListAllGamesEntry implements MenuEntry {
-    private final String label;
-
-    public ListAllGamesEntry(String label) {
-        this.label = label;
-    }
-
+public record ListAllGamesEntry(String label, ListAllGamesService service) implements MenuEntry {
     @Override
-    public void handle(MenuInterface UI, GameCollectionDao dao) {
-        UI.displayGames(dao.findAll());
+    public void handle(MenuInterface UI) {
+        UI.displayGames(service.findAllGames());
     }
 
     @Override

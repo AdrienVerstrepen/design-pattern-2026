@@ -1,8 +1,7 @@
-package fr.fges.UI.menu.entries;
+package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
-import fr.fges.data.repositories.Games.GameCollectionDao;
 
 public interface MenuEntry {
-    void handle(MenuInterface UI, GameCollectionDao dao);
+    void handle(MenuInterface UI);
     String label();
 }

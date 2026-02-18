@@ -1,10 +1,10 @@
-package fr.fges.UI.menu.entries;
+package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.commands.AddGameCommand;
-import fr.fges.data.repositories.Games.GameCollectionDao;
-import fr.fges.data.repositories.History.HistoryDao;
-import fr.fges.services.Verifications.BoardGameVerificator;
+import fr.fges.data.repositories.games.GameCollectionDao;
+import fr.fges.data.repositories.history.HistoryDao;
+import fr.fges.services.verifications.BoardGameVerificator;
 
 public record AddGameEntry(String label, HistoryDao history) implements MenuEntry {
     @Override

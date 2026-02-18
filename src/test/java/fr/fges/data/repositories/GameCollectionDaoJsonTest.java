@@ -1,7 +1,7 @@
 package fr.fges.data.repositories;
 
-import fr.fges.data.repositories.Games.GameCollectionDao;
-import fr.fges.data.repositories.Games.GameCollectionDaoJson;
+import fr.fges.data.repositories.games.GameCollectionDao;
+import fr.fges.data.repositories.games.GameCollectionDaoJson;
 
 public class GameCollectionDaoJsonTest extends GameCollectionDaoTest {
     @Override

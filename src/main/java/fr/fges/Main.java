@@ -2,8 +2,8 @@ package fr.fges;
 import fr.fges.services.factories.DaoFactory;
 import fr.fges.UI.formatters.MenuFormatter;
 import fr.fges.UI.menu.Menu;
-import fr.fges.UI.menu.entries.MenuEntry;
-import fr.fges.data.repositories.Games.GameCollectionDao;
+import fr.fges.UI.menu.entriesUI.MenuEntry;
+import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.factories.MenuFactory;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class Main {
         verifyGivenFile(storageFile);
         this.dao = DaoFactory.create(storageFile);
         this.UI = new MenuFormatter();
-        this.menu = new Menu(UI, dao);
+        this.menu = new Menu(UI);
     }
 
     public static void main(String[] args) {

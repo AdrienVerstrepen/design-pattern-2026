@@ -1,6 +1,6 @@
 package fr.fges.services.recommend;
 import fr.fges.data.models.BoardGame;
-import fr.fges.data.repositories.Games.GameCollectionDao;
+import fr.fges.data.repositories.games.GameCollectionDao;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;

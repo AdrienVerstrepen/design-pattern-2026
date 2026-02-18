@@ -1,14 +1,13 @@
-package fr.fges.UI.menu.entries;
+package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.commands.AddGameCommand;
 import fr.fges.data.commands.Command;
-import fr.fges.data.repositories.Games.GameCollectionDao;
-import fr.fges.data.repositories.History.HistoryDao;
+import fr.fges.data.repositories.games.GameCollectionDao;
+import fr.fges.data.repositories.history.HistoryDao;
 
-import static fr.fges.services.Verifications.BoardGameVerificator.isEmptyList;
+import static fr.fges.services.verifications.BoardGameVerificator.isEmptyList;
 
 public record UndoLastActionEntry (String label, HistoryDao history) implements MenuEntry {
-
     @Override
     public void handle(MenuInterface UI, GameCollectionDao dao) {
         if (isEmptyList(history.findAll())) {

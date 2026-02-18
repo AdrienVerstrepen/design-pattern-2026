@@ -1,4 +1,4 @@
-package fr.fges.data.repositories.Games;
+package fr.fges.data.repositories.games;
 import fr.fges.data.models.BoardGame;
 
 import java.io.*;

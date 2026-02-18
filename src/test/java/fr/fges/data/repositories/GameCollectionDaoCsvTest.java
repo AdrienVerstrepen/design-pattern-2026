@@ -1,7 +1,7 @@
 package fr.fges.data.repositories;
 
-import fr.fges.data.repositories.Games.GameCollectionDao;
-import fr.fges.data.repositories.Games.GameCollectionDaoCsv;
+import fr.fges.data.repositories.games.GameCollectionDao;
+import fr.fges.data.repositories.games.GameCollectionDaoCsv;
 
 public class GameCollectionDaoCsvTest extends GameCollectionDaoTest {
     @Override

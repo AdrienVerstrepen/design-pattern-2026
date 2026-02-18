@@ -1,17 +1,14 @@
 package fr.fges.UI.menu;
 import fr.fges.UI.formatters.MenuFormatter;
-import fr.fges.UI.menu.entries.*;
-import fr.fges.data.repositories.Games.GameCollectionDao;
-
+import fr.fges.UI.menu.entriesUI.*;
+import fr.fges.data.repositories.games.GameCollectionDao;
 import java.util.List;
 
 public class Menu {
     private final MenuFormatter formatter;
-    private final GameCollectionDao dao;
 
-    public Menu(MenuFormatter formatter, GameCollectionDao dao) {
+    public Menu(MenuFormatter formatter) {
         this.formatter = formatter;
-        this.dao = dao;
     }
 
     public void handleMenu(List<MenuEntry> menuEntries) {
@@ -22,7 +19,7 @@ public class Menu {
             choice = formatter.getNumberFromUser("Please select an option (1-" + menuEntries.size() + "): ");
         }
         formatter.displayMessage("");
-        menuEntries.get(choice - 1).handle(formatter, dao);
+        menuEntries.get(choice - 1).handle(formatter);
         formatter.displayMessage("");
     }
 }

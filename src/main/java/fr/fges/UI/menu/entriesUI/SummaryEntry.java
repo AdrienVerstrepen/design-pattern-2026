@@ -1,25 +1,16 @@
-package fr.fges.UI.menu.entries;
+package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
-import fr.fges.data.repositories.Games.GameCollectionDao;
-import fr.fges.services.recommend.RandomNElementsStrategy;
-import fr.fges.services.recommend.RecommendationStrategy;
+import fr.fges.services.entriesServices.SummaryService;
 import java.util.List;
 
-public class SummaryEntry implements MenuEntry {
-    private final String label;
-
-    public SummaryEntry(String label) {
-        this.label = label;
-    }
-
+public record SummaryEntry(String label, SummaryService service) implements MenuEntry {
     @Override
-    public void handle(MenuInterface UI, GameCollectionDao dao) {
-        if (dao.findAll().size() <= 3){
-            UI.displayGames(dao.findAll());
+    public void handle(MenuInterface UI) {
+        if (service.findAllGames().size() <= 3){
+            UI.displayGames(service.findAllGames());
         } else {
-            RecommendationStrategy myStrategy = new RandomNElementsStrategy();
-            List<BoardGame> randomGames = myStrategy.getNRandomGame(3, dao.findAll());
+            List<BoardGame> randomGames = service.makeSummary();
             UI.displayGames(randomGames);
         }
     }

@@ -1,7 +1,7 @@
 package fr.fges.services.factories;
-import fr.fges.data.repositories.Games.GameCollectionDao;
-import fr.fges.data.repositories.Games.GameCollectionDaoCsv;
-import fr.fges.data.repositories.Games.GameCollectionDaoJson;
+import fr.fges.data.repositories.games.GameCollectionDao;
+import fr.fges.data.repositories.games.GameCollectionDaoCsv;
+import fr.fges.data.repositories.games.GameCollectionDaoJson;
 
 public class DaoFactory {
     public static GameCollectionDao create(String filename) {

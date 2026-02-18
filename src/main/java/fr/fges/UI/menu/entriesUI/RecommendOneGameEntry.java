@@ -1,7 +1,7 @@
-package fr.fges.UI.menu.entries;
+package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
-import fr.fges.data.repositories.Games.GameCollectionDao;
+import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.recommend.RecommendationStrategy;
 
 public class RecommendOneGameEntry implements MenuEntry {
