@@ -2,6 +2,7 @@ package fr.fges.services.factories;
 
 import fr.fges.UI.menu.entries.*;
 import fr.fges.data.repositories.History.HistoryDaoRam;
+import fr.fges.data.repositories.History.HistoryDao;
 import fr.fges.services.recommend.RandomNElementsStrategy;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import static fr.fges.services.DateGestion.isWeekEnd;
 public class MenuFactory {
     public static List<MenuEntry> create() {
         List<MenuEntry> menuEntries = new ArrayList<>();
-        HistoryDaoRam history = new HistoryDaoRam();
+        HistoryDao history = new HistoryDaoRam();
         menuEntries.add(new AddGameEntry("Add Board Game", history));
         menuEntries.add(new RemoveGameEntry("Remove Board Game", history));
         menuEntries.add(new ListAllGamesEntry("List All Board Games"));

@@ -1,4 +1,5 @@
 package fr.fges.services.entriesServices;
 
-public interface EntryService {
+public interface EntryService<I, O> {
+    O execute(I input);
 }
