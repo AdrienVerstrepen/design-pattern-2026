@@ -83,7 +83,7 @@ public class MenuFormatter implements MenuInterface {
 
     @Override
     public void displayPlayers(List<Player> players) {
-        for (int i = 0; i < players.size() - 1; i++) {
+        for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             displayMessage((i+1) + ". " + player.getName() + " - " + player.getPoints() + " points " + "(" + player.getNumberOfWins() + " wins)" );
         }

@@ -11,15 +11,15 @@ import java.util.List;
 public class TournamentService {
     public void execute(MenuInterface UI, int NumberOfPlayers) {
         List<Player> players = new ArrayList<>();
-        for (int i = 0; i < NumberOfPlayers - 1; i++) {
-            String playerName = UI.getUserInput("Enter player " + i + " name: ");
+        for (int i = 0; i < NumberOfPlayers; i++) {
+            String playerName = UI.getUserInput("Enter player " + (i+1) + " name: ");
             players.add(new Player(playerName, 0, 0));
         }
         UI.displayMessage("Choose format:");
 
         List<TournamentFormat> formats = TournamentFormatFactory.create(UI);
         for (int i = 0; i < formats.size() - 1; i++) {
-            UI.displayMessage(i + ". " + formats.get(i).label());
+            UI.displayMessage((i+1) + ". " + formats.get(i).label());
         }
 
         int chosenFormat = UI.getNumberFromUser("Select format (1-" + formats.size() + "): ");
