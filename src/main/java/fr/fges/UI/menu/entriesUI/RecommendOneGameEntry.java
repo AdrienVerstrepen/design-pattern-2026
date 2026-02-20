@@ -4,17 +4,9 @@ import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.recommend.RecommendationStrategy;
 
-public class RecommendOneGameEntry implements MenuEntry {
-    private final String label;
-    private final RecommendationStrategy strategy;
-
-    public RecommendOneGameEntry(String label, RecommendationStrategy strategy) {
-        this.label = label;
-        this.strategy = strategy;
-    }
-
+public record RecommendOneGameEntry (String label, RecommendationStrategy strategy, GameCollectionDao dao) implements MenuEntry {
     @Override
-    public void handle(MenuInterface UI, GameCollectionDao dao) {
+    public void handle(MenuInterface UI) {
         int numberOfPlayers = UI.getNumberFromUser("How many players?: ");
 
         BoardGame game = strategy.getNRandomGame(1, dao.findByNumberOfPlayers(numberOfPlayers)).getFirst();

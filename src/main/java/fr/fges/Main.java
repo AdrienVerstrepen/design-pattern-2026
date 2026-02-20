@@ -1,4 +1,6 @@
 package fr.fges;
+import fr.fges.data.repositories.history.HistoryDao;
+import fr.fges.data.repositories.history.HistoryDaoRam;
 import fr.fges.services.factories.DaoFactory;
 import fr.fges.UI.formatters.MenuFormatter;
 import fr.fges.UI.menu.Menu;
@@ -10,15 +12,17 @@ import java.util.List;
 
 public class Main {
     Menu menu;
-    GameCollectionDao dao;
+    GameCollectionDao gamesDao;
     MenuFormatter UI;
+    HistoryDao historyDao;
 
     public Main(String[] args) {
         String storageFile = receiveArguments(args);
         verifyGivenFile(storageFile);
-        this.dao = DaoFactory.create(storageFile);
+        this.gamesDao = DaoFactory.create(storageFile);
         this.UI = new MenuFormatter();
         this.menu = new Menu(UI);
+        this.historyDao = new HistoryDaoRam();
     }
 
     public static void main(String[] args) {
@@ -43,7 +47,7 @@ public class Main {
     }
 
     public void launch() {
-        List<MenuEntry> entries = MenuFactory.create();
+        List<MenuEntry> entries = MenuFactory.create(this.historyDao, this.gamesDao);
         while (true) {
             menu.handleMenu(entries);
         }

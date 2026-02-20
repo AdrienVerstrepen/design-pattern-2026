@@ -10,7 +10,7 @@ public class ExitEntry implements MenuEntry {
     }
 
     @Override
-    public void handle(MenuInterface formatter, GameCollectionDao dao) {
+    public void handle(MenuInterface formatter) {
         formatter.displayMessage("Exiting the application. Goodbye!");
         System.exit(0);
     }

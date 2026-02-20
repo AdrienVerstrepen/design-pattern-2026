@@ -7,24 +7,17 @@ import fr.fges.data.repositories.history.HistoryDao;
 
 import java.util.Optional;
 
-public class RemoveGameEntry implements MenuEntry {
-    private final String label;
-    private final HistoryDao history;
-
-    public RemoveGameEntry(String label, HistoryDao history) {
-        this.label = label;
-        this.history = history;
-    }
+public record RemoveGameEntry (String label, HistoryDao historyDao, GameCollectionDao dao) implements MenuEntry {
 
     @Override
-    public void handle(MenuInterface UI, GameCollectionDao dao) {
+    public void handle(MenuInterface UI) {
         String title = UI.getGameTitle();
         Optional<BoardGame> game = dao.findByTitle(title);
         if (game.isEmpty()) {
             UI.displayMessage("No board game found with that title.");
             return;
         }
-        history.saveModification(new RemoveGameCommand(game.get()));
+        historyDao.saveModification(new RemoveGameCommand(game.get()));
         if (dao.delete(title)) {
             UI.displayMessage("Board game removed successfully.");
         }

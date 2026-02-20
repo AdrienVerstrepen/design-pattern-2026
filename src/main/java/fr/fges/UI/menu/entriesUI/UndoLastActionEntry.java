@@ -7,9 +7,9 @@ import fr.fges.data.repositories.history.HistoryDao;
 
 import static fr.fges.services.verifications.BoardGameVerificator.isEmptyList;
 
-public record UndoLastActionEntry (String label, HistoryDao history) implements MenuEntry {
+public record UndoLastActionEntry (String label, HistoryDao history, GameCollectionDao dao) implements MenuEntry {
     @Override
-    public void handle(MenuInterface UI, GameCollectionDao dao) {
+    public void handle(MenuInterface UI) {
         if (isEmptyList(history.findAll())) {
             UI.displayMessage("nothing to cancel");
             return;
