@@ -1,6 +1,8 @@
 package fr.fges.UI.formatters;
 import fr.fges.UI.menu.entriesUI.MenuEntry;
 import fr.fges.data.models.BoardGame;
+import fr.fges.data.models.Player;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -77,5 +79,13 @@ public class MenuFormatter implements MenuInterface {
             category = getUserInput("Title: ");
         }
         return category;
+    }
+
+    @Override
+    public void displayPlayers(List<Player> players) {
+        for (int i = 0; i < players.size() - 1; i++) {
+            Player player = players.get(i);
+            displayMessage((i+1) + ". " + player.getName() + " - " + player.getPoints() + " points " + "(" + player.getNumberOfWins() + " wins)" );
+        }
     }
 }

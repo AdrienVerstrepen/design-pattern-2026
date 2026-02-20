@@ -3,10 +3,7 @@ package fr.fges.services.factories;
 import fr.fges.UI.menu.entriesUI.*;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.data.repositories.history.HistoryDao;
-import fr.fges.services.entriesServices.AddGameService;
-import fr.fges.services.entriesServices.ListAllGamesService;
-import fr.fges.services.entriesServices.RecommendByPlayerCountService;
-import fr.fges.services.entriesServices.SummaryService;
+import fr.fges.services.entriesServices.*;
 import fr.fges.services.recommend.RandomNElementsStrategy;
 
 import java.util.ArrayList;
@@ -42,8 +39,8 @@ public class MenuFactory {
         menuEntries.add(
                 new RecommendOneGameEntry(
                         "Recommend Game",
-                        new RandomNElementsStrategy(),
-                        gamesDao
+                        gamesDao,
+                        new RecommendOneGameService(new RandomNElementsStrategy())
                 )
         );
         if (isWeekEnd(getWeekDay())) {
@@ -57,6 +54,15 @@ public class MenuFactory {
                         gamesDao
                 )
         );
+        menuEntries.add(
+                new TournamentEntry(
+                        "Tournament Mode",
+                        gamesDao,
+                        new TournamentService()
+                )
+        );
+
+
         menuEntries.add(new ExitEntry("Exit"));
         return menuEntries;
     }

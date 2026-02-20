@@ -1,5 +1,7 @@
 package fr.fges.services.entriesServices;
 
-public interface EntryService {
+import fr.fges.services.results.Result;
 
+public interface EntryService<T, E> {
+    public Result<T, E> execute();
 }
