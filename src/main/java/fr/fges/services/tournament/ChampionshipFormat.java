@@ -10,9 +10,8 @@ public class ChampionshipFormat implements TournamentFormat{
 	private List<Player> players;
 	private final MenuInterface UI;
 
-	public ChampionshipFormat(String label, List<Player> players, MenuInterface UI) {
+	public ChampionshipFormat(String label, MenuInterface UI) {
 		this.label = label;
-		this.players = players;
 		this.UI = UI;
 	}
 
@@ -50,5 +49,10 @@ public class ChampionshipFormat implements TournamentFormat{
 		}
 
 		return players;
+	}
+
+	@Override
+	public void setPlayers(List<Player> players) {
+		this.players = players;
 	}
 }

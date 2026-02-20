@@ -9,4 +9,5 @@ public interface TournamentFormat {
 	void playMatch(Player player1, Player player2);
 	void attributePoints(Player player, Integer gain);
 	List<Player> playTournament();
+	void setPlayers(List<Player> players);
 }
