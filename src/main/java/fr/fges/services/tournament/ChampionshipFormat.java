@@ -23,8 +23,8 @@ public class ChampionshipFormat implements TournamentFormat{
 
 	@Override
 	public void playMatch(Player player1, Player player2) {
-		UI.displayMessage("≡≡≡" + player1.name() + " VS " + player2.name() + "≡≡≡");
-		String winner = UI.getUserInput("Winner (1="+player1.name()+", 2="+player2.name()+"): ");
+		UI.displayMessage("≡≡≡" + player1.getName() + " VS " + player2.getName() + "≡≡≡");
+		String winner = UI.getUserInput("Winner (1="+player1.getName()+", 2="+player2.getName()+"): ");
 
 		int player1Point = winner.equals("1") ? 3 : 1;
 		int player2Point = winner.equals("2") ? 3 : 1;
@@ -34,7 +34,10 @@ public class ChampionshipFormat implements TournamentFormat{
 
 	@Override
 	public void attributePoints(Player player, Integer gain) {
-		//player.points += gain;
+		player.setPoints(player.getPoints() + gain);
+		if (gain == 3) {
+			player.setNumberOfWins(player.getNumberOfWins() + 1 );
+		}
 	}
 
 	@Override
