@@ -3,6 +3,7 @@ import fr.fges.UI.menu.entriesUI.MenuEntry;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.models.Player;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -83,6 +84,7 @@ public class MenuFormatter implements MenuInterface {
 
     @Override
     public void displayPlayers(List<Player> players) {
+        players.sort(Comparator.comparingInt(Player::getPoints).reversed());
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             displayMessage((i+1) + ". " + player.getName() + " - " + player.getPoints() + " points " + "(" + player.getNumberOfWins() + " wins)" );

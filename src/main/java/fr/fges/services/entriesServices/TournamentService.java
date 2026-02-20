@@ -9,9 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TournamentService {
-    public void execute(MenuInterface UI, int NumberOfPlayers) {
+    public void execute(MenuInterface UI, int numberOfPlayers) {
+        while (numberOfPlayers < 3 || numberOfPlayers > 8) {
+            UI.displayMessage("The number entered is invalid, please write a valid number");
+            numberOfPlayers = UI.getNumberFromUser("Number of participants (3-8): ");
+        }
+
         List<Player> players = new ArrayList<>();
-        for (int i = 0; i < NumberOfPlayers; i++) {
+        for (int i = 0; i < numberOfPlayers; i++) {
             String playerName = UI.getUserInput("Enter player " + (i+1) + " name: ");
             players.add(new Player(playerName, 0, 0));
         }
