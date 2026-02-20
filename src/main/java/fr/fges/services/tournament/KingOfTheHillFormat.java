@@ -17,7 +17,7 @@ public class KingOfTheHillFormat implements TournamentFormat{
 
 	@Override
 	public String label() {
-		return "";
+		return label;
 	}
 
 	@Override
