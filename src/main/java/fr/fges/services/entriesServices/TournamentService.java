@@ -6,6 +6,7 @@ import fr.fges.services.factories.TournamentFormatFactory;
 import fr.fges.services.tournament.TournamentFormat;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class TournamentService {
@@ -32,6 +33,7 @@ public class TournamentService {
         format.setPlayers(players);
         List<Player> endResults = format.playTournament();
         UI.displayMessage("=== Tournament Results ===");
+        endResults.sort(Comparator.comparingInt(Player::getPoints).reversed());
         UI.displayPlayers(endResults);
     }
 }
