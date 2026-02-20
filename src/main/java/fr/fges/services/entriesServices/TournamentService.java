@@ -18,7 +18,7 @@ public class TournamentService {
         UI.displayMessage("Choose format:");
 
         List<TournamentFormat> formats = TournamentFormatFactory.create(UI);
-        for (int i = 0; i < formats.size() - 1; i++) {
+        for (int i = 0; i < formats.size(); i++) {
             UI.displayMessage((i+1) + ". " + formats.get(i).label());
         }
 
