@@ -1,0 +1,17 @@
+graph TD
+    %% Définition des nœuds avec saut de ligne
+    A["<b>Presentation Layer</b><br/>UI, Display, Input"]
+    B["<b>Service Layer</b><br/>Business Logic"]
+    C["<b>Repository Layer</b><br/>Data Access"]
+
+    %% Liaisons avec étiquettes
+    A -->|"affiche et récupère les </br>données nécessaires pour le service"| B
+    B -->|accède aux données| C
+    B -->|"renvoie un objet Result <br/> isSucess, getValue, getError"| A
+
+    linkStyle 2 stroke:#ff0000,stroke-width:3px,color:#fff00
+
+    %% Styles améliorés pour la lisibilité
+    style A fill:#D1EAFF,stroke:#0056b3,stroke-width:2px,color:#000
+    style B fill:#FFF4C2,stroke:#856404,stroke-width:2px,color:#000
+    style C fill:#D4EDDA,stroke:#155724,stroke-width:2px,color:#000

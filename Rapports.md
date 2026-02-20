@@ -28,3 +28,17 @@ Pour la première Feature, nous avons implémenté une Dao qui traite l'historiq
 Pour la deuxième feature, nous avons ajouté une classe RecommendByPlayerCountEntry, qui fait la gestion de la feature et est appelée par le Menu. Elle contient une méthode handle qui va faire cette gestion. Pour appliquer des tests avec des mocks, il a fallut ajouter une classe MenuInterface pour faire la gestion du MenuFormatter, ce qui a amené quelques changelents structurels pour les actions du menu. On fait également une gestion de l'affichage dans l'ordre alphabetique en ajoutant une méthode dans GameCollectionDao.
 
 [Diagramme mermaid](diagramme-TP3.mmd)
+
+# Rapport 4
+
+## Refacto
+
+Nous avons refactorisé toutes les entrées du menu pour mieux séparer les couches business logic et UI. 
+Nous avons discuté de comment implémenter cette séparation et avons convenu de suivre le schéma suivant.
+![Schéma communication entre les couches](communications-couches.mmd)
+
+## Ajout de la feature
+
+Une interface TournamentFormat a été créée avec ses implémentations.
+Une TournamentFactory donne la liste des formats de tournois disponibles. 
+Une méthode d'affichage des joueurs a été rajoutée.
