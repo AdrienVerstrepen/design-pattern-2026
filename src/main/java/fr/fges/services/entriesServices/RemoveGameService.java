@@ -1,5 +1,4 @@
 package fr.fges.services.entriesServices;
-
 import fr.fges.data.commands.RemoveGameCommand;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;

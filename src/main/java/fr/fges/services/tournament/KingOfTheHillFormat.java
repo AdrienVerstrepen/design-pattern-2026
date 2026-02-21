@@ -1,7 +1,6 @@
 package fr.fges.services.tournament;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -12,9 +12,9 @@ public record RecommendOneGameEntry(String label, GameCollectionDao gamesDao, Re
         Result<BoardGame, String> result = service.recommendOneGame(numberOfPlayers, gamesDao);
         if (result.isSuccess()) {
             UI.displayMessage("Recommended game: ");
-            UI.displayGame(result.getValue());
+            UI.displayGame(result.value());
         } else {
-            UI.displayMessage(result.getError());
+            UI.displayMessage(result.error());
         }
     }
 

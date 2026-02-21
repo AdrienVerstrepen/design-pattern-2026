@@ -28,7 +28,7 @@ public class SummaryService {
         if (!allGamesResult.isSuccess()) {
             return allGamesResult;
         }
-        List<BoardGame> allGames = allGamesResult.getValue();
+        List<BoardGame> allGames = allGamesResult.value();
         RecommendationStrategy myStrategy = new RandomNElementsStrategy();
         List<BoardGame> summaryGames = myStrategy.getNRandomGame(Math.min(3, allGames.size()), allGames);
         if (summaryGames.isEmpty()) {

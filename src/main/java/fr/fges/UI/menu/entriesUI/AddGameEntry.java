@@ -17,7 +17,7 @@ public record AddGameEntry(String label, AddGameService service) implements Menu
         if (result.isSuccess()) {
             UI.displayMessage("Board game added successfully.");
         } else {
-            UI.displayMessage(result.getError());
+            UI.displayMessage(result.error());
         }
     }
 }

@@ -1,24 +1,13 @@
 package fr.fges.services.results;
 
-public class Failure<T, E> implements Result<T, E> {
-    private final E error;
-
-    public Failure(E error) {
-        this.error = error;
-    }
-
+public record Failure<T, E>(E error) implements Result<T, E> {
     @Override
     public boolean isSuccess() {
         return false;
     }
 
     @Override
-    public T getValue() {
+    public T value() {
         throw new UnsupportedOperationException("No value in failure result");
-    }
-
-    @Override
-    public E getError() {
-        return error;
     }
 }

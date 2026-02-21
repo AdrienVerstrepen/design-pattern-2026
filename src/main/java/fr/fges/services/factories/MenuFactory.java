@@ -12,7 +12,6 @@ import static fr.fges.services.DateGestion.isWeekEnd;
 public class MenuFactory {
     public static List<MenuEntry> create(HistoryDao historyDao, GameCollectionDao gamesDao) {
         List<MenuEntry> menuEntries = new ArrayList<>();
-
         RecommendByPlayerCountService recommendPlayerCountService = new RecommendByPlayerCountService(gamesDao);
         ListAllGamesService listGamesService = new ListAllGamesService(gamesDao);
         SummaryService summaryService = new SummaryService(gamesDao);
@@ -23,14 +22,12 @@ public class MenuFactory {
                         new AddGameService(gamesDao, historyDao)
                 )
         );
-
         menuEntries.add(
                 new RemoveGameEntry(
                         "Remove Board Game",
                         new RemoveGameService(gamesDao, historyDao)
                 )
         );
-
         menuEntries.add(new ListAllGamesEntry("List All Board Games", listGamesService));
         menuEntries.add(
                 new RecommendOneGameEntry(
@@ -55,7 +52,6 @@ public class MenuFactory {
                         new TournamentService(gamesDao)
                 )
         );
-
         menuEntries.add(new ExitEntry("Exit"));
         return menuEntries;
     }

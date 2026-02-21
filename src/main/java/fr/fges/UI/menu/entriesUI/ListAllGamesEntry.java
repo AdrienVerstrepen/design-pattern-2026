@@ -10,9 +10,9 @@ public record ListAllGamesEntry(String label, ListAllGamesService service) imple
     public void handle(MenuInterface UI) {
         Result<List<BoardGame>, String> result = service.findAllGames();
         if (result.isSuccess()) {
-            UI.displayGames(result.getValue());
+            UI.displayGames(result.value());
         } else {
-            UI.displayMessage(result.getError());
+            UI.displayMessage(result.error());
         }
     }
 

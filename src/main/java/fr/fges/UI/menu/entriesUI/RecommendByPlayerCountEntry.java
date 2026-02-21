@@ -11,9 +11,9 @@ public record RecommendByPlayerCountEntry(String label, RecommendByPlayerCountSe
         int playerCount = UI.getNumberFromUser("Number of players: ");
         Result<List<BoardGame>, String> result = service.recommendByPlayerCount(playerCount);
         if (result.isSuccess()) {
-            UI.displayGames(result.getValue());
+            UI.displayGames(result.value());
         } else {
-            UI.displayMessage(result.getError());
+            UI.displayMessage(result.error());
         }
     }
 }

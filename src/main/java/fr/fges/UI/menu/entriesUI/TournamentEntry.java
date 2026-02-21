@@ -1,11 +1,8 @@
 package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
-import fr.fges.data.models.BoardGame;
 import fr.fges.data.models.Player;
-import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.entriesServices.TournamentService;
 import fr.fges.services.results.Result;
-
 import java.util.List;
 
 public record TournamentEntry (String label, TournamentService service) implements MenuEntry {
@@ -15,9 +12,9 @@ public record TournamentEntry (String label, TournamentService service) implemen
         Result<List<Player>, String> result = service.execute(UI);
         if (result.isSuccess()) {
             UI.displayMessage("=== Tournament Results ===");
-            UI.displayPlayers(result.getValue());
+            UI.displayPlayers(result.value());
         } else {
-            UI.displayMessage("Error: " + result.getError());
+            UI.displayMessage("Error: " + result.error());
         }
     }
 }

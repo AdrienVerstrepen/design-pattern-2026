@@ -12,7 +12,7 @@ public record RemoveGameEntry(String label, RemoveGameService service) implement
         if (result.isSuccess()) {
             UI.displayMessage("Board game removed successfully.");
         } else {
-            UI.displayMessage(result.getError());
+            UI.displayMessage(result.error());
         }
     }
 
