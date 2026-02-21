@@ -34,9 +34,7 @@ public abstract class GameCollectionDaoTest {
     void shouldAddGame() {
         GameCollectionDao myDao = getDao();
         BoardGame myGame = new BoardGame("Tutel", 1, 4, "humor");
-
         myDao.save(myGame);
-
         assertTrue(myDao.findAll().contains(myGame));
     }
 
@@ -45,9 +43,7 @@ public abstract class GameCollectionDaoTest {
         GameCollectionDao myDao = getDao();
         BoardGame myGame = new BoardGame("Tutel", 1, 4, "humor");
         myDao.save(myGame);
-
         assertTrue(myDao.delete(myGame.title()));
-
         assertFalse(myDao.findAll().contains(myGame));
     }
 

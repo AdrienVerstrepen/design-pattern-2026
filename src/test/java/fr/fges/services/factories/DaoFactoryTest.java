@@ -9,9 +9,7 @@ public class DaoFactoryTest {
     @Test
     void shouldReturnJsonDao() {
         String filename = "myGreatGames.json";
-
         GameCollectionDao result = DaoFactory.create(filename);
-
         assertNotNull(result);
         assertInstanceOf(GameCollectionDaoJson.class, result);
     }
@@ -19,9 +17,7 @@ public class DaoFactoryTest {
     @Test
     void shouldReturnCsvDao() {
         String filename = "myGreatGames.csv";
-
         GameCollectionDao result = DaoFactory.create(filename);
-
         assertNotNull(result);
         assertInstanceOf(GameCollectionDaoCsv.class, result);
     }
@@ -29,9 +25,7 @@ public class DaoFactoryTest {
     @Test
     void shouldThrowExceptionForInvalidFileType() {
         String filename = "myGames.mmm";
-
         Exception exception = assertThrows(IllegalArgumentException.class, () -> { DaoFactory.create(filename); });
-
         assertEquals("Unknown extension: mmm", exception.getMessage());
     }
 }

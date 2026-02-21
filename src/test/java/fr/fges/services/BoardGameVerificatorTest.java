@@ -2,11 +2,10 @@ package fr.fges.services;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import static fr.fges.services.verifications.BoardGameVerificator.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
