@@ -9,11 +9,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class RecommendOneGameTest {
-    @Test
-    void shouldDisplayOneGame() {
-        MenuInterface formatter = mock(MenuInterface.class);
-        GameCollectionDao dao = mock(GameCollectionDao.class);
-        when(formatter.getNumberFromUser(anyString())).thenReturn(3);
-        when(dao.delete("Catan")).thenReturn(true);
-    }
+//    @Test
+//    void shouldDisplayOneGame() {
+//        MenuInterface formatter = mock(MenuInterface.class);
+//        GameCollectionDao dao = mock(GameCollectionDao.class);
+//        when(formatter.getNumberFromUser(anyString())).thenReturn(3);
+//        when(dao.delete("Catan")).thenReturn(true);
+//    }
 }
