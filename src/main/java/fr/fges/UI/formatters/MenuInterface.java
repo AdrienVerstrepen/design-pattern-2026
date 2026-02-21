@@ -2,7 +2,6 @@ package fr.fges.UI.formatters;
 import fr.fges.UI.menu.entriesUI.MenuEntry;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.models.Player;
-
 import java.util.List;
 
 public interface MenuInterface {
@@ -24,5 +23,5 @@ public interface MenuInterface {
 
     String getGameCategory();
 
-    public void displayPlayers(List<Player> players);
+    void displayPlayers(List<Player> players);
 }

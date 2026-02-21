@@ -1,6 +1,5 @@
 package fr.fges.services.recommend;
 import fr.fges.data.models.BoardGame;
-
 import java.util.ArrayList;
 import java.util.List;
 

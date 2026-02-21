@@ -34,5 +34,4 @@ public class Player {
     public void setPoints(int points) {
         this.points = points;
     }
-
 }

@@ -1,14 +1,11 @@
 package fr.fges.services.factories;
-
 import fr.fges.UI.menu.entriesUI.*;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.data.repositories.history.HistoryDao;
 import fr.fges.services.entriesServices.*;
 import fr.fges.services.recommend.RandomNElementsStrategy;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static fr.fges.services.DateGestion.getWeekDay;
 import static fr.fges.services.DateGestion.isWeekEnd;
 
@@ -23,18 +20,17 @@ public class MenuFactory {
         menuEntries.add(
                 new AddGameEntry(
                         "Add Board Game",
-                        new AddGameService(),
-                        historyDao,
-                        gamesDao
+                        new AddGameService(gamesDao, historyDao)
                 )
         );
+
         menuEntries.add(
                 new RemoveGameEntry(
                         "Remove Board Game",
-                        historyDao,
-                        gamesDao
+                        new RemoveGameService(gamesDao, historyDao)
                 )
         );
+
         menuEntries.add(new ListAllGamesEntry("List All Board Games", listGamesService));
         menuEntries.add(
                 new RecommendOneGameEntry(
@@ -50,18 +46,15 @@ public class MenuFactory {
         menuEntries.add(
                 new UndoLastActionEntry(
                         "Undo Last Action",
-                        historyDao,
-                        gamesDao
+                        new UndoLastActionService(gamesDao, historyDao)
                 )
         );
         menuEntries.add(
                 new TournamentEntry(
                         "Tournament Mode",
-                        gamesDao,
-                        new TournamentService()
+                        new TournamentService(gamesDao)
                 )
         );
-
 
         menuEntries.add(new ExitEntry("Exit"));
         return menuEntries;

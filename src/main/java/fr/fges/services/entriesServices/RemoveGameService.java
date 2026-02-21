@@ -4,19 +4,29 @@ import fr.fges.data.commands.RemoveGameCommand;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.data.repositories.history.HistoryDao;
-
+import fr.fges.services.results.Result;
+import fr.fges.services.results.Success;
+import fr.fges.services.results.Failure;
 import java.util.Optional;
 
 public class RemoveGameService {
-    public String removeGame(String title, HistoryDao historyDao, GameCollectionDao gamesDao) {
-        Optional<BoardGame> game = gamesDao.findByTitle(title);
+    private final GameCollectionDao dao;
+    private final HistoryDao history;
+
+    public RemoveGameService(GameCollectionDao dao, HistoryDao history) {
+        this.dao = dao;
+        this.history = history;
+    }
+
+    public Result<Void, String> removeGame(String title) {
+        Optional<BoardGame> game = dao.findByTitle(title);
         if (game.isEmpty()) {
-            return "No board game found with that title.";
+            return new Failure<>("No board game found with that title.");
         }
-        historyDao.saveModification(new RemoveGameCommand(game.get()));
-        if (gamesDao.delete(title)) {
-            return "Board game removed successfully.";
+        if (dao.delete(title)) {
+            history.saveModification(new RemoveGameCommand(game.get()));
+            return new Success<>(null);
         }
-        return "An error has occured, while trying to remove the game";
+        return new Failure<>("An error occurred while trying to remove the game.");
     }
 }

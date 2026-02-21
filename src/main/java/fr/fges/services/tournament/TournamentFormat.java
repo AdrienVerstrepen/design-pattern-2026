@@ -1,7 +1,5 @@
 package fr.fges.services.tournament;
-
 import fr.fges.data.models.Player;
-
 import java.util.List;
 
 public interface TournamentFormat {

@@ -1,8 +1,6 @@
 package fr.fges.services.tournament;
-
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.Player;
-
 import java.util.List;
 
 public class ChampionshipFormat implements TournamentFormat{
@@ -41,13 +39,11 @@ public class ChampionshipFormat implements TournamentFormat{
 
 	@Override
 	public List<Player> playTournament() {
-
 		for (int i = 0; i < players.size()-1 ; i++){
 			for (int j = i+1; j < players.size(); j++){
 				playMatch(players.get(i), players.get(j));
 			}
 		}
-
 		return players;
 	}
 

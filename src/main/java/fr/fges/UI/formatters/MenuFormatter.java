@@ -2,14 +2,13 @@ package fr.fges.UI.formatters;
 import fr.fges.UI.menu.entriesUI.MenuEntry;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.models.Player;
-
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-
 import static fr.fges.services.verifications.BoardGameVerificator.*;
 
 public class MenuFormatter implements MenuInterface {
+    private final Scanner scanner = new Scanner(System.in);
+
     @Override
     public void displayMessage(String message) {
         System.out.println(message);
@@ -24,6 +23,7 @@ public class MenuFormatter implements MenuInterface {
     public void displayGames(List<BoardGame> games) {
         if (isEmptyList(games)) {
             displayMessage("Error: no games found :'(");
+            return;
         }
         for (BoardGame game: games) {
             displayGame(game);
@@ -37,7 +37,6 @@ public class MenuFormatter implements MenuInterface {
 
     @Override
     public String getUserInput(String message) {
-        Scanner scanner = new Scanner(System.in);
         displayMessage("%s", message);
         return scanner.nextLine();
     }

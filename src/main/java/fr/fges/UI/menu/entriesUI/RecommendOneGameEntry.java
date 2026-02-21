@@ -3,15 +3,19 @@ import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.entriesServices.RecommendOneGameService;
-import fr.fges.services.recommend.RecommendationStrategy;
+import fr.fges.services.results.Result;
 
-public record RecommendOneGameEntry (String label, GameCollectionDao gamesDao, RecommendOneGameService service) implements MenuEntry {
+public record RecommendOneGameEntry(String label, GameCollectionDao gamesDao, RecommendOneGameService service) implements MenuEntry {
     @Override
     public void handle(MenuInterface UI) {
         int numberOfPlayers = UI.getNumberFromUser("How many players?: ");
-        BoardGame game = service.recommendOneGame(numberOfPlayers, gamesDao);
-        UI.displayMessage("Recommended game: ");
-        UI.displayGame(game);
+        Result<BoardGame, String> result = service.recommendOneGame(numberOfPlayers, gamesDao);
+        if (result.isSuccess()) {
+            UI.displayMessage("Recommended game: ");
+            UI.displayGame(result.getValue());
+        } else {
+            UI.displayMessage(result.getError());
+        }
     }
 
     @Override

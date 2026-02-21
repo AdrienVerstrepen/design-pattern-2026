@@ -1,11 +1,10 @@
 package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
-import fr.fges.data.repositories.games.GameCollectionDao;
-import fr.fges.data.repositories.history.HistoryDao;
 import fr.fges.services.entriesServices.AddGameService;
+import fr.fges.services.results.Result;
 
-public record AddGameEntry(String label, AddGameService service, HistoryDao history, GameCollectionDao dao) implements MenuEntry {
+public record AddGameEntry(String label, AddGameService service) implements MenuEntry {
     @Override
     public void handle(MenuInterface UI) {
         UI.displayMessage("> " + label());
@@ -13,14 +12,12 @@ public record AddGameEntry(String label, AddGameService service, HistoryDao hist
         int minPlayers = UI.getNumberFromUser("Minimum Players: ");
         int maxPlayers = UI.getNumberFromUser("Maximum Players: ");
         String category = UI.getGameCategory();
-
-        // Transmission au service
-        String result = service.addGame(
-                new BoardGame(title, minPlayers, maxPlayers, category),
-                dao,
-                history
-                );
-
-        UI.displayMessage(result);
+        BoardGame game = new BoardGame(title, minPlayers, maxPlayers, category);
+        Result<Void, String> result = service.addGame(game);
+        if (result.isSuccess()) {
+            UI.displayMessage("Board game added successfully.");
+        } else {
+            UI.displayMessage(result.getError());
+        }
     }
 }

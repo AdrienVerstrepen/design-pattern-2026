@@ -7,7 +7,6 @@ import fr.fges.UI.menu.Menu;
 import fr.fges.UI.menu.entriesUI.MenuEntry;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.factories.MenuFactory;
-
 import java.util.List;
 
 public class Main {

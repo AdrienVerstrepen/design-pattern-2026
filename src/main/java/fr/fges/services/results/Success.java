@@ -1,9 +1,9 @@
 package fr.fges.services.results;
 
-public class Sucess<T, E> implements Result<T, E> {
+public class Success<T, E> implements Result<T, E> {
     private final T value;
 
-    public Sucess(T value) {
+    public Success(T value) {
         this.value = value;
     }
 

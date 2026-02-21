@@ -1,12 +1,8 @@
 package fr.fges.services.factories;
-
 import fr.fges.UI.formatters.MenuInterface;
-import fr.fges.UI.menu.entriesUI.MenuEntry;
-import fr.fges.data.models.Player;
 import fr.fges.services.tournament.ChampionshipFormat;
 import fr.fges.services.tournament.KingOfTheHillFormat;
 import fr.fges.services.tournament.TournamentFormat;
-
 import java.util.ArrayList;
 import java.util.List;
 

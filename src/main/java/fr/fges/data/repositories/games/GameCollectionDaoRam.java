@@ -1,6 +1,5 @@
 package fr.fges.data.repositories.games;
 import fr.fges.data.models.BoardGame;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
