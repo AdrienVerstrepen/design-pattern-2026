@@ -22,7 +22,7 @@ public class RecommendOneGameService {
         if (possibleGames.isEmpty()) {
             return new Failure<>("No games available for this number of players.");
         }
-        BoardGame game = strategy.getNRandomGame(1, possibleGames).get(0); // getFirst remplacé par get(0)
+        BoardGame game = strategy.getNRandomGame(1, possibleGames).getFirst();
         return new Success<>(game);
     }
 }

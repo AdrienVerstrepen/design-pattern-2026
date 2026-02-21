@@ -8,15 +8,8 @@ import fr.fges.services.tournament.TournamentFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import fr.fges.data.repositories.games.GameCollectionDao;
 
 public class TournamentService {
-    private final GameCollectionDao dao;
-
-    public TournamentService(GameCollectionDao dao) {
-        this.dao = dao;
-    }
-
     public Result<List<Player>, String> execute(MenuInterface UI) {
         List<Player> players = getPlayers(UI);
         TournamentFormat format = selectFormat(UI);
