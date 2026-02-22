@@ -7,14 +7,14 @@ import fr.fges.services.results.Failure;
 import java.util.List;
 
 public class ListAllGamesService {
-    private final GameCollectionDao dao;
+    private final GameCollectionDao gamesDao;
 
-    public ListAllGamesService(GameCollectionDao dao) {
-        this.dao = dao;
+    public ListAllGamesService(GameCollectionDao gamesDao) {
+        this.gamesDao = gamesDao;
     }
 
     public Result<List<BoardGame>, String> findAllGames() {
-        List<BoardGame> games = dao.findAll();
+        List<BoardGame> games = gamesDao.findAll();
         if (games == null || games.isEmpty()) {
             return new Failure<>("No games found in the collection.");
         }

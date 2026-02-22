@@ -9,20 +9,20 @@ import fr.fges.services.results.Success;
 import fr.fges.services.verifications.BoardGameVerificator;
 
 public class AddGameService {
-    private final GameCollectionDao dao;
-    private final HistoryDao history;
+    private final GameCollectionDao gamesDao;
+    private final HistoryDao historyDao;
 
-    public AddGameService(GameCollectionDao dao, HistoryDao history) {
-        this.dao = dao;
-        this.history = history;
+    public AddGameService(GameCollectionDao gamesDao, HistoryDao historyDao) {
+        this.gamesDao = gamesDao;
+        this.historyDao = historyDao;
     }
 
     public Result<Void, String> addGame(BoardGame game) {
-        if (BoardGameVerificator.isADuplicate(game.title(), dao)) {
+        if (BoardGameVerificator.isADuplicate(game.title(), gamesDao)) {
             return new Failure<>("A game with the same title already exists !");
         }
-        if (dao.save(game)) {
-            history.saveModification(new AddGameCommand(game));
+        if (gamesDao.save(game)) {
+            historyDao.saveModification(new AddGameCommand(game));
             return new Success<>(null);
         } else {
             return new Failure<>("An error occurred, please try again.");

@@ -3,161 +3,6 @@ title : Diagramme de classes TP 4
 ---
 
 classDiagram 
-	namespace UI {
-		class Menu {
-			+handleMenu(List~MenuEntry~ entries) void
-		}
-
-		class MenuEntry {
-			<<interface>>
-			+handle(MenuInterface UI, GameCollectionDao dao) void
-			+label() String
-		}
-
-		class ExitEntry {
-			+handle(MenuInterface UI, GameCollectionDao dao) void
-			+label() String
-		}
-
-		class AddGameEntry {
-			+handle(MenuInterface UI, GameCollectionDao dao) void
-			+label() String
-		}
-
-		class RemoveGameEntry {
-			+handle(MenuInterface UI, GameCollectionDao dao) void
-			+label() String
-		}
-		
-		class RecommendOneGameEntry {
-			+handle(MenuInterface UI, GameCollectionDao dao) void
-			+label() String
-		}
-
-		class RecommendByPlayerCountEntry {
-			+handle(MenuInterface UI, GameCollectionDao dao) void
-			+label() String
-		}
-
-		class ListAllGamesEntry {
-			+handle(MenuInterface UI, GameCollectionDao dao) void
-			+label() String
-		}
-
-		class SummaryEntry {
-			+handle(MenuInterface UI, GameCollectionDao dao) void
-			+label() String
-		}
-
-		class UndoLastActionEntry {
-			+handle(MenuInterface UI, GameCollectionDao dao) void
-			+label() String
-		}
-
-		class MenuFormatter {
-            +displayMessage(String message) void
-            +displayMessage(String format, Object... args) void
-            +displayGames(List~BoardGame~ games) void
-            +getUserInput(String message) String
-            +displayMenu(List~MenuEntry~ entries) void
-            +getGameTitle() String
-            +getNumberFromUser(String message) Int
-            +getGameCategory() String
-        }
-
-        class MenuInterface {
-            <<interface>>
-            +displayMessage(String message) void
-            +displayMessage(String format, Object... args) void
-            +displayGames(List~BoardGame~ games) void
-            +getUserInput(String message) String
-            +displayMenu(List~MenuEntry~ entries) void
-            +getGameTitle() String
-            +getNumberFromUser(String message) Int
-            +getGameCategory() String
-        }
-
-		class TournamentEntry {
-            -formats List~TournamentFormat~
-            +handle(MenuInterface UI, GameCollectionDao dao) Void
-            +label() String
-        }
-
-		class TournamentFormatter {
-            %% Récupère les inputs utilisateurs d'un match %%
-            +getWinnerFromUser() void
-            %% Affichage du gagnant %%
-            +displayWinner() void
-            %% Affichage des gagnants %%
-            +displayAllScores() void
-        }
-	}
-
-	namespace Services {
-		class DaoFactory {
-			+create(String filename) GameCollectionDao
-		}
-
-		class MenuFactory {
-			+create() List~MenuEntry~
-		}
-
-		class DateGestion {
-			+isWeekEnd(int weekDay) Boolean
-			+getDate() Calendar
-			+getWeekDay() Int
-		}
-
-		class BoardGameVerificator {
-			+isADuplicate(String title, GameCollectionDao dao) Boolean
-			+isValidString(String input) Boolean
-			+isValidNumber(String input) Boolean
-			+isEmptyList(List~?~ list) Boolean
-		}
-
-		class RecommendationStrategy {
-			<<interface>>
-			+getNRandomGames(Int numberOfGames, GameCollectionDao) List~BoardGame~
-		}
-
-		class RandomNElementsStrategy {
-			+getNRandomGames(Int numberOfGames, GameCollectionDao) List~BoardGame~
-		}
-
-		class LastNElementsStrategy {
-			+getNRandomGames(Int numberOfGames, GameCollectionDao) List~BoardGame~
-		}
-
-		class FirstNElementsStrategy {
-			+getNRandomGames(Int numberOfGames, GameCollectionDao) List~BoardGame~
-		}
-
-		class EntryService {
-
-		}
-
-		class TournamentFormat {
-            <<interface>>
-            +label() String
-            +playMatch() void %% appel à tournamentFormatter %%
-            +attributePoints() void
-            +playTournament() List~Player~ %% itère sur les playMatch et donne les scores finaux à tournamentEntry %%
-        }
-
-        class KingOfTheHillFormat {
-            +label() String
-            +playMatch() void
-            +attributePoints() void
-            +playTournament() List~Player~
-        }
-        class ChampionshipFormat {
-            +label() String
-            +playMatch() void
-            +attributePoints() void
-            +playTournament() List~Player~
-        }
-	}
-
 	namespace Data {
 		class BoardGame {
 			+title String
@@ -239,70 +84,338 @@ classDiagram
             +name String
             +numberOfWins int
             +points int
+			+getName() String
+			+getNumberOfWins() int
+			+getPoints() int
+			+setName() void
+			+setNumberOfWins(int numberOfWins) void
+			+setPoints(int points) void
+        }
+	}
+	
+	namespace Services {
+		class GamesDaoFactory {
+			+create(String filename) GameCollectionDao$
+		}
+
+		class MenuFactory {
+			+create() List~MenuEntry~$
+		}
+
+		class TournamentFormatFactory {
+			+create(MenuInterface UI) List~TournamentFormat~$
+		}
+
+		class DateGestion {
+			+isWeekEnd(int weekDay) Boolean
+			+getDate() Calendar
+			+getWeekDay() Int
+		}
+
+		class BoardGameVerificator {
+			+isADuplicate(String title, GameCollectionDao dao) Boolean$
+			+isValidString(String input) Boolean$
+			+isValidNumber(String input) Boolean$
+			+isEmptyList(List~?~ list) Boolean$
+		}
+
+		class RecommendationStrategy {
+			<<interface>>
+			+getNRandomGames(Int numberOfGames, List~BoardGame~) List~BoardGame~
+		}
+
+		class RandomNElementsStrategy {
+			+getNRandomGames(Int numberOfGames, List~BoardGame~) List~BoardGame~
+		}
+
+		class LastNElementsStrategy {
+			+getNRandomGames(Int numberOfGames, List~BoardGame~) List~BoardGame~
+		}
+
+		class FirstNElementsStrategy {
+			+getNRandomGames(Int numberOfGames, List~BoardGame~) List~BoardGame~
+		}
+
+		class EntryService~T, E~ {
+			<<interface>>
+        	+execute() Result~T, E~
+		}
+
+		class AddGameService {
+			-gamesDao GameCollectionDao
+			-historyDao HistroyDao
+    		+addGame(BoardGame game) Result~Void, String~
+		}
+
+		class RemoveGameService {
+			-gamesDao GameCollectionDao
+			-historyDao HistroyDao
+    		+removeGame(BoardGame game) Result~Void, String~
+		}
+
+        class RecommendOneGameService {
+			-strategy RecommendationStrategy
+    		+recommendOneGame(int numberOfPlayers, GameCollectionDao gamesDao) Result~BoardGame, String~
+		}
+
+		class RecommendByPlayerCountService {
+			-GameCollectionDao gamesDao
+    		+recommendByPlayerCount(int playerCount) Result~List~BoardGame~, String~
+		}
+
+		class ListAllGamesService {
+			-gamesDao GameCollectionDao
+    		+findAllGames() Result~List~BoardGame~, String~
+		}
+
+		class SummaryService {
+			-gamesDao GameCollectionDao
+    		+makeSummary() Result~List~BoardGame~, String~
+		}
+
+		class UndoLastActionService {
+			-gamesDao GameCollectionDao
+			-historyDao HistoryDao
+			+undo() String
+		}
+
+		class TournamentService {
+			+execute(MenuInterface UI) Result~List~Player~, String~
+			-getPlayers(MenuInterfaceUI) List~Player~
+			-getNumberOfParticipants(MenuInterface UI) int
+			-getPlayerName(MenuInterface UI, int index) String
+			-selectFormat(MenuInterface UI) TournamentFormat
+			-playTournament(TournamentFormat format, List~Player~ players) List~Player~
+			-sortResults(List~Player~ players) List~Player~
+		}
+
+		class Result~T, E~ {
+			<<interface>>
+			+isSuccess() boolean
+			+value() T
+			+error() E
+		}
+
+		class Success~T, E~ {
+			<<record>>
+			+value T
+			+isSuccess() boolean
+			+error() E
+		}
+
+		class Failure~T, E~ {
+			<<record>>
+			+error E
+			+isSuccess() boolean
+			+value() T
+		}
+
+		class TournamentFormat {
+            <<interface>>
+            +label() String
+            +playMatch() void 
+            +attributePoints() void
+            +playTournament() List~Player~
+			+setPlayers(List~Player~ players) void
+        }
+
+        class KingOfTheHillFormat {
+            +label() String
+            +playMatch() void
+            +attributePoints() void
+            +playTournament() List~Player~
+			+setPlayers(List~Player~ players) void
+        }
+        class ChampionshipFormat {
+            +label() String
+            +playMatch() void
+            +attributePoints() void
+            +playTournament() List~Player~
+			+setPlayers(List~Player~ players) void
         }
 	}
 
-	namespace main {
-		class Main {
-			+receiveArguments(String[] arguments) String
-			+launch() void
-			+verifyGivenFile(String filename) void
+	namespace UI {
+		class MenuFormatter {
+            +displayMessage(String message) void
+            +displayMessage(String format, Object... args) void
+            +displayGames(List~BoardGame~ games) void
+			+displayGame(BoardGame game) void
+            +getUserInput(String message) String
+            +displayMenu(List~MenuEntry~ entries) void
+            +getGameTitle() String
+            +getNumberFromUser(String message) Int
+            +getGameCategory() String
+			+displayPlayers(List~Player~ players) void
+        }
+
+        class MenuInterface {
+            <<interface>>
+            +displayMessage(String message) void
+            +displayMessage(String format, Object... args) void
+            +displayGames(List~BoardGame~ games) void
+            +displayGame(BoardGame game) void
+            +getUserInput(String message) String
+            +displayMenu(List~MenuEntry~ entries) void
+            +getGameTitle() String
+            +getNumberFromUser(String message) Int
+            +getGameCategory() String
+			+displayPlayers(List~Player~ players) void
+        }
+
+		class Menu {
+			+handleMenu(List~MenuEntry~ entries) void
 		}
 
+		class MenuEntry {
+			<<interface>>
+			+handle(MenuInterface UI) void
+			+label() String
+		}
+
+		class ExitEntry {
+			+handle(MenuInterface UI) void
+			+label() String
+		}
+
+		class AddGameEntry {
+			<<record>>
+			+label String
+			+service AddGameService
+			+handle(MenuInterface UI) void
+		}
+
+		class RemoveGameEntry {
+			<<record>>
+			+label String
+			+service RemoveGameService
+			+handle(MenuInterface UI) void
+		}
+		
+		class RecommendOneGameEntry {
+			<<record>>
+			+label String
+			+gamesDao GameCollectionDao
+			+service RecommendOneGameService
+			+handle(MenuInterface UI) void
+		}
+
+		class RecommendByPlayerCountEntry {
+			<<record>>
+			+label String
+			+service RecommendByPlayerCountService
+			+handle(MenuInterface UI, GameCollectionDao dao) void
+		}
+
+		class ListAllGamesEntry {
+			<<record>>
+			+label String
+			+service ListAllGamesService
+			+handle(MenuInterface UI) void
+		}
+
+		class SummaryEntry {
+			<<record>>
+			+label String
+			+service SummaryService
+			+handle(MenuInterface UI) void
+		}
+
+		class UndoLastActionEntry {
+			<<record>>
+			+label String
+			+service UndoLastActionService
+			+handle(MenuInterface UI) void
+		}
+
+		class TournamentEntry {
+			<<record>>
+			+label String
+			+service TournamentService
+            +handle(MenuInterface UI) void
+        }
+	}
+
+	class Main {
+		+receiveArguments(String[] arguments) String
+		+launch() void
+		+verifyGivenFile(String filename) void
 	}
 
 	%% Liens entre les classes
 
-	Main --> MenuFactory: Création de la liste d'entrées du Menu
-	Main --> DaoFactory : Création de la DAO
-	Main --> Menu : Transmission au menu	
+	Main --> MenuFactory: Create the list of avilable menu entries
+	Main --> HistoryDao: Instantiate one implementation of History
+	Main --> GamesDaoFactory : Create GameCollectionDao
+	Main --> Menu : relays to Menu
 
-	DaoFactory --> GameCollectionDao : instancie
+	GamesDaoFactory --> GameCollectionDao : instantiate GamesCollectionDao
 
 	GameCollectionDao <|.. GameCollectionDaoCsv
 	GameCollectionDao <|.. GameCollectionDaoRam
 	GameCollectionDao <|.. GameCollectionDaoJson
-	GameCollectionDao --> BoardGame : stocke les jeux
+	GameCollectionDao --> BoardGame : provides a way to save games
 
-	MenuFactory --> MenuEntry : instancie
-	MenuFactory --> DateGestion : utilises les vérification horodatées
-	MenuFactory --> HistoryDao : affectes à certaines entrées du menu l'historique
+	MenuFactory --> MenuEntry : instantiate
+	MenuFactory --> DateGestion : uses timed verifications
+	MenuFactory --> HistoryDao : binds to some entries
 
-	MenuEntry <|.. ExitEntry
-	MenuEntry <|.. AddGameEntry
-	MenuEntry <|.. RemoveGameEntry
-	MenuEntry <|.. RecommendOneGameEntry
-	MenuEntry <|.. RecommendByPlayerCountEntry
-	MenuEntry <|.. ListAllGamesEntry
-	MenuEntry <|.. SummaryEntry
-	MenuEntry <|.. TournamentEntry
+	MenuEntry <|.. ExitEntry : implements
+	MenuEntry <|.. AddGameEntry : implements
+	MenuEntry <|.. RemoveGameEntry : implements
+	MenuEntry <|.. RecommendOneGameEntry : implements
+	MenuEntry <|.. RecommendByPlayerCountEntry : implements
+	MenuEntry <|.. ListAllGamesEntry : implements
+	MenuEntry <|.. SummaryEntry : implements
+	MenuEntry <|.. TournamentEntry : implements
+	MenuEntry <|.. UndoLastActionEntry : implements
 
-	HistoryDao <|.. HistoryDaoRam
-	HistoryDao --> Command : stocke des commandes
+	HistoryDao <|.. HistoryDaoRam : implements
+	HistoryDao --> Command : saves commands
 
-	Menu --> MenuInterface : utilises pour l'affichage
-	Menu --> MenuEntry : associe le choix de l'utilisateur à la bonne entrée
+	Menu --> MenuInterface : uses to display
+	Menu --> MenuEntry : bind the user choice to the corresponding entry implementation
 
-	MenuInterface <|.. MenuFormatter
+	MenuInterface <|.. MenuFormatter : implements
 
-	MenuEntry --> GameCollectionDao : utilises la dao pour stocker les jeux
-	MenuEntry --> MenuInterface : utilises le formatter pour afficher
-	MenuEntry --> TournamentFormatter : utilises le formatter pour afficher
+	EntryService --> GameCollectionDao : uses GamesCollectionDao to access or modify games
+	MenuEntry --|> MenuInterface : uses formatter to display
 
-	AddGameEntry --> HistoryDao : log l'ajout
-	RemoveGameEntry --> HistoryDao : log le retrait
-	RecommendOneGameEntry --> RecommendationStrategy : utilises une stratégie de recommendation
-	SummaryEntry --> RecommendationStrategy : utilises une stratégie de recommendation
-	UndoLastActionEntry --> HistoryDao : enregistre l'annulation de la dernière action
+	AddGameService --> HistoryDao : log l'ajout
+	RemoveGameService --> HistoryDao : log le retrait
+	RecommendOneGameService --> RecommendationStrategy : uses a recommendation strategy
+	SummaryService --> RecommendationStrategy : uses a recommendation strategy
+	UndoLastActionService --> HistoryDao : register undo of last action
 
 	Command <|.. RemoveGameCommand
 	Command <|.. AddGameCommand
-	Command --> GameCollectionDao : répercute l'historique sur la DAO
+	Command --> GameCollectionDao : saves undo actions on the DAO
 
 	RecommendationStrategy <|.. FirstNElementsStrategy
 	RecommendationStrategy <|.. LastNElementsStrategy
 	RecommendationStrategy <|.. RandomNElementsStrategy
-	RecommendationStrategy --> GameCollectionDao : utilises
+	RecommendationStrategy --> GameCollectionDao : uses
 
-	TournamentFormat <|.. KingOfTheHillFormat
-	TournamentFormat <|.. ChampionshipFormat
+	TournamentFormat <|.. KingOfTheHillFormat : implements
+	TournamentFormat <|.. ChampionshipFormat : implements
+
+	Result <|.. Success : implements
+    Result <|.. Failure : implements
+
+	EntryService <|.. UndoLastActionService : implements
+	EntryService <|.. AddGameService : implements
+	EntryService <|.. RemoveGameService : implements
+	EntryService <|.. RecommendOneGameService : implements
+	EntryService <|.. RecommendByPlayerCountService : implements
+	EntryService <|.. ListAllGamesService : implements
+	EntryService <|.. SummaryService : implements
+	EntryService <|.. TournamentService : implements
+
+	MenuEntry --> EntryService : relays logic to service
+
+	TournamentService --> TournamentFormatFactory : instantiate list of availables formats
+
+	AddGameService --> BoardGameVerificator
+	RemoveGameService --> BoardGameVerificator
+
+	TournamentService --> Player : handles players scores and names

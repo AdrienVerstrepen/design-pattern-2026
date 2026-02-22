@@ -5,6 +5,6 @@ import fr.fges.services.entriesServices.UndoLastActionService;
 public record UndoLastActionEntry (String label, UndoLastActionService service) implements MenuEntry {
     @Override
     public void handle(MenuInterface UI) {
-        UI.displayMessage(service.Undo());
+        UI.displayMessage(service.undo());
     }
 }

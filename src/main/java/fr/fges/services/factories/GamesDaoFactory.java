@@ -3,7 +3,7 @@ import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.data.repositories.games.GameCollectionDaoCsv;
 import fr.fges.data.repositories.games.GameCollectionDaoJson;
 
-public class DaoFactory {
+public class GamesDaoFactory {
     public static GameCollectionDao create(String filename) {
         if (filename == null || !filename.contains(".")) {
             throw new IllegalArgumentException("Invalid filename: " + filename);

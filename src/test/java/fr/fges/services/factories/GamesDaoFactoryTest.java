@@ -5,11 +5,11 @@ import fr.fges.data.repositories.games.GameCollectionDaoJson;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DaoFactoryTest {
+public class GamesFactoryTest {
     @Test
     void shouldReturnJsonDao() {
         String filename = "myGreatGames.json";
-        GameCollectionDao result = DaoFactory.create(filename);
+        GameCollectionDao result = GamesFactory.create(filename);
         assertNotNull(result);
         assertInstanceOf(GameCollectionDaoJson.class, result);
     }
@@ -17,7 +17,7 @@ public class DaoFactoryTest {
     @Test
     void shouldReturnCsvDao() {
         String filename = "myGreatGames.csv";
-        GameCollectionDao result = DaoFactory.create(filename);
+        GameCollectionDao result = GamesFactory.create(filename);
         assertNotNull(result);
         assertInstanceOf(GameCollectionDaoCsv.class, result);
     }
@@ -25,7 +25,7 @@ public class DaoFactoryTest {
     @Test
     void shouldThrowExceptionForInvalidFileType() {
         String filename = "myGames.mmm";
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> { DaoFactory.create(filename); });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> { GamesFactory.create(filename); });
         assertEquals("Unknown extension: mmm", exception.getMessage());
     }
 }

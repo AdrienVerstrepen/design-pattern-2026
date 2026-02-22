@@ -1,7 +1,7 @@
 package fr.fges;
 import fr.fges.data.repositories.history.HistoryDao;
 import fr.fges.data.repositories.history.HistoryDaoRam;
-import fr.fges.services.factories.DaoFactory;
+import fr.fges.services.factories.GamesDaoFactory;
 import fr.fges.UI.formatters.MenuFormatter;
 import fr.fges.UI.menu.Menu;
 import fr.fges.UI.menu.entriesUI.MenuEntry;
@@ -18,7 +18,7 @@ public class Main {
     public Main(String[] args) {
         String storageFile = receiveArguments(args);
         verifyGivenFile(storageFile);
-        this.gamesDao = DaoFactory.create(storageFile);
+        this.gamesDao = GamesDaoFactory.create(storageFile);
         this.UI = new MenuFormatter();
         this.menu = new Menu(UI);
         this.historyDao = new HistoryDaoRam();

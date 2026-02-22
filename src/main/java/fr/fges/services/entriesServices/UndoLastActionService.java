@@ -6,20 +6,20 @@ import fr.fges.data.repositories.history.HistoryDao;
 import static fr.fges.services.verifications.BoardGameVerificator.isEmptyList;
 
 public class UndoLastActionService{
-	private final GameCollectionDao dao;
-	private final HistoryDao history;
+	private final GameCollectionDao gamesDao;
+	private final HistoryDao historyDao;
 
-	public UndoLastActionService(GameCollectionDao dao, HistoryDao history) {
-		this.dao = dao;
-		this.history = history;
+	public UndoLastActionService(GameCollectionDao gamesDao, HistoryDao history) {
+		this.gamesDao = gamesDao;
+		this.historyDao = history;
 	}
 
-	public String Undo() {
-		if (isEmptyList(history.findAll())) {
+	public String undo() {
+		if (isEmptyList(historyDao.findAll())) {
 			return "nothing to cancel";
 		}
-		Command lastCommand = history.removeLast();
-		lastCommand.restore(dao);
+		Command lastCommand = historyDao.removeLast();
+		lastCommand.restore(gamesDao);
 		if (lastCommand instanceof AddGameCommand) {
 			return "Undone : Removed " + lastCommand.getModifiedGame().title() + " from collection";
 		} else {
