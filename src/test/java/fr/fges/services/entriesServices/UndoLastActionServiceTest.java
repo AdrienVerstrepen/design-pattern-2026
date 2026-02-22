@@ -30,7 +30,7 @@ class UndoLastActionServiceTest {
         AddGameCommand command = new AddGameCommand(game);
         when(history.findAll()).thenReturn(List.of(command));
         when(history.removeLast()).thenReturn(command);
-        String result = service.Undo();
+        String result = service.undo();
         assertEquals("Undone : Removed Catan from collection", result);
     }
 
@@ -40,7 +40,7 @@ class UndoLastActionServiceTest {
         when(history.findAll()).thenReturn(emptyList);
         try (MockedStatic<BoardGameVerificator> mockedStatic = mockStatic(BoardGameVerificator.class)) {
             mockedStatic.when(() -> isEmptyList(emptyList)).thenReturn(true);
-            String result = service.Undo();
+            String result = service.undo();
             assertEquals("nothing to cancel", result);
             verify(history).findAll();
             verify(history, never()).removeLast();
