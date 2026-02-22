@@ -33,7 +33,9 @@ Pour la deuxième feature, nous avons ajouté une classe RecommendByPlayerCountE
 
 ## Refacto
 
-Nous avons refactorisé toutes les entrées du menu pour mieux séparer les couches business logic et UI. 
+Nous avons refactorisé toutes les entrées du menu pour mieux séparer les couches business logic et UI.
+Une gross étape de refactorisation a été faite, où nous avons réorganisé nos classes dans trois dossiers : data, services et ui. Nous avons vérifié dans chaque classe que les rôles d'une classe n'empiétaient pas sur des rôles qu'elle n'a pas à avoir, avec notamment l'ajout du folder entriesServices qui permet de faire les liens entre entriesUI et la couche data.
+Cette refactorisation implique également de grosses modifications des tests.
 Nous avons discuté de comment implémenter cette séparation et avons convenu de suivre le schéma suivant.
 ![Schéma communication entre les couches](communications-couches.mmd)
 
@@ -42,3 +44,5 @@ Nous avons discuté de comment implémenter cette séparation et avons convenu d
 Une interface TournamentFormat a été créée avec ses implémentations.
 Une TournamentFactory donne la liste des formats de tournois disponibles. 
 Une méthode d'affichage des joueurs a été rajoutée.
+Nous avons opté pour l'implémentation de deux classes pour les tournois, une pour chaque approche.
+La différence majeure entre les deux se trouve au niveau de l'implémentation du choix des joueurs du match suivant après avoir joué un match.
