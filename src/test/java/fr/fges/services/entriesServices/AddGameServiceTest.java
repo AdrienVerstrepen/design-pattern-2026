@@ -32,7 +32,7 @@ class AddGameServiceTest {
             mockedStatic.when(() -> BoardGameVerificator.isADuplicate("Catan", dao)).thenReturn(true);
             Result<Void, String> result = service.addGame(game);
             assertInstanceOf(Failure.class, result);
-            assertEquals("A game with the same title already exists !", ((Failure<Void, String>) result).error());
+            assertEquals("A game with the same title already exists !", result.error());
             verify(dao, never()).save(any());
             verify(history, never()).saveModification(any());
         }
@@ -59,7 +59,7 @@ class AddGameServiceTest {
             when(dao.save(game)).thenReturn(false);
             Result<Void, String> result = service.addGame(game);
             assertInstanceOf(Failure.class, result);
-            assertEquals("An error occurred, please try again.", ((Failure<Void, String>) result).error());
+            assertEquals("An error occurred, please try again.", result.error());
             verify(history, never()).saveModification(any());
         }
     }

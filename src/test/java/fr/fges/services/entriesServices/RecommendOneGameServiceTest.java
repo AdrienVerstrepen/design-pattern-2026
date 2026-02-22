@@ -27,7 +27,7 @@ class RecommendOneGameServiceTest {
     void shouldReturnFailureWhenPlayerCountIsZeroOrNegative() {
         Result<BoardGame, String> result = service.recommendOneGame(0, dao);
         assertInstanceOf(Failure.class, result);
-        assertEquals("Number of players must be greater than zero.", ((Failure<BoardGame, String>) result).error());
+        assertEquals("Number of players must be greater than zero.", result.error());
         verify(dao, never()).findByNumberOfPlayers(anyInt());
         verify(strategy, never()).getNRandomGame(anyInt(), any());
     }
@@ -37,7 +37,7 @@ class RecommendOneGameServiceTest {
         when(dao.findByNumberOfPlayers(4)).thenReturn(List.of());
         Result<BoardGame, String> result = service.recommendOneGame(4, dao);
         assertInstanceOf(Failure.class, result);
-        assertEquals("No games available for this number of players.", ((Failure<BoardGame, String>) result).error());
+        assertEquals("No games available for this number of players.", result.error());
         verify(dao).findByNumberOfPlayers(4);
         verify(strategy, never()).getNRandomGame(anyInt(), any());
     }
@@ -51,7 +51,7 @@ class RecommendOneGameServiceTest {
         when(strategy.getNRandomGame(1, possibleGames)).thenReturn(List.of(game2));
         Result<BoardGame, String> result = service.recommendOneGame(4, dao);
         assertInstanceOf(Success.class, result);
-        assertEquals(game2, ((Success<BoardGame, String>) result).value());
+        assertEquals(game2, result.value());
         verify(dao).findByNumberOfPlayers(4);
         verify(strategy).getNRandomGame(1, possibleGames);
     }

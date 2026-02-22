@@ -29,7 +29,7 @@ class RemoveGameServiceTest {
         when(dao.findByTitle("Catan")).thenReturn(Optional.empty());
         Result<Void, String> result = service.removeGame("Catan");
         assertInstanceOf(Failure.class, result);
-        assertEquals("No board game found with that title.", ((Failure<Void, String>) result).error());
+        assertEquals("No board game found with that title.", result.error());
         verify(dao).findByTitle("Catan");
         verify(dao, never()).delete(anyString());
         verify(history, never()).saveModification(any());
@@ -42,7 +42,7 @@ class RemoveGameServiceTest {
         when(dao.delete("Catan")).thenReturn(false);
         Result<Void, String> result = service.removeGame("Catan");
         assertInstanceOf(Failure.class, result);
-        assertEquals("An error occurred while trying to remove the game.", ((Failure<Void, String>) result).error());
+        assertEquals("An error occurred while trying to remove the game.", result.error());
         verify(dao).findByTitle("Catan");
         verify(dao).delete("Catan");
         verify(history, never()).saveModification(any());

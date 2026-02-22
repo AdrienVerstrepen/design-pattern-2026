@@ -35,7 +35,7 @@ class TournamentServiceTest {
             when(format.playTournament()).thenAnswer(invocation -> new ArrayList<>(capturedPlayersHolder[0]));
             Result<List<Player>, String> result = service.execute(ui);
             assertInstanceOf(Success.class, result);
-            List<Player> sorted = ((Success<List<Player>, String>) result).value();
+            List<Player> sorted = result.value();
             assertEquals("Alice", sorted.get(0).getName());
             assertEquals("Bob", sorted.get(1).getName());
             assertEquals("Charlie", sorted.get(2).getName());

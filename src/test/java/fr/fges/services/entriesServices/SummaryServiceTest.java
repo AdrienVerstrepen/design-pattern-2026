@@ -25,7 +25,7 @@ class SummaryServiceTest {
         when(dao.findAll()).thenReturn(List.of());
         Result<List<BoardGame>, String> result = service.findAllGames();
         assertInstanceOf(Failure.class, result);
-        assertEquals("No games found in the collection.", ((Failure<List<BoardGame>, String>) result).error());
+        assertEquals("No games found in the collection.", result.error());
         verify(dao).findAll();
     }
 
@@ -37,7 +37,7 @@ class SummaryServiceTest {
         when(dao.findAll()).thenReturn(games);
         Result<List<BoardGame>, String> result = service.findAllGames();
         assertInstanceOf(Success.class, result);
-        assertEquals(games, ((Success<List<BoardGame>, String>) result).value());
+        assertEquals(games, result.value());
     }
 
     @Test
@@ -45,7 +45,7 @@ class SummaryServiceTest {
         when(dao.findAll()).thenReturn(List.of());
         Result<List<BoardGame>, String> result = service.makeSummary();
         assertInstanceOf(Failure.class, result);
-        assertEquals("No games found in the collection.", ((Failure<List<BoardGame>, String>) result).error());
+        assertEquals("No games found in the collection.", result.error());
     }
 
     @Test
@@ -59,7 +59,7 @@ class SummaryServiceTest {
         when(dao.findAll()).thenReturn(games);
         Result<List<BoardGame>, String> result = service.makeSummary();
         assertInstanceOf(Success.class, result);
-        List<BoardGame> summary = ((Success<List<BoardGame>, String>) result).value();
+        List<BoardGame> summary = result.value();
         assertTrue(summary.size() <= 3);
         assertFalse(summary.isEmpty());
     }
@@ -73,7 +73,7 @@ class SummaryServiceTest {
         when(dao.findAll()).thenReturn(games);
         Result<List<BoardGame>, String> result = service.makeSummary();
         assertInstanceOf(Success.class, result);
-        List<BoardGame> summary = ((Success<List<BoardGame>, String>) result).value();
+        List<BoardGame> summary = result.value();
         assertEquals(2, summary.size());
     }
 }
