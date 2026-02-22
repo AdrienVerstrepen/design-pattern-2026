@@ -1,4 +1,4 @@
-package fr.fges.services;
+package fr.fges.services.verifications;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import org.junit.jupiter.api.Test;
