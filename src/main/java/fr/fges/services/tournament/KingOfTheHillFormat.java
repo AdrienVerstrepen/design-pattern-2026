@@ -21,7 +21,7 @@ public class KingOfTheHillFormat implements TournamentFormat{
 
 	@Override
 	public void playMatch(Player currentWinner, Player newPlayer) {
-		UI.displayMessage("=== " + currentWinner.getName() + " VS " + newPlayer.getName() + " ===");
+		UI.displayMessage(currentWinner.getName() + " VS " + newPlayer.getName());
 		String winner = "";
 		while (!winner.equals("1") && !winner.equals("2")) {
 			winner = UI.getUserInput("Winner (1=" + currentWinner.getName() + ", 2=" + newPlayer.getName() + "): ");
@@ -53,9 +53,11 @@ public class KingOfTheHillFormat implements TournamentFormat{
 		}
 		List<Player> remainingPlayers = new ArrayList<>(players);
 		Player currentWinner = remainingPlayers.getFirst();
+		int numberMatches = remainingPlayers.size() - 1;
 		for (int i = 1; i < remainingPlayers.size(); i++) {
 			Player newPlayer = remainingPlayers.get(i);
 			int currentWinnerWinsBeforeMatch = currentWinner.getNumberOfWins();
+			UI.displayMessage("=== Match " + i + "/" + numberMatches+ " ===");
 			playMatch(currentWinner, newPlayer);
 			if (currentWinnerWinsBeforeMatch == currentWinner.getNumberOfWins()){
 				currentWinner = newPlayer;
