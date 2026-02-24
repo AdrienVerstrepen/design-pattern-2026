@@ -21,7 +21,14 @@ public class ChampionshipFormat implements TournamentFormat{
 	@Override
 	public void playMatch(Player player1, Player player2) {
 		UI.displayMessage("===" + player1.getName() + " VS " + player2.getName() + "===");
-		String winner = UI.getUserInput("Winner (1="+player1.getName()+", 2="+player2.getName()+"): ");
+
+		String winner = "";
+		while (!winner.equals("1") && !winner.equals("2")) {
+			winner = UI.getUserInput("Winner (1=" + player1.getName() + ", 2=" + player2.getName() + "): ");
+			if (!winner.equals("1") && !winner.equals("2")) {
+				UI.displayMessage("Invalid input. Please enter 1 or 2.");
+			}
+		}
 
 		int player1Point = winner.equals("1") ? 3 : 1;
 		int player2Point = winner.equals("2") ? 3 : 1;
