@@ -1,6 +1,8 @@
 package fr.fges.services.entriesServices;
 import fr.fges.UI.formatters.MenuInterface;
+import fr.fges.data.models.BoardGame;
 import fr.fges.data.models.Player;
+import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.factories.TournamentFormatFactory;
 import fr.fges.services.results.Result;
 import fr.fges.services.results.Success;
@@ -10,7 +12,17 @@ import java.util.Comparator;
 import java.util.List;
 
 public class TournamentService {
+    private final GameCollectionDao gamesDao;
+
+    public TournamentService(GameCollectionDao gamesDao) {
+        this.gamesDao = gamesDao;
+    }
+
     public Result<List<Player>, String> execute(MenuInterface UI) {
+        List<BoardGame> twoPlayerGames = gamesDao.findByNumberOfPlayers(2);
+        UI.displayGames(twoPlayerGames);
+        int max = twoPlayerGames.size();
+        UI.getNumberFromUser("Select game (1-" + max + "): ");
         List<Player> players = getPlayers(UI);
         TournamentFormat format = selectFormat(UI);
         List<Player> endResults = playTournament(format, players);

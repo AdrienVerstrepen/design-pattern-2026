@@ -49,7 +49,7 @@ public class MenuFactory {
         menuEntries.add(
                 new TournamentEntry(
                         "Tournament Mode",
-                        new TournamentService()
+                        new TournamentService(gamesDao)
                 )
         );
         menuEntries.add(new ExitEntry("Exit"));
