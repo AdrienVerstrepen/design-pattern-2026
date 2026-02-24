@@ -46,9 +46,13 @@ public class ChampionshipFormat implements TournamentFormat{
 
 	@Override
 	public List<Player> playTournament() {
+		int idmatch = 1;
+		int nbmatchs = ((players.size()-1)*players.size())/2;
 		for (int i = 0; i < players.size()-1 ; i++){
 			for (int j = i+1; j < players.size(); j++){
+				UI.displayMessage("=== Match " + idmatch + "/" + nbmatchs+ " ===");
 				playMatch(players.get(i), players.get(j));
+				idmatch++;
 			}
 		}
 		return players;
