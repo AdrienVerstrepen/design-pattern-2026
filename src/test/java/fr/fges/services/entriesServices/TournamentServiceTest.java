@@ -1,10 +1,13 @@
 package fr.fges.services.entriesServices;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.Player;
+import fr.fges.data.repositories.games.GameCollectionDao;
+import fr.fges.data.repositories.history.HistoryDao;
 import fr.fges.services.factories.TournamentFormatFactory;
 import fr.fges.services.results.Result;
 import fr.fges.services.results.Success;
 import fr.fges.services.tournament.TournamentFormat;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import java.util.ArrayList;
@@ -13,9 +16,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class TournamentServiceTest {
+    private GameCollectionDao dao;
+
+    @BeforeEach
+    void setUp() {
+        dao = mock(GameCollectionDao.class);
+    }
     @Test
     void shouldExecuteTournamentAndReturnSortedResults() {
-        TournamentService service = new TournamentService();
+        TournamentService service = new TournamentService(dao);
         MenuInterface ui = mock(MenuInterface.class);
         TournamentFormat format = mock(TournamentFormat.class);
         when(ui.getNumberFromUser("Number of participants (3-8): ")).thenReturn(3);
