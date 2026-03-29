@@ -4,6 +4,8 @@ import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.entriesServices.RecommendOneGameService;
+import fr.fges.services.exceptions.InvalidPlayerCountException;
+import fr.fges.services.exceptions.NoMatchingGamesException;
 import fr.fges.services.results.Failure;
 import fr.fges.services.results.Success;
 import org.junit.jupiter.api.Test;
@@ -32,7 +34,7 @@ public class RecommendOneGameTest {
         MenuInterface formatter = mock(MenuInterface.class);
         RecommendOneGameService service = mock(RecommendOneGameService.class);
         GameCollectionDao gamesDao = mock(GameCollectionDao.class);
-        when(service.recommendOneGame(anyInt(), any(GameCollectionDao.class))).thenReturn(new Failure<>("Number of players must be greater than zero."));
+        when(service.recommendOneGame(anyInt(), any(GameCollectionDao.class))).thenReturn(new Failure<>(new InvalidPlayerCountException()));
 
         RecommendOneGameEntry entry = new RecommendOneGameEntry("J1", gamesDao, service);
         entry.handle(formatter);
@@ -45,7 +47,7 @@ public class RecommendOneGameTest {
         MenuInterface formatter = mock(MenuInterface.class);
         RecommendOneGameService service = mock(RecommendOneGameService.class);
         GameCollectionDao gamesDao = mock(GameCollectionDao.class);
-        when(service.recommendOneGame(anyInt(), any(GameCollectionDao.class))).thenReturn(new Failure<>("No games available for this number of players."));
+        when(service.recommendOneGame(anyInt(), any(GameCollectionDao.class))).thenReturn(new Failure<>(new NoMatchingGamesException()));
 
         RecommendOneGameEntry entry = new RecommendOneGameEntry("J1", gamesDao, service);
         entry.handle(formatter);

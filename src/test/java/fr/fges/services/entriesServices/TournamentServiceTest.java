@@ -42,7 +42,7 @@ class TournamentServiceTest {
                 return null;
             }).when(format).setPlayers(anyList());
             when(format.playTournament()).thenAnswer(invocation -> new ArrayList<>(capturedPlayersHolder[0]));
-            Result<List<Player>, String> result = service.execute(ui);
+            Result<List<Player>, Exception> result = service.execute(ui);
             assertInstanceOf(Success.class, result);
             List<Player> sorted = result.value();
             assertEquals("Alice", sorted.get(0).getName());

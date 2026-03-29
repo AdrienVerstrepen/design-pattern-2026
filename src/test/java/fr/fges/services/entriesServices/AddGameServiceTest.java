@@ -30,9 +30,9 @@ class AddGameServiceTest {
         BoardGame game = new BoardGame("Catan", 3, 4, "Strategy");
         try (MockedStatic<BoardGameVerificator> mockedStatic = mockStatic(BoardGameVerificator.class)) {
             mockedStatic.when(() -> BoardGameVerificator.isADuplicate("Catan", dao)).thenReturn(true);
-            Result<Void, String> result = service.addGame(game);
+            Result<Void, Exception> result = service.addGame(game);
             assertInstanceOf(Failure.class, result);
-            assertEquals("A game with the same title already exists !", result.error());
+            assertEquals("A game with the same title already exists !", result.error().getMessage());
             verify(dao, never()).save(any());
             verify(history, never()).saveModification(any());
         }
@@ -44,7 +44,7 @@ class AddGameServiceTest {
         try (MockedStatic<BoardGameVerificator> mockedStatic = mockStatic(BoardGameVerificator.class)) {
             mockedStatic.when(() -> BoardGameVerificator.isADuplicate("Catan", dao)).thenReturn(false);
             when(dao.save(game)).thenReturn(true);
-            Result<Void, String> result = service.addGame(game);
+            Result<Void, Exception> result = service.addGame(game);
             assertInstanceOf(Success.class, result);
             verify(dao).save(game);
             verify(history).saveModification(any(AddGameCommand.class));
@@ -57,9 +57,9 @@ class AddGameServiceTest {
         try (MockedStatic<BoardGameVerificator> mockedStatic = mockStatic(BoardGameVerificator.class)) {
             mockedStatic.when(() -> BoardGameVerificator.isADuplicate("Catan", dao)).thenReturn(false);
             when(dao.save(game)).thenReturn(false);
-            Result<Void, String> result = service.addGame(game);
+            Result<Void, Exception> result = service.addGame(game);
             assertInstanceOf(Failure.class, result);
-            assertEquals("An error occurred, please try again.", result.error());
+            assertEquals("An error occurred while saving game collection state, please try again.", result.error().getMessage());
             verify(history, never()).saveModification(any());
         }
     }

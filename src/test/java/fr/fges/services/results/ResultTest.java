@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ResultTest {
     @Test
     void successShouldReturnValueAndBeSuccess() {
-        Success<String, String> success = new Success<>("Hello");
+        Success<String, Exception> success = new Success<>("Hello");
         assertTrue(success.isSuccess());
         assertEquals("Hello", success.value());
         assertDoesNotThrow(success::value);
@@ -14,9 +14,9 @@ class ResultTest {
 
     @Test
     void failureShouldReturnErrorAndNotBeSuccess() {
-        Failure<String, String> failure = new Failure<>("Something went wrong");
+        Failure<String, Exception> failure = new Failure<>(new Exception("Something went wrong"));
         assertFalse(failure.isSuccess());
-        assertEquals("Something went wrong", failure.error());
+        assertEquals("Something went wrong", failure.error().getMessage());
         assertDoesNotThrow(failure::error);
         assertThrows(UnsupportedOperationException.class, failure::value);
     }

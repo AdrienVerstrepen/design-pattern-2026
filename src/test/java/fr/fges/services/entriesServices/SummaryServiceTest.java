@@ -23,9 +23,9 @@ class SummaryServiceTest {
     @Test
     void shouldReturnFailureWhenNoGamesExist() {
         when(dao.findAll()).thenReturn(List.of());
-        Result<List<BoardGame>, String> result = service.findAllGames();
+        Result<List<BoardGame>, Exception> result = service.findAllGames();
         assertInstanceOf(Failure.class, result);
-        assertEquals("No games found in the collection.", result.error());
+        assertEquals("No games found in the collection.", result.error().getMessage());
         verify(dao).findAll();
     }
 
@@ -35,7 +35,7 @@ class SummaryServiceTest {
                 new BoardGame("Catan", 3, 4, "Strategy")
         );
         when(dao.findAll()).thenReturn(games);
-        Result<List<BoardGame>, String> result = service.findAllGames();
+        Result<List<BoardGame>, Exception> result = service.findAllGames();
         assertInstanceOf(Success.class, result);
         assertEquals(games, result.value());
     }
@@ -43,9 +43,9 @@ class SummaryServiceTest {
     @Test
     void shouldReturnFailureWhenNoGamesForSummary() {
         when(dao.findAll()).thenReturn(List.of());
-        Result<List<BoardGame>, String> result = service.makeSummary();
+        Result<List<BoardGame>, Exception> result = service.makeSummary();
         assertInstanceOf(Failure.class, result);
-        assertEquals("No games found in the collection.", result.error());
+        assertEquals("No games found in the collection.", result.error().getMessage());
     }
 
     @Test
@@ -57,7 +57,7 @@ class SummaryServiceTest {
                 new BoardGame("Azul", 2, 4, "Family")
         );
         when(dao.findAll()).thenReturn(games);
-        Result<List<BoardGame>, String> result = service.makeSummary();
+        Result<List<BoardGame>, Exception> result = service.makeSummary();
         assertInstanceOf(Success.class, result);
         List<BoardGame> summary = result.value();
         assertTrue(summary.size() <= 3);
@@ -71,7 +71,7 @@ class SummaryServiceTest {
                 new BoardGame("7 Wonders", 3, 7, "Strategy")
         );
         when(dao.findAll()).thenReturn(games);
-        Result<List<BoardGame>, String> result = service.makeSummary();
+        Result<List<BoardGame>, Exception> result = service.makeSummary();
         assertInstanceOf(Success.class, result);
         List<BoardGame> summary = result.value();
         assertEquals(2, summary.size());

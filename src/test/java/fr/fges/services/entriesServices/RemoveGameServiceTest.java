@@ -27,9 +27,9 @@ class RemoveGameServiceTest {
     @Test
     void shouldReturnFailureWhenGameDoesNotExist() {
         when(dao.findByTitle("Catan")).thenReturn(Optional.empty());
-        Result<Void, String> result = service.removeGame("Catan");
+        Result<Void, Exception> result = service.removeGame("Catan");
         assertInstanceOf(Failure.class, result);
-        assertEquals("No board game found with that title.", result.error());
+        assertEquals("No board game found with that title.", result.error().getMessage());
         verify(dao).findByTitle("Catan");
         verify(dao, never()).delete(anyString());
         verify(history, never()).saveModification(any());
@@ -40,9 +40,9 @@ class RemoveGameServiceTest {
         BoardGame game = new BoardGame("Catan", 3, 4, "Strategy");
         when(dao.findByTitle("Catan")).thenReturn(Optional.of(game));
         when(dao.delete("Catan")).thenReturn(false);
-        Result<Void, String> result = service.removeGame("Catan");
+        Result<Void, Exception> result = service.removeGame("Catan");
         assertInstanceOf(Failure.class, result);
-        assertEquals("An error occurred while trying to remove the game.", result.error());
+        assertEquals("An error occurred while saving game collection state, please try again.", result.error().getMessage());
         verify(dao).findByTitle("Catan");
         verify(dao).delete("Catan");
         verify(history, never()).saveModification(any());
@@ -53,7 +53,7 @@ class RemoveGameServiceTest {
         BoardGame game = new BoardGame("Catan", 3, 4, "Strategy");
         when(dao.findByTitle("Catan")).thenReturn(Optional.of(game));
         when(dao.delete("Catan")).thenReturn(true);
-        Result<Void, String> result = service.removeGame("Catan");
+        Result<Void, Exception> result = service.removeGame("Catan");
         assertInstanceOf(Success.class, result);
         verify(dao).findByTitle("Catan");
         verify(dao).delete("Catan");

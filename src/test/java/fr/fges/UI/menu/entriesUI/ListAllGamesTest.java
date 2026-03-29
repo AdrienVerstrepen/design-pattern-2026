@@ -4,6 +4,7 @@ import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.entriesServices.ListAllGamesService;
+import fr.fges.services.exceptions.EmptyCollectionException;
 import fr.fges.services.results.Failure;
 import fr.fges.services.results.Success;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ public class ListAllGamesTest {
         GameCollectionDao dao = mock(GameCollectionDao.class);
         ListAllGamesService service = mock(ListAllGamesService.class);
         when(dao.findAll()).thenReturn(null);
-        when(service.findAllGames()).thenReturn(new Failure<>("No games found in the collection."));
+        when(service.findAllGames()).thenReturn(new Failure<>(new EmptyCollectionException()));
         ListAllGamesEntry entry = new ListAllGamesEntry("List All Board Games", service);
 
         entry.handle(formatter);

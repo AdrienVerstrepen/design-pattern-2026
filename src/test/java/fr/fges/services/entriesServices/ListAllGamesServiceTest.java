@@ -23,18 +23,18 @@ class ListAllGamesServiceTest {
     @Test
     void shouldReturnFailureWhenDaoReturnsNull() {
         when(dao.findAll()).thenReturn(null);
-        Result<List<BoardGame>, String> result = service.findAllGames();
+        Result<List<BoardGame>, Exception> result = service.findAllGames();
         assertInstanceOf(Failure.class, result);
-        assertEquals("No games found in the collection.", result.error());
+        assertEquals("No games found in the collection.", result.error().getMessage());
         verify(dao).findAll();
     }
 
     @Test
     void shouldReturnFailureWhenListIsEmpty() {
         when(dao.findAll()).thenReturn(List.of());
-        Result<List<BoardGame>, String> result = service.findAllGames();
+        Result<List<BoardGame>, Exception> result = service.findAllGames();
         assertInstanceOf(Failure.class, result);
-        assertEquals("No games found in the collection.", result.error());
+        assertEquals("No games found in the collection.", result.error().getMessage());
         verify(dao).findAll();
     }
 
@@ -45,7 +45,7 @@ class ListAllGamesServiceTest {
                 new BoardGame("Uno", 2, 10, "Card Game")
         );
         when(dao.findAll()).thenReturn(games);
-        Result<List<BoardGame>, String> result = service.findAllGames();
+        Result<List<BoardGame>, Exception> result = service.findAllGames();
         assertInstanceOf(Success.class, result);
         assertEquals(games, result.value());
         verify(dao).findAll();

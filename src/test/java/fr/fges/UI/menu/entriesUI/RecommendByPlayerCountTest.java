@@ -3,6 +3,8 @@ import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.services.entriesServices.RecommendByPlayerCountService;
+import fr.fges.services.exceptions.InvalidPlayerCountException;
+import fr.fges.services.exceptions.NoMatchingGamesException;
 import fr.fges.services.results.Failure;
 import fr.fges.services.results.Success;
 import org.junit.jupiter.api.Test;
@@ -35,24 +37,24 @@ class RecommendByPlayerCountTest {
     void shouldDisplayNoGamesAvailable() {
         MenuInterface formatter = mock(MenuInterface.class);
         RecommendByPlayerCountService service =  mock(RecommendByPlayerCountService.class);
-        when(service.recommendByPlayerCount(anyInt())).thenReturn(new Failure<>("The number of players must be bigger than zero."));
+        when(service.recommendByPlayerCount(anyInt())).thenReturn(new Failure<>(new InvalidPlayerCountException()));
         RecommendByPlayerCountEntry entry = new RecommendByPlayerCountEntry("Recommend games for a number of players", service);
 
         entry.handle(formatter);
 
-        verify(formatter).displayMessage("The number of players must be bigger than zero.");
+        verify(formatter).displayMessage("Number of players must be greater than zero.");
     }
 
     @Test
     void shouldDisplayInvalidNumberChosen() {
         MenuInterface formatter = mock(MenuInterface.class);
         RecommendByPlayerCountService service =  mock(RecommendByPlayerCountService.class);
-        when(service.recommendByPlayerCount(anyInt())).thenReturn(new Failure<>("There is no game for this number of players."));
+        when(service.recommendByPlayerCount(anyInt())).thenReturn(new Failure<>(new NoMatchingGamesException()));
         RecommendByPlayerCountEntry entry = new RecommendByPlayerCountEntry("Recommend games for a number of players", service);
 
         entry.handle(formatter);
 
-        verify(formatter).displayMessage("There is no game for this number of players.");
+        verify(formatter).displayMessage("No games available for this number of players.");
     }
 
 }
