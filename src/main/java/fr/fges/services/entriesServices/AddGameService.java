@@ -3,6 +3,8 @@ import fr.fges.data.commands.AddGameCommand;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.data.repositories.history.HistoryDao;
+import fr.fges.services.exceptions.DuplicateGameException;
+import fr.fges.services.exceptions.GameStorageException;
 import fr.fges.services.results.Failure;
 import fr.fges.services.results.Result;
 import fr.fges.services.results.Success;
@@ -17,15 +19,15 @@ public class AddGameService {
         this.historyDao = historyDao;
     }
 
-    public Result<Void, String> addGame(BoardGame game) {
+    public Result<Void, Exception> addGame(BoardGame game) {
         if (BoardGameVerificator.isADuplicate(game.title(), gamesDao)) {
-            return new Failure<>("A game with the same title already exists !");
+            return new Failure<>(new DuplicateGameException());
         }
         if (gamesDao.save(game)) {
             historyDao.saveModification(new AddGameCommand(game));
             return new Success<>(null);
         } else {
-            return new Failure<>("An error occurred, please try again.");
+            return new Failure<>(new GameStorageException());
         }
     }
 }

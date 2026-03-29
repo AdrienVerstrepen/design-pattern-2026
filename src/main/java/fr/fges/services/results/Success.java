@@ -1,6 +1,6 @@
 package fr.fges.services.results;
 
-public record Success<T, E>(T value) implements Result<T, E> {
+public record Success<T, E extends Exception>(T value) implements Result<T, E> {
     @Override
     public boolean isSuccess() {
         return true;

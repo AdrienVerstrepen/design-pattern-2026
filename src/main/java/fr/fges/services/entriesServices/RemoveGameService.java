@@ -3,6 +3,7 @@ import fr.fges.data.commands.RemoveGameCommand;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.data.repositories.history.HistoryDao;
+import fr.fges.services.exceptions.GameNotFoundException;
 import fr.fges.services.results.Result;
 import fr.fges.services.results.Success;
 import fr.fges.services.results.Failure;
@@ -17,15 +18,15 @@ public class RemoveGameService {
         this.history = history;
     }
 
-    public Result<Void, String> removeGame(String title) {
+    public Result<Void, Exception> removeGame(String title) {
         Optional<BoardGame> game = dao.findByTitle(title);
         if (game.isEmpty()) {
-            return new Failure<>("No board game found with that title.");
+            return new Failure<>(new GameNotFoundException());
         }
         if (dao.delete(title)) {
             history.saveModification(new RemoveGameCommand(game.get()));
             return new Success<>(null);
         }
-        return new Failure<>("An error occurred while trying to remove the game.");
+        return new Failure<>(new GameNotFoundException());
     }
 }

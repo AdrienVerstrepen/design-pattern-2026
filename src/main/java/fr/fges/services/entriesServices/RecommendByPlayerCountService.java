@@ -13,14 +13,14 @@ public class RecommendByPlayerCountService {
         this.gamesDao = gamesDao;
     }
 
-    public Result<List<BoardGame>, String> recommendByPlayerCount(int playerCount) {
+    public Result<List<BoardGame>, Exception> recommendByPlayerCount(int playerCount) {
         if (playerCount <= 0) {
-            return new Failure<>("The number of players must be bigger than zero.");
+            return new Failure<>(new Exception("The number of players must be bigger than zero."));
         }
         List<BoardGame> games = gamesDao.findByNumberOfPlayers(playerCount);
         games = gamesDao.findAllInAlphabeticalOrder(games);
         if (games.isEmpty()) {
-            return new Failure<>("There is no game for this number of players.");
+            return new Failure<>(new Exception("There is no game for this number of players."));
         }
         return new Success<>(games);
     }

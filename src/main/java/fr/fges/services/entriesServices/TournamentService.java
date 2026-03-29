@@ -18,7 +18,7 @@ public class TournamentService {
         this.gamesDao = gamesDao;
     }
 
-    public Result<List<Player>, String> execute(MenuInterface UI) {
+    public Result<List<Player>, Exception> execute(MenuInterface UI) {
         List<BoardGame> twoPlayerGames = gamesDao.findByNumberOfPlayers(2);
         UI.displayGames(twoPlayerGames);
         int max = twoPlayerGames.size();

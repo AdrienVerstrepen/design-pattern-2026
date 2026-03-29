@@ -9,12 +9,12 @@ public record TournamentEntry (String label, TournamentService service) implemen
     @Override
     public void handle(MenuInterface UI) {
         UI.displayMessage("=== Tournament Mode ===");
-        Result<List<Player>, String> result = service.execute(UI);
+        Result<List<Player>, Exception> result = service.execute(UI);
         if (result.isSuccess()) {
             UI.displayMessage("=== Tournament Results ===");
             UI.displayPlayers(result.value());
         } else {
-            UI.displayMessage("Error: " + result.error());
+            UI.displayMessage("Error: " + result.error().getMessage());
         }
     }
 }

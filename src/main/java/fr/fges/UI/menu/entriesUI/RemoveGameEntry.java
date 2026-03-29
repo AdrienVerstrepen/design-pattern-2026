@@ -7,12 +7,12 @@ public record RemoveGameEntry(String label, RemoveGameService service) implement
     @Override
     public void handle(MenuInterface UI) {
         String title = UI.getGameTitle();
-        Result<Void, String> result = service.removeGame(title);
+        Result<Void, Exception> result = service.removeGame(title);
 
         if (result.isSuccess()) {
             UI.displayMessage("Board game removed successfully.");
         } else {
-            UI.displayMessage(result.error());
+            UI.displayMessage(result.error().getMessage());
         }
     }
 

@@ -9,12 +9,12 @@ public record RecommendOneGameEntry(String label, GameCollectionDao gamesDao, Re
     @Override
     public void handle(MenuInterface UI) {
         int numberOfPlayers = UI.getNumberFromUser("How many players?: ");
-        Result<BoardGame, String> result = service.recommendOneGame(numberOfPlayers, gamesDao);
+        Result<BoardGame, Exception> result = service.recommendOneGame(numberOfPlayers, gamesDao);
         if (result.isSuccess()) {
             UI.displayMessage("Recommended game: ");
             UI.displayGame(result.value());
         } else {
-            UI.displayMessage(result.error());
+            UI.displayMessage(result.error().getMessage());
         }
     }
 

@@ -9,11 +9,11 @@ public record RecommendByPlayerCountEntry(String label, RecommendByPlayerCountSe
     @Override
     public void handle(MenuInterface UI) {
         int playerCount = UI.getNumberFromUser("Number of players: ");
-        Result<List<BoardGame>, String> result = service.recommendByPlayerCount(playerCount);
+        Result<List<BoardGame>, Exception> result = service.recommendByPlayerCount(playerCount);
         if (result.isSuccess()) {
             UI.displayGames(result.value());
         } else {
-            UI.displayMessage(result.error());
+            UI.displayMessage(result.error().getMessage());
         }
     }
 }

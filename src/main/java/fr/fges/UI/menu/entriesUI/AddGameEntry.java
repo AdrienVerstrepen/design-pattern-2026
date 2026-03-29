@@ -13,11 +13,11 @@ public record AddGameEntry(String label, AddGameService service) implements Menu
         int maxPlayers = UI.getNumberFromUser("Maximum Players: ");
         String category = UI.getGameCategory();
         BoardGame game = new BoardGame(title, minPlayers, maxPlayers, category);
-        Result<Void, String> result = service.addGame(game);
+        Result<Void, Exception> result = service.addGame(game);
         if (result.isSuccess()) {
             UI.displayMessage("Board game added successfully.");
         } else {
-            UI.displayMessage(result.error());
+            UI.displayMessage(result.error().getMessage());
         }
     }
 }

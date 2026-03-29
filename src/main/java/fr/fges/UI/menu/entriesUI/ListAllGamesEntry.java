@@ -8,11 +8,11 @@ import java.util.List;
 public record ListAllGamesEntry(String label, ListAllGamesService service) implements MenuEntry {
     @Override
     public void handle(MenuInterface UI) {
-        Result<List<BoardGame>, String> result = service.findAllGames();
+        Result<List<BoardGame>, Exception> result = service.findAllGames();
         if (result.isSuccess()) {
             UI.displayGames(result.value());
         } else {
-            UI.displayMessage(result.error());
+            UI.displayMessage(result.error().getMessage());
         }
     }
 

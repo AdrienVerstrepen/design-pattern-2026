@@ -8,7 +8,7 @@ import java.util.List;
 public record SummaryEntry(String label, SummaryService service) implements MenuEntry {
     @Override
     public void handle(MenuInterface UI) {
-        Result<List<BoardGame>, String> result;
+        Result<List<BoardGame>, Exception> result;
         if (service.findAllGames().isSuccess() && service.findAllGames().value().size() <= 3) {
             result = service.findAllGames();
         } else {
@@ -17,7 +17,7 @@ public record SummaryEntry(String label, SummaryService service) implements Menu
         if (result.isSuccess()) {
             UI.displayGames(result.value());
         } else {
-            UI.displayMessage(result.error());
+            UI.displayMessage(result.error().getMessage());
         }
     }
 
