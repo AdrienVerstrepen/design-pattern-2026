@@ -3,6 +3,10 @@ import fr.fges.data.commands.AddGameCommand;
 import fr.fges.data.commands.Command;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.data.repositories.history.HistoryDao;
+import fr.fges.services.exceptions.CancelActionException;
+import fr.fges.services.results.Failure;
+import fr.fges.services.results.Result;
+
 import static fr.fges.services.verifications.BoardGameVerificator.isEmptyList;
 
 public class UndoLastActionService{
@@ -14,16 +18,12 @@ public class UndoLastActionService{
 		this.historyDao = history;
 	}
 
-	public String undo() {
+	public Result<Command, Exception> undo() {
 		if (isEmptyList(historyDao.findAll())) {
-			return "nothing to cancel";
+			return new Failure<>(new CancelActionException());
 		}
 		Command lastCommand = historyDao.removeLast();
 		lastCommand.restore(gamesDao);
-		if (lastCommand instanceof AddGameCommand) {
-			return "Undone : Removed " + lastCommand.getModifiedGame().title() + " from collection";
-		} else {
-			return "Undone : Added " + lastCommand.getModifiedGame().title() + " to collection";
-		}
+		return lastCommand;
 	}
 }
