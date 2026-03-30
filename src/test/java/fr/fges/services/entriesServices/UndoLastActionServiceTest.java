@@ -4,6 +4,7 @@ import fr.fges.data.commands.Command;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.repositories.games.GameCollectionDao;
 import fr.fges.data.repositories.history.HistoryDao;
+import fr.fges.services.results.Result;
 import fr.fges.services.verifications.BoardGameVerificator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,25 +26,23 @@ class UndoLastActionServiceTest {
     }
 
     @Test
-    void shouldUndoAddGameCommandWithoutMockingFinalClass() {
+    void shouldUndoLastAction() {
         BoardGame game = new BoardGame("Catan", 3, 4, "Strategy");
         AddGameCommand command = new AddGameCommand(game);
         when(history.findAll()).thenReturn(List.of(command));
         when(history.removeLast()).thenReturn(command);
-        String result = service.undo();
-        assertEquals("Undone : Removed Catan from collection", result);
+
+        Result<Command, Exception> result = service.undo();
+
+        assertTrue(result.isSuccess());
     }
 
     @Test
-    void shouldReturnNothingToCancelWhenHistoryIsEmpty() {
-        List<Command> emptyList = List.of();
-        when(history.findAll()).thenReturn(emptyList);
-        try (MockedStatic<BoardGameVerificator> mockedStatic = mockStatic(BoardGameVerificator.class)) {
-            mockedStatic.when(() -> isEmptyList(emptyList)).thenReturn(true);
-            String result = service.undo();
-            assertEquals("nothing to cancel", result);
-            verify(history).findAll();
-            verify(history, never()).removeLast();
-        }
+    void shouldNotUndoLastAction() {
+        when(history.findAll()).thenReturn(List.of());
+
+        Result<Command, Exception> result = service.undo();
+
+        assertFalse(result.isSuccess());
     }
 }

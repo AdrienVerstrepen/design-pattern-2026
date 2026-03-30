@@ -6,6 +6,7 @@ import fr.fges.data.repositories.history.HistoryDao;
 import fr.fges.services.exceptions.CancelActionException;
 import fr.fges.services.results.Failure;
 import fr.fges.services.results.Result;
+import fr.fges.services.results.Success;
 
 import static fr.fges.services.verifications.BoardGameVerificator.isEmptyList;
 
@@ -24,6 +25,6 @@ public class UndoLastActionService{
 		}
 		Command lastCommand = historyDao.removeLast();
 		lastCommand.restore(gamesDao);
-		return lastCommand;
+		return new Success<>(lastCommand);
 	}
 }
