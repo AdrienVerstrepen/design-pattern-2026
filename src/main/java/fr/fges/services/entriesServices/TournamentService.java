@@ -18,6 +18,11 @@ public class TournamentService {
         this.gamesDao = gamesDao;
     }
 
+    // findGames
+    // instantiantePlayers
+    // instantiateFormat
+    // 
+
     public Result<List<Player>, Exception> execute(MenuInterface UI) {
         List<BoardGame> twoPlayerGames = gamesDao.findByNumberOfPlayers(2);
         UI.displayGames(twoPlayerGames);
