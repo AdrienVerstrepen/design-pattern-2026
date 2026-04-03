@@ -12,4 +12,6 @@ public interface TournamentFormat {
 	List<Player> playTournament();
 
 	void setPlayers(List<Player> players);
+
+	int getNumberOfMatches();
 }

@@ -3,7 +3,9 @@ import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.models.Player;
 import fr.fges.data.repositories.games.GameCollectionDao;
+import fr.fges.services.exceptions.NoMatchingGamesException;
 import fr.fges.services.factories.TournamentFormatFactory;
+import fr.fges.services.results.Failure;
 import fr.fges.services.results.Result;
 import fr.fges.services.results.Success;
 import fr.fges.services.tournament.TournamentFormat;
@@ -21,7 +23,46 @@ public class TournamentService {
     // findGames
     // instantiantePlayers
     // instantiateFormat
-    // 
+
+//    Refacto
+
+    public Result<List<BoardGame>, Exception> findGames() {
+        List<BoardGame> twoPlayerGames = gamesDao.findByNumberOfPlayers(2);
+        if (!twoPlayerGames.isEmpty()) {
+            return new Success<>(twoPlayerGames);
+        }
+        return new Failure<>(new NoMatchingGamesException());
+    }
+
+    public List<Player> instantiatePlayers(List<String> playerNames) {
+        List<Player> players = new ArrayList<>();
+        for (String playerName : playerNames) {
+            players.add(new Player(playerName, 0, 0));
+        }
+        return players;
+    }
+
+    public List<TournamentFormat> obtainFormats(MenuInterface UI) {
+        return TournamentFormatFactory.create(UI);
+    }
+
+    public int obtainNumberOfMatches(TournamentFormat format) {
+        return format.getNumberOfMatches();
+    }
+
+    public List<Player> getMatchParticipants(int position) {
+        List<Player> duo = new ArrayList<>();
+    }
+
+    public Result<List<Player>, Exception> playTournament(BoardGame game, TournamentFormat format, List<Player> players) {
+        format.setPlayers(players);
+        List<Player> endResults = format.playTournament();
+        if (endResults.isEmpty()) {
+            return new Failure<>(new )
+        }
+    }
+
+    //    Refacto
 
     public Result<List<Player>, Exception> execute(MenuInterface UI) {
         List<BoardGame> twoPlayerGames = gamesDao.findByNumberOfPlayers(2);
@@ -30,6 +71,7 @@ public class TournamentService {
         UI.getNumberFromUser("Select game (1-" + max + "): ");
         List<Player> players = getPlayers(UI);
         TournamentFormat format = selectFormat(UI);
+        //
         List<Player> endResults = playTournament(format, players);
         List<Player> sortedResults = sortResults(endResults);
         return new Success<>(sortedResults);
@@ -72,7 +114,7 @@ public class TournamentService {
         return formats.get(chosenFormat - 1);
     }
 
-    private List<Player> playTournament(TournamentFormat format, List<Player> players) {
+    public List<Player> playTournament(TournamentFormat format, List<Player> players) {
         format.setPlayers(players);
         return format.playTournament();
     }

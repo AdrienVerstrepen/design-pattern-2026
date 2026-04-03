@@ -1,0 +1,47 @@
+---
+Title : match
+---
+%% flowchart TD
+%% 	UI(MenuInterface UI)
+%% 	TE(TournamentEntry entry)
+%% 	TS(TournamentService service)
+%% 	TF(TournamentFormat format)
+
+%% 	UI --"envoi les choix utilisateurs"--> TE
+%% 	TE --"relaye les choix utilisateurs"--> TS
+%% 	TS --"suit les règles définies par le format pour jouer un tournoi"--> TF
+	
+%% 	TS --"renvoie les prises de décision faites sur les choix utilisateur"--> TE
+%% 	TE --"renvoi les données à afficher"-->UI
+%% 	TF --"renvoi les résultats du tournoi"--> TS
+
+sequenceDiagram
+	Entry->>Service: combien de matchs ? 
+	activate Service
+	Service->>Format: getNumberOfMatches()
+	activate Format
+	Format-->>Service: nombre de matchs
+	deactivate Format
+	Service-->>Entry: nombre de matchs
+	deactivate Service
+
+	%% Entry boucle pour nombre de matchs fois
+	Entry->>Service: qui est dans le match ?
+	activate Service
+	Service-->>Entry : Match(Player player1, Player player2)
+	deactivate Service
+	Entry->>UI : Quel gagnant ? 
+	activate UI
+	UI-->>Entry : 1 (ou 2)
+	deactivate UI
+	Entry-)Service : 1 (ou 2)
+	activate Service
+	Service-)Format: attributePoints(player1, 3)
+	Service-)Format: attributePoints(player2, 1)
+	deactivate Service
+	%% Fin de la boucle
+	Entry->>Service: Etat final des joueurs
+	activate Service
+	Service-->>Entry: ArrayList<Player>
+	deactivate Service
+	Entry-)UI: affiche ArrayList<Player>

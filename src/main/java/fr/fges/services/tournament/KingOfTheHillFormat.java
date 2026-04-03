@@ -8,10 +8,12 @@ public class KingOfTheHillFormat implements TournamentFormat{
 	private final String label;
 	private List<Player> players;
 	private final MenuInterface UI;
+	private int numberOfMatches;
 
 	public KingOfTheHillFormat(String label, MenuInterface UI) {
 		this.label = label;
 		this.UI = UI;
+		this.numberOfMatches = 0;
 	}
 
 	@Override
@@ -69,5 +71,11 @@ public class KingOfTheHillFormat implements TournamentFormat{
 	@Override
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+		this.numberOfMatches = players.size() - 1;
+	}
+
+	@Override
+	public int getNumberOfMatches() {
+		return this.numberOfMatches;
 	}
 }

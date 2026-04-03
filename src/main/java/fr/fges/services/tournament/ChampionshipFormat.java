@@ -5,12 +5,14 @@ import java.util.List;
 
 public class ChampionshipFormat implements TournamentFormat{
 	private final String label;
-	private List<Player> players;
 	private final MenuInterface UI;
+	private List<Player> players;
+	private int numberOfMatches;
 
 	public ChampionshipFormat(String label, MenuInterface UI) {
 		this.label = label;
 		this.UI = UI;
+		this.numberOfMatches = 0;
 	}
 
 	@Override
@@ -61,5 +63,11 @@ public class ChampionshipFormat implements TournamentFormat{
 	@Override
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+		this.numberOfMatches = ((players.size()-1)*players.size())/2;
+	}
+
+	@Override
+	public int getNumberOfMatches() {
+		return this.numberOfMatches;
 	}
 }
