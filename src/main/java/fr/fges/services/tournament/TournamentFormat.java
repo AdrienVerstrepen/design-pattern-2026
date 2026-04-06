@@ -4,14 +4,10 @@ import java.util.List;
 
 public interface TournamentFormat {
 	String label();
-
-	void playMatch(Player player1, Player player2);
-
 	void attributePoints(Player player, Integer gain);
-
-	List<Player> playTournament();
-
 	void setPlayers(List<Player> players);
-
 	int getNumberOfMatches();
+	List<Player> getCurrentMatch();
+	void registerMatch(Player winner, Player loser);
+	List<Player> getPlayers();
 }

@@ -2,6 +2,7 @@ package fr.fges.UI.menu.entriesUI;
 import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.services.entriesServices.AddGameService;
+import fr.fges.services.entriesServices.UndoLastActionService;
 import fr.fges.services.exceptions.DuplicateGameException;
 import fr.fges.services.exceptions.GameStorageException;
 import fr.fges.services.results.Failure;

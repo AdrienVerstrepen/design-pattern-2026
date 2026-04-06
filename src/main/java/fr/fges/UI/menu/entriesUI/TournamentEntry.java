@@ -25,18 +25,19 @@ public record TournamentEntry (String label, TournamentService service) implemen
 
         // Gestion des matchs
         int N = service.obtainNumberOfMatches(chosenFormat);
-        // N sera le nombre de matchs à réalisé, donné par le service
+        // N sera le nombre de matchs à réaliser, donné par le service
         List<Player> winners = new ArrayList<>();
         for (int i = 0; i < N; i++ ) {
             // récupérer les 2 joueurs qui doivent s'affronter depuis le service
             // récupérer le choix du gagnant
             // passer l'information au service
-            List<Player> duo = service.getMatchParticipants(i);
+            List<Player> duo = service.getMatchParticipants(chosenFormat);
             Player winner = getWinner(duo.get(0), duo.get(1), UI);
-            service.registerWinner(winner);
+            Player loser = (winner.equals(duo.get(0))) ? duo.get(1) : duo.get(0);
+            service.registerWinner(winner, loser, chosenFormat);
         }
 
-        Result<List<Player>, Exception> endResults = service.obtainResults();
+        Result<List<Player>, Exception> endResults = service.obtainResults(chosenFormat);
 
 //        Result<List<Player>, Exception> result = service.playTournament(chosenFormat, players);
 
@@ -78,7 +79,7 @@ public record TournamentEntry (String label, TournamentService service) implemen
 
     private TournamentFormat handleFormats(MenuInterface UI, List<Player> players) {
         UI.displayMessage("Choose format:");
-        List<TournamentFormat> formats = service.obtainFormats(UI);
+        List<TournamentFormat> formats = service.obtainFormats();
         for (int i = 0; i < formats.size(); i++) {
             UI.displayMessage((i + 1) + ". " + formats.get(i).label());
         }
@@ -102,6 +103,6 @@ public record TournamentEntry (String label, TournamentService service) implemen
                 UI.displayMessage("Invalid input. Please enter 1 or 2.");
             }
         }
-        return players.get(winner);
+        return players.get(winner - 1);
     }
 }
