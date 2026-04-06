@@ -1,5 +1,4 @@
 package fr.fges.services.tournament;
-import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.Player;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,35 +6,17 @@ import java.util.List;
 public class KingOfTheHillFormat implements TournamentFormat{
 	private final String label;
 	private List<Player> players;
-	private final MenuInterface UI;
+	private int numberOfMatches;
+	private Player currentWinner;
+	private int nextChallengerIndex;
 
-	public KingOfTheHillFormat(String label, MenuInterface UI) {
+	public KingOfTheHillFormat(String label) {
 		this.label = label;
-		this.UI = UI;
 	}
 
 	@Override
 	public String label() {
 		return label;
-	}
-
-	@Override
-	public void playMatch(Player currentWinner, Player newPlayer) {
-		UI.displayMessage(currentWinner.getName() + " VS " + newPlayer.getName());
-		String winner = "";
-		while (!winner.equals("1") && !winner.equals("2")) {
-			winner = UI.getUserInput("Winner (1=" + currentWinner.getName() + ", 2=" + newPlayer.getName() + "): ");
-			if (!winner.equals("1") && !winner.equals("2")) {
-				UI.displayMessage("Invalid input. Please enter 1 or 2.");
-			}
-		}
-		if (winner.equals("1")) {
-			attributePoints(currentWinner, 3);
-			attributePoints(newPlayer, 1);
-		} else {
-			attributePoints(newPlayer, 3);
-			attributePoints(currentWinner, 1);
-		}
 	}
 
 	@Override
@@ -47,27 +28,38 @@ public class KingOfTheHillFormat implements TournamentFormat{
 	}
 
 	@Override
-	public List<Player> playTournament() {
-		if (players == null || players.isEmpty()){
-			return List.of();
-		}
-		List<Player> remainingPlayers = new ArrayList<>(players);
-		Player currentWinner = remainingPlayers.getFirst();
-		int numberMatches = remainingPlayers.size() - 1;
-		for (int i = 1; i < remainingPlayers.size(); i++) {
-			Player newPlayer = remainingPlayers.get(i);
-			int currentWinnerWinsBeforeMatch = currentWinner.getNumberOfWins();
-			UI.displayMessage("=== Match " + i + "/" + numberMatches+ " ===");
-			playMatch(currentWinner, newPlayer);
-			if (currentWinnerWinsBeforeMatch == currentWinner.getNumberOfWins()){
-				currentWinner = newPlayer;
-			}
-		}
-		return players;
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+		this.numberOfMatches = players.size() - 1;
+		this.currentWinner = players.getFirst();
+		this.nextChallengerIndex = 1;
 	}
 
 	@Override
-	public void setPlayers(List<Player> players) {
-		this.players = players;
+	public int getNumberOfMatches() {
+		return this.numberOfMatches;
 	}
+
+    @Override
+    public List<Player> getCurrentMatch() {
+        if (nextChallengerIndex >= players.size()) {
+			return null;
+		}
+		return List.of(currentWinner, players.get(nextChallengerIndex));
+    }
+
+	@Override
+	public void registerMatch(Player winner, Player loser) {
+		attributePoints(winner, 3);
+		attributePoints(loser, 1);
+
+		this.currentWinner = winner;
+		this.nextChallengerIndex++;
+	}
+
+	@Override
+	public List<Player> getPlayers() {
+		return this.players;
+	}
+
 }

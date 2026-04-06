@@ -3,7 +3,9 @@ import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.BoardGame;
 import fr.fges.data.models.Player;
 import fr.fges.data.repositories.games.GameCollectionDao;
+import fr.fges.services.exceptions.NoMatchingGamesException;
 import fr.fges.services.factories.TournamentFormatFactory;
+import fr.fges.services.results.Failure;
 import fr.fges.services.results.Result;
 import fr.fges.services.results.Success;
 import fr.fges.services.tournament.TournamentFormat;
@@ -18,67 +20,41 @@ public class TournamentService {
         this.gamesDao = gamesDao;
     }
 
-    // findGames
-    // instantiantePlayers
-    // instantiateFormat
-    // 
-
-    public Result<List<Player>, Exception> execute(MenuInterface UI) {
+    public Result<List<BoardGame>, Exception> findGames() {
         List<BoardGame> twoPlayerGames = gamesDao.findByNumberOfPlayers(2);
-        UI.displayGames(twoPlayerGames);
-        int max = twoPlayerGames.size();
-        UI.getNumberFromUser("Select game (1-" + max + "): ");
-        List<Player> players = getPlayers(UI);
-        TournamentFormat format = selectFormat(UI);
-        List<Player> endResults = playTournament(format, players);
-        List<Player> sortedResults = sortResults(endResults);
-        return new Success<>(sortedResults);
+        if (!twoPlayerGames.isEmpty()) {
+            return new Success<>(twoPlayerGames);
+        }
+        return new Failure<>(new NoMatchingGamesException());
     }
 
-    private List<Player> getPlayers(MenuInterface UI) {
-        int numberOfPlayers = getNumberOfParticipants(UI);
+    public List<Player> instantiatePlayers(List<String> playerNames) {
         List<Player> players = new ArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            String playerName = getPlayerName(UI, i);
+        for (String playerName : playerNames) {
             players.add(new Player(playerName, 0, 0));
         }
         return players;
     }
 
-    private int getNumberOfParticipants(MenuInterface UI) {
-        int numberOfPlayers = UI.getNumberFromUser("Number of participants (3-8): ");
-        while (numberOfPlayers < 3 || numberOfPlayers > 8) {
-            UI.displayMessage("The number entered is invalid, please write a valid number (3-8).");
-            numberOfPlayers = UI.getNumberFromUser("Number of participants (3-8): ");
-        }
-        return numberOfPlayers;
+    public List<TournamentFormat> obtainFormats() {
+        return TournamentFormatFactory.create();
     }
 
-    private String getPlayerName(MenuInterface UI, int index) {
-        return UI.getUserInput("Enter player " + (index + 1) + " name: ");
+    public int obtainNumberOfMatches(TournamentFormat format) {
+        return format.getNumberOfMatches();
     }
 
-    private TournamentFormat selectFormat(MenuInterface UI) {
-        UI.displayMessage("Choose format:");
-        List<TournamentFormat> formats = TournamentFormatFactory.create(UI);
-        for (int i = 0; i < formats.size(); i++) {
-            UI.displayMessage((i + 1) + ". " + formats.get(i).label());
-        }
-        int chosenFormat = UI.getNumberFromUser("Select format (1-" + formats.size() + "): ");
-        while (chosenFormat < 1 || chosenFormat > formats.size()) {
-            UI.displayMessage("Invalid format selection. Please choose a valid number.");
-            chosenFormat = UI.getNumberFromUser("Select format (1-" + formats.size() + "): ");
-        }
-        return formats.get(chosenFormat - 1);
+    public List<Player> getMatchParticipants(TournamentFormat format) {
+        return format.getCurrentMatch();
     }
 
-    private List<Player> playTournament(TournamentFormat format, List<Player> players) {
-        format.setPlayers(players);
-        return format.playTournament();
+    public void registerWinner(Player winner, Player loser, TournamentFormat format) {
+        format.registerMatch(winner, loser);
     }
 
-    private List<Player> sortResults(List<Player> players) {
+    public Result<List<Player>, Exception> obtainResults(TournamentFormat format) {
+        List<Player> players = new ArrayList<>(format.getPlayers());
         players.sort(Comparator.comparingInt(Player::getPoints).reversed());
-        return players;
+        return new Success<>(players);
     }
 }

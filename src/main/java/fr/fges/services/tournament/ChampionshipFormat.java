@@ -1,39 +1,22 @@
 package fr.fges.services.tournament;
-import fr.fges.UI.formatters.MenuInterface;
 import fr.fges.data.models.Player;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChampionshipFormat implements TournamentFormat{
 	private final String label;
 	private List<Player> players;
-	private final MenuInterface UI;
+	private int numberOfMatches;
+	private List<List<Player>> matchQueue;
 
-	public ChampionshipFormat(String label, MenuInterface UI) {
+	public ChampionshipFormat(String label) {
 		this.label = label;
-		this.UI = UI;
 	}
 
 	@Override
 	public String label() {
 		return this.label;
-	}
-
-	@Override
-	public void playMatch(Player player1, Player player2) {
-		UI.displayMessage("===" + player1.getName() + " VS " + player2.getName() + "===");
-
-		String winner = "";
-		while (!winner.equals("1") && !winner.equals("2")) {
-			winner = UI.getUserInput("Winner (1=" + player1.getName() + ", 2=" + player2.getName() + "): ");
-			if (!winner.equals("1") && !winner.equals("2")) {
-				UI.displayMessage("Invalid input. Please enter 1 or 2.");
-			}
-		}
-
-		int player1Point = winner.equals("1") ? 3 : 1;
-		int player2Point = winner.equals("2") ? 3 : 1;
-		attributePoints(player1, player1Point);
-		attributePoints(player2, player2Point);
 	}
 
 	@Override
@@ -45,21 +28,41 @@ public class ChampionshipFormat implements TournamentFormat{
 	}
 
 	@Override
-	public List<Player> playTournament() {
-		int idmatch = 1;
-		int nbmatchs = ((players.size()-1)*players.size())/2;
-		for (int i = 0; i < players.size()-1 ; i++){
-			for (int j = i+1; j < players.size(); j++){
-				UI.displayMessage("=== Match " + idmatch + "/" + nbmatchs+ " ===");
-				playMatch(players.get(i), players.get(j));
-				idmatch++;
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+		this.matchQueue = new ArrayList<>();
+		for (int i = 0; i < players.size(); i++) {
+			for (int j = i + 1; j < players.size(); j++) {
+				this.matchQueue.add(List.of(players.get(i), players.get(j)));
 			}
 		}
-		return players;
+		this.numberOfMatches = ((players.size()-1)*players.size())/2;
 	}
 
 	@Override
-	public void setPlayers(List<Player> players) {
-		this.players = players;
+	public int getNumberOfMatches() {
+		return this.numberOfMatches;
+	}
+
+	@Override
+	public List<Player> getCurrentMatch() {
+		if (matchQueue.isEmpty()) {
+			return null;
+		}
+		return matchQueue.getFirst();
+	}
+
+	@Override
+	public void registerMatch(Player winner, Player loser) {
+		attributePoints(winner, 3);
+		attributePoints(loser, 1);
+		if(!matchQueue.isEmpty()) {
+			matchQueue.removeFirst();
+		}
+	}
+
+	@Override
+	public List<Player> getPlayers() {
+		return this.players;
 	}
 }
