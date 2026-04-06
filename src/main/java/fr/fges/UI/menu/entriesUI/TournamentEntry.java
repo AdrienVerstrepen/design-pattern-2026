@@ -15,22 +15,15 @@ public record TournamentEntry (String label, TournamentService service) implemen
     @Override
     public void handle(MenuInterface UI) {
         UI.displayMessage("=== Tournament Mode ===");
-//        Refacto
 
         BoardGame chosenGame = handleGameSelection(UI);
         List<Player> players = handlePlayerNaming(UI);
 
-        // Gestion des formats
         TournamentFormat chosenFormat = handleFormats(UI, players);
 
-        // Gestion des matchs
         int N = service.obtainNumberOfMatches(chosenFormat);
-        // N sera le nombre de matchs à réaliser, donné par le service
         List<Player> winners = new ArrayList<>();
         for (int i = 0; i < N; i++ ) {
-            // récupérer les 2 joueurs qui doivent s'affronter depuis le service
-            // récupérer le choix du gagnant
-            // passer l'information au service
             List<Player> duo = service.getMatchParticipants(chosenFormat);
             Player winner = getWinner(duo.get(0), duo.get(1), UI);
             Player loser = (winner.equals(duo.get(0))) ? duo.get(1) : duo.get(0);
@@ -39,12 +32,6 @@ public record TournamentEntry (String label, TournamentService service) implemen
 
         Result<List<Player>, Exception> endResults = service.obtainResults(chosenFormat);
 
-//        Result<List<Player>, Exception> result = service.playTournament(chosenFormat, players);
-
-
-
-//        Refacto
-//        Result<List<Player>, Exception> result = service.execute(UI);
         if (endResults.isSuccess()) {
             UI.displayMessage("=== Tournament Results ===");
             UI.displayPlayers(endResults.value());
